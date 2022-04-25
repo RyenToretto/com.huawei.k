@@ -1,0 +1,210 @@
+<template>
+  <div class=" story-container">
+
+    <block for="data">
+
+      <div class="list-item">
+        <!-- 头部 -->
+        <div class="swiper-head">
+          <div class="swiper-left">
+            <text class="swiper-main-title">{{$item.title}}</text>
+          </div>
+          <div onclick="findMore($item.title)">
+            <text class="swiper-link">{{$item.link}}</text>
+            <image class="swiper-arrow" src="{{$item.uri}}"></image>
+          </div>
+        </div>
+
+        <!-- 列表 -->
+        <div class="story-main">
+          <block for="{{$item.list}}">
+            <div class="story-content" onclick="route($item)">
+              <stack>
+                <image class="swipe-image" src="{{$item.img}}"></image>
+                <div>
+                  <image class="swipe-icon" src="{{$item.icon}}"></image>
+                </div>
+              </stack>
+              <text class="swiper-hand-title">{{$item.title}}</text>
+            </div>
+          </block>
+
+        </div>
+      </div>
+      <div if="$idx < data.length - 1" style="height: 15.4px;width:100%;"></div>
+    </block>
+
+  </div>
+</template>
+
+<style>
+  .story-container {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-head {
+    justify-content: space-between;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+
+  .list-item {
+    flex-direction: column;
+  }
+
+  .swiper-main-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1A1A1A;
+    align-self: center;
+  }
+
+  .swiper-link {
+    font-size: 13px;
+    color: #8D8D8D;
+    margin-right: 5px;
+    align-self: center;
+  }
+
+  .swiper-arrow {
+    width: 7.7px;
+    height: 13.4px;
+    align-self: center;
+    margin-right: 2px;
+  }
+
+  @media screen and (min-width: 0) and (max-width: 360) {
+    .story-main {
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-left: 18px;
+      margin-right: 18px;
+    }
+
+    .story-content {
+      flex-direction: column;
+    }
+
+    .swipe-image {
+      width: 150px;
+      height: 90px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+    }
+  }
+
+  @media screen and (min-width: 361) and (max-width: 392) {
+    .story-main {
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-left: 18px;
+      margin-right: 18px;
+    }
+
+    .story-content {
+      flex-direction: column;
+    }
+
+    .swipe-image {
+      width: 160px;
+      height: 90px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+    }
+  }
+
+  @media screen and (min-width: 393) and (max-width: 1300) {
+    .story-main {
+      flex-wrap: wrap;
+      margin-left: 18px;
+      margin-right: 18px;
+    }
+
+    .story-content {
+      flex-direction: column;
+      margin-right: 10px;
+    }
+
+    .swipe-image {
+      width: 160px;
+      height: 90px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+    }
+  }
+
+  .swipe-icon {
+    width: 15.8px;
+    height: 15.8px;
+    margin-top: 70.7px;
+    margin-left: 4px;
+    border-radius: 2.4px;
+  }
+
+  .swiper-hand-title {
+    font-size: 15px;
+    margin-bottom: 12.3px;
+    text-align: center;
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+  module.exports = {
+    data: {
+      data:
+        [
+          {
+            link: '更多',
+            title: "热门产品",
+            uri: "./Page_Product/img/arrow.png",
+            list: [
+              { title: '前后双景录像', img: './Page_Product/img/page-product-img-2.jpg' },
+              { title: 'nova系列', img: './Page_Product/img/page-product-img-1.jpg' },
+              { title: '智能摄像', img: './Page_Product/img/page-product-img-2.jpg' },
+              { title: '随心拍摄', img: './Page_Product/img/page-product-img-1.jpg' },
+              { title: '5G', img: './Page_Product/img/page-product-img-2.jpg' },
+              { title: '大容量存储', img: './Page_Product/img/page-product-img-1.jpg' },
+              { title: 'MateBook', img: './Page_Product/img/page-product-img-2.jpg' },
+              { title: '麒麟芯片', img: './Page_Product/img/page-product-img-1.jpg' },
+            ]
+          },
+          {
+            link: '更多',
+            title: "最新产品",
+            uri: "./Page_Product/img/arrow.png",
+            list: [
+              { title: '5G', img: './Page_Product/img/page-product-img-1.jpg' },
+              { title: '大容量存储', img: './Page_Product/img/page-product-img-2.jpg' },
+              { title: 'MateBook', img: './Page_Product/img/page-product-img-1.jpg' },
+              { title: '麒麟芯片', img: './Page_Product/img/page-product-img-2.jpg' },
+              { title: '前后双景录像', img: './Page_Product/img/page-product-img-1.jpg' },
+              { title: 'nova系列', img: './Page_Product/img/page-product-img-2.jpg' },
+              { title: '智能摄像', img: './Page_Product/img/page-product-img-1.jpg' },
+              { title: '随心拍摄', img: './Page_Product/img/page-product-img-2.jpg' },
+            ]
+          },
+        ]
+
+    },
+    route(item) {
+      // 点击跳转音频播放页面，跳转参数都封装到了itme里面（可修改）
+      // 参数包含：音乐名称（title）,封面图片（img），音频资源路径（uri）
+      router.push({
+        uri: '/Page_Audio',
+        params: { item: item }
+      });
+    },
+    findMore(titleBarText) {
+      // 预留点击事件，可根据业务需求进行实现
+      router.push({
+        uri: '/Page_List',
+        params: { titlebar: titleBarText }
+      });
+    }
+  }
+</script>

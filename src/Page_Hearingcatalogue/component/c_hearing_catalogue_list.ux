@@ -1,0 +1,118 @@
+<template>
+  <div class="container">
+    <div class="content" for="item in catalogue" onclick="toHearing(item)">
+      <div class="left">
+        <div class="top ">
+          <text class="title_num {{item.isHearing?'activate':''}} ">
+            {{$idx+1}}
+          </text>
+          <text class="title_name {{item.isHearing?'activate':''}}">
+            {{item.title}}
+          </text>
+        </div>
+        <div class="bottom">
+          <image class="clock" src="../img/clock.png"></image>
+          <text class="time"> {{item.duration}}</text>
+        </div>
+      </div>
+      <div class="right" if="item.isHearing">
+        <image class="music_paly_png" src="../img/ic_music_paly.png"></image>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+  }
+
+  .content {
+    justify-content: space-between;
+    align-items: center;
+    height: 64.3px;
+    padding-top: 12px;
+    padding-left: 15.8px;
+    padding-right: 15.8px;
+    border-bottom-width: 0.5px;
+    border-bottom-color: #f2f2f2;
+  }
+
+  .left {
+    flex-direction: column;
+  }
+
+  .title_num {
+    font-size: 15px;
+    color: #1a1a1a;
+  }
+
+  .title_name {
+    margin-left: 4.8px;
+    font-size: 15px;
+    color: #1a1a1a;
+  }
+
+  .right {
+    margin-left: 36px;
+  }
+
+  .music_paly_png {
+    width: 20.2px;
+
+  }
+
+  .bottom {
+    margin-top: 1.4px;
+    align-items: center;
+  }
+
+  .clock {
+    width: 12px;
+    height: 12px;
+  }
+
+  .time {
+    font-size: 13px;
+    color: #1A1A1A;
+    opacity: 0.5;
+    margin-left: 3.8px;
+  }
+
+  .activate {
+    color: #007DFF;
+  }
+</style>
+
+<script>
+  import router from '@system.router'
+  module.exports = {
+    props: [
+      'catalogue',
+    ],
+    data: {
+
+    },
+
+    onInit() {
+      this.$page.setTitleBar({ text: '播放列表' })
+    },
+
+    toHearing(item) {
+      this.catalogue.forEach(element => {
+        element.isHearing = false;
+      });
+      item.isHearing = true;
+      let param = {
+        'title': '播放列表之歌',
+        'src': 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a'};
+      //跳转至听书详情页面
+      router.push({
+        uri: '/Page_Audio',
+        params: { param: param }
+      })
+    }
+
+  }
+
+</script>

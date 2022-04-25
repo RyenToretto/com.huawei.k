@@ -1,0 +1,36 @@
+<import name="hearing-catalogue" src="./component/c_hearing_catalogue_list"></import>
+<template>
+  <div class="container">
+    <hearing-catalogue catalogue="{{catalogueList}}"></hearing-catalogue>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+  }
+</style>
+
+<script>
+
+  module.exports = {
+    data: {
+      catalogueList: [
+        { title: "dream it possible", isHearing: true, duration: `4'54"` },
+        { title: "我的梦", isHearing: false, duration: `4'54"` },
+        { title: "大鱼海棠", isHearing: false, duration: `4'54"` },
+        { title: "大鱼", isHearing: false, duration: `4'54"` },
+        { title: "梦中的婚礼", isHearing: false, duration: `4'54"` },
+        { title: "秋之梦", isHearing: false, duration: `4'54"` }]
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        //titlebar的状态，在manifest.json中display设置的
+        text:'目录',
+        textColor: '#1A1A1A',
+        menu: false
+      });
+    },
+
+  }
+</script>

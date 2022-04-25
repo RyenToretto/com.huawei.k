@@ -1,0 +1,340 @@
+<import name="lists" src="./component/c_vertList.ux"></import>
+<import name="hotvideo" src="./component/c_hot_video.ux"></import>
+
+<template>
+  <div style="flex-direction: column;width: 100%;height: 100%;">
+    <div class="block">
+      <div class="bigDiv" onclick="route($item)">
+        <image class="bigPic" src="{{data.swiper_image}}"></image>
+      </div>
+      <div class="smallDiv">
+        <image class="smallPic1" src="{{data.swiper_image2.img}}" onclick="playVideo"></image>
+        <image class="smallPic2" src="{{data.swiper_image3}}" onclick="showPlayList"></image>
+      </div>
+    </div>
+
+    <div class="pngRowDiv">
+      <div class="pngColumnDivLeft">
+        <image class="mypng" src="{{data.history_image}}" onclick="showPlayHistory"></image>
+        <text class="textAlign">播放历史</text>
+      </div>
+      <div class="pngColumnDiv" onclick="playList()">
+        <image class="mypng" src="{{data.list_image}}"></image>
+        <text class="textAlign">视频精选</text>
+      </div>
+      <div class="pngColumnDiv" onclick="route($item)">
+        <image class="mypng" src="{{data.audio_image}}"></image>
+        <text class="textAlign">歌曲推荐</text>
+      </div>
+      <div class="pngColumnDiv" onclick="playVideo()">
+        <image class="mypng" src="{{data.video_image}}"></image>
+        <text class="textAlign">产品宣传</text>
+      </div>
+      <div class="pngColumnDivRight" onclick="playHearing()">
+        <image class="mypng" src="{{data.listen_image}}"></image>
+        <text class="textAlign">倾听目录</text>
+      </div>
+    </div>
+
+    <div class="list1">
+      <lists list="{{data.list1}}" banner="{{data.banner1}}"></lists>
+    </div>
+    <div class="list2">
+      <lists list="{{data.list2}}" banner="{{data.banner2}}"></lists>
+    </div>
+    <div class="list3">
+      <hotvideo list="{{data.list3}}" last="{{data.last}}" banner="{{data.banner3}}"></hotvideo>
+    </div>
+  </div>
+</template>
+
+<style>
+  @media screen and (min-width: 479) and (max-width: 1300) {
+    .block {
+      width: 100%;
+      height: 280px;
+      background-color: #ffffff;
+    }
+  }
+
+  @media screen and (min-width: 0) and (max-width: 478) {
+    .block {
+      width: 100%;
+      height: 150px;
+      background-color: #ffffff;
+    }
+  }
+
+  .bigDiv {
+    width: 60%;
+    height: 100%;
+    margin-right: 3px;
+  }
+
+  .smallDiv {
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+  }
+
+  .bigPic {
+    width: 100%;
+    height: 100%;
+  }
+
+  .smallPic1 {
+    margin-bottom: 3px;
+    width: 100%;
+    height: 50%;
+  }
+
+  .smallPic2 {
+    width: 100%;
+    height: 50%;
+  }
+
+  .pngRowDiv {
+    background-color: #ffffff;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 90px;
+    margin-top: 4.5px;
+  }
+
+  .pngColumnDiv {
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+  }
+
+  .pngColumnDivLeft {
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    margin-left: 18px;
+  }
+
+  .pngColumnDivRight {
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    margin-right: 18px;
+  }
+
+  .mypng {
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
+    object-fit: contain;
+  }
+
+  .textAlign {
+    font-size: 14px;
+    margin-top: 7px;
+    text-align: center;
+  }
+
+  .list1 {
+    width: 100%;
+    height: 200px;
+    flex-direction: column;
+  }
+
+  .list2 {
+    width: 100%;
+    height: 200px;
+    flex-direction: column;
+  }
+
+  @media screen and (min-width: 480) and (max-width: 1300) {
+    .list3 {
+      width: 100%;
+      height: 420px;
+      flex-direction: column;
+    }
+  }
+  @media screen and (min-width: 0) and (max-width: 479) {
+    .list3 {
+      width: 100%;
+      height: 610px;
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+  module.exports = {
+    props: [
+      "datas"
+    ],
+    data() {
+      return {
+        data: {
+
+          swiper_image: './Page_Home/img/page-home-img-1.jpg',
+          swiper_image2: {
+            img: './Page_Home/img/page-home-img-2.jpg',
+            src: 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a'
+          },
+          swiper_image3: './Page_Home/img/page-home-img-1.jpg',
+          history_image: './Page_Home/img/1.png',
+          list_image: './Page_Home/img/2.png',
+          audio_image: './Page_Home/img/3.png',
+          video_image: './Page_Home/img/4.png',
+          listen_image: './Page_Home/img/5.png',
+
+          banner1: {
+            title: '华为产品',
+            link: '更多',
+            uri: './Page_Home/img/arrow.png'
+          },
+          list1: [{
+            img: './Page_Home/img/page-home-img-2.jpg',
+            title: '手机'
+          },
+          {
+            img: './Page_Home/img/page-home-img-1.jpg',
+            title: '平板'
+          },
+          {
+            img: './Page_Home/img/page-home-img-2.jpg',
+            title: '智慧屏'
+          },
+          {
+            img: './Page_Home/img/page-home-img-1.jpg',
+            title: 'pad'
+          },
+          {
+            img: './Page_Home/img/page-home-img-2.jpg',
+            title: '音箱'
+          },
+          {
+            img: './Page_Home/img/page-home-img-1.jpg',
+            title: 'MateBook'
+          },
+          ],
+
+          banner2: {
+            title: '5G中国行',
+            link: '更多',
+            uri: './Page_Home/img/arrow.png',
+          },
+          list2: [
+            {
+              img: './Page_Home/img/page-home-img-2.jpg',
+              title: '海尔智慧工厂',
+            },
+            {
+              img: './Page_Home/img/page-home-img-1.jpg',
+              title: '长江索道VR',
+            },
+            {
+              img: './Page_Home/img/page-home-img-2.jpg',
+              title: '智慧公交',
+            },
+            {
+              img: './Page_Home/img/page-home-img-1.jpg',
+              title: '智慧医疗',
+            },
+            {
+              img: './Page_Home/img/page-home-img-2.jpg',
+              title: '智慧港口',
+            },
+            {
+              img: './Page_Home/img/page-home-img-1.jpg',
+              title: '智慧物流'
+            },
+            {
+              img: './Page_Home/img/page-home-img-2.jpg',
+              title: '智慧工厂'
+            },
+          ],
+
+          banner3: {
+            title: '热门产品',
+            link: '更多',
+            uri: './Page_Home/img/arrow.png'
+          },
+          last: {
+            img: './Page_Home/img/page-home-img-2.jpg',
+            title: "华为Nova7系列视频",
+            icon: "./Page_Home/img/ic_play.png"
+          },
+          list3: [
+            {
+              img: './Page_Home/img/page-home-img-2.jpg',
+              title: "麒麟芯片"
+            },
+            {
+              img: './Page_Home/img/page-home-img-1.jpg',
+              title: "前后双景"
+            },
+            {
+              img: './Page_Home/img/page-home-img-2.jpg',
+              title: "5G"
+            },
+            {
+              img: './Page_Home/img/page-home-img-1.jpg',
+              title: "外观"
+            },
+          ],
+          list4: [
+            {
+              img: './Page_Home/img/episode_three.png',
+            }
+          ]
+        }
+      }
+    },
+    route(item) {
+      // 点击跳转音频播放页面，跳转参数都封装到了itme里面（可修改）
+      // 参数包含：音乐名称（title）,封面图片（img），音频资源路径（uri）
+      router.push({
+        uri: '/Page_Audio',
+        params: { item: item }
+      });
+    },
+    playVideo() {
+      router.push({
+        uri: '/Page_VideoDetail',
+      });
+    },
+    playHearing() {
+      router.push({
+        uri: '/Page_Hearingcatalogue',
+      });
+    },
+    showPlayList() {
+      router.push({
+        uri: '/Page_PlayList',
+      });
+    },
+    showPlayHistory() {
+      router.push({
+        uri: '/Page_PlayHistory'
+      })
+    },
+    playList() {
+      router.push({
+        uri: '/Page_List'
+      })
+    },
+    changeTabactive: function (e) {
+      for (let i = 0; i < this.datas.list.length; i++) {
+        let element = this.datas.list[i];
+        element.show = false;
+        element.color = this.datas.color_normal;
+        if (i === e.index) {
+          element.show = true;
+          element.color = this.datas.color_active;
+          this.$page.setTitleBar({ menu: false });
+        }
+      }
+    }
+  }
+</script>

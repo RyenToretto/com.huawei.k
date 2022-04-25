@@ -1,0 +1,102 @@
+{
+  "package": "com.huawei.k",
+  "name": "k小说",
+  "versionName": "1.0.30",
+  "versionCode": 6,
+  "icon": "/Common/logo.png",
+  "minPlatformVersion": 1045,
+  "features": [
+    {
+      "name": "system.audio"
+    },
+    {
+      "name": "system.router"
+    },
+    {
+      "name": "system.image"
+    },
+    {
+      "name": "system.device"
+    }
+  ],
+  "config": {
+    "designWidth": "device-width"
+  },
+  "router": {
+    "entry": "Main",
+    "pages": {
+      "Main": {
+        "component": "index",
+        "path": "/Main"
+      },
+      "Page_Audio": {
+        "component": "index",
+        "path": "/Page_Audio"
+      },
+      "Page_VideoDetail": {
+        "component": "index",
+        "path": "/Page_VideoDetail"
+      },
+      "Page_PlayHistory": {
+        "component": "index",
+        "path": "/Page_PlayHistory"
+      },
+      "Page_PlayList": {
+        "component": "index",
+        "path": "/Page_PlayList"
+      },
+      "Page_Search": {
+        "component": "index",
+        "path": "/Page_Search"
+      },
+      "Page_List": {
+        "component": "index",
+        "path": "/Page_List"
+      },
+      "Page_Hearingcatalogue": {
+        "component": "index",
+        "path": "/Page_Hearingcatalogue"
+      }
+    }
+  },
+  "display": {
+    "titleBar": false,
+    "titleBarBackgroundColor": "#ffffff",
+    "orientation": "auto",
+    "pages": {
+      "Page_Audio": {
+        "titleBar": true
+      },
+      "Page_PlayHistory": {
+        "titleBar": true,
+        "backgroundColor": "#ffffff"
+      },
+      "Page_PlayList": {
+        "titleBar": true,
+        "backgroundColor": "#ffffff"
+      },
+      "Page_VideoDetail": {
+        "titleBar": true,
+        "backgroundColor": "#ffffff"
+      },
+      "Main": {
+        "titleBar": true,
+        "backgroundColor": "#E8F8FB",
+        "titleBarBackgroundColor": "#33C6F1",
+        "menu": true
+      },
+      "Page_List": {
+        "titleBar": true,
+        "menu": true,
+        "titleBarBackgroundColor": "#F3F3F3",
+        "backgroundColor": "#ffffff"
+      },
+      "Page_Hearingcatalogue": {
+        "titleBar": true,
+        "menu": true,
+        "titleBarBackgroundColor": "#F3F3F3",
+        "backgroundColor": "#ffffff"
+      }
+    }
+  }
+}

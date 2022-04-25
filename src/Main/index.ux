@@ -1,0 +1,131 @@
+<import name="choices" src="./Page_Home/index"></import>
+<import name="news" src="./Page_News/index"></import>
+<import name="products" src="./Page_Product/index"></import>
+<import name="animations" src="./Page_Animation/index"></import>
+<import name="searchbarss" src="./component/c_search_bar"></import>
+<template>
+  <div style="width: 100%;height: 100%;">
+    <stack style="width: 100%;height: 100%;">
+
+      <tabs style="width: 100%;" onchange="changeTabactive">
+        <tab-bar class="tab_bar">
+          <block for="datas.list">
+            <div class="tab_item">
+              <text class="title" style="color: {{$item.color}}">{{$item.title}}</text>
+            </div>
+          </block>
+        </tab-bar>
+        <tab-content class="choice-container">
+          <block for="datas.list">
+            <div style="flex-direction: column;">
+              <div style="width: 100%;height: 100%;" if="{{$idx === 0}}">
+                <choices></choices>
+              </div>
+              <div style="width: 100%;height: 100%;" if="{{$idx === 1}}">
+                <products></products>
+              </div>
+              <div style="width: 100%;height: 100%;" if="{{$idx === 2}}">
+                <animations></animations>
+              </div>
+              <div style="width: 100%;height: 100%;" if="{{$idx === 3}}">
+                <news></news>
+              </div>
+            </div>
+          </block>
+        </tab-content>
+      </tabs>
+
+      <div class="mysearch">
+        <image onclick="showSearchPage" src="./img/mysearch.png"></image>
+      </div>
+    </stack>
+
+  </div>
+
+</template>
+
+<style>
+  .tab_bar {
+    width: 100%;
+    height: 7%;
+  }
+  .choice-container {
+    width: 100%;
+    height: 93%;
+  }
+
+  .mysearch {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    height: 36px;
+    width: 36px;
+  }
+
+  .tab_bar {
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  .tab_item {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 15.8px;
+    margin-right: 15.8px;
+    padding-top: 6.7px;
+    padding-bottom: 5.3px;
+    width: 82px;
+    height: 50px;
+  }
+
+  .title {
+    font-size: 18.2px;
+    margin-top: 4.8px;
+  }
+</style>
+
+<script>
+  import router from '@system.router'
+
+  module.exports = {
+    data: {
+
+      mate: {
+
+        image: './img/search.png',
+        uri: '/Page_Search',
+        placeholder: 'huawei',
+      },
+      datas: {
+
+        color_normal: '#878787',
+        color_active: '#007DFF',
+        list: [
+          { i: 0, color: '#878787', title: '推荐' },
+          { i: 1, color: '#878787', title: '产品' },
+          { i: 2, color: '#878787', title: '视频' },
+          { i: 3, color: '#878787', title: '新闻' },
+        ]
+      }
+    },
+    changeTabactive: function (e) {
+      for (let i = 0; i < this.datas.list.length; i++) {
+        let element = this.datas.list[i];
+        element.show = false;
+        element.color = this.datas.color_normal;
+        if (i === e.index) {
+          element.show = true;
+          element.color = this.datas.color_active;
+          // this.$page.setTitleBar({ menu: false });
+        }
+      }
+    },
+    showSearchPage() {
+      router.push({
+        uri: '/Page_Search'
+      })
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: '响应式布局示例', textColor: '#FFFFFF' });
+    },
+  }
+</script>

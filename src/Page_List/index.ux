@@ -1,0 +1,174 @@
+<template>
+  <div class=" story-container">
+
+    <block for="data">
+      <div class="list-item">
+        <!-- 列表 -->
+        <div class="story-main">
+          <block for="{{$item.list}}">
+            <div class="story-content" onclick="route($item)">
+              <stack>
+                <image class="swipe-image" src="{{$item.img}}"></image>
+                <div>
+                  <image class="swipe-icon" src="{{$item.icon}}"></image>
+                </div>
+              </stack>
+              <text class="swiper-hand-title">{{$item.title}}</text>
+            </div>
+          </block>
+        </div>
+
+      </div>
+      <div if="$idx < data.length - 1" style="height: 15.4px;width:100%;"></div>
+    </block>
+
+  </div>
+</template>
+
+<style>
+  .story-container {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-top: 16.3px;
+  }
+
+  @media screen and (min-width: 0) and (max-width: 479) {
+    .story-main {
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-left: 18px;
+      margin-right: 18px;
+    }
+
+    .story-content {
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (min-width: 480) and (max-width: 1300) {
+    .story-main {
+      flex-wrap: wrap;
+      margin-left: 18px;
+      margin-right: 18px;
+    }
+
+    .story-content {
+      flex-direction: column;
+      margin-right: 10px;
+    }
+  }
+
+  .list-item {
+    flex-direction: column;
+  }
+
+  .swiper-main-title {
+    font-size: 14.9px;
+    color: #1A1A1A;
+    align-self: center;
+  }
+
+  .swiper-hand-title {
+    font-size: 15px;
+    color: #1A1A1A;
+    margin-bottom: 12.3px;
+    text-align: center;
+  }
+
+  .swiper-right {
+    margin-right: 15.8px;
+  }
+
+  .swiper-link {
+    font-size: 13px;
+    color: #8D8D8D;
+    margin-right: 6.7px;
+    align-self: center;
+  }
+
+  .swiper-arrow {
+    width: 7.7px;
+    height: 13.4px;
+    align-self: center;
+    margin-right: 15.8px;
+  }
+
+  .swipe-image {
+    width: 160px;
+    height: 90px;
+    margin-bottom: 8px;
+    border-radius: 3.8px;
+  }
+
+  .swipe-list {
+    height: 111.4px;
+    margin: 0px 12px 0px 0px;
+  }
+
+  .swipe-icon {
+    width: 15.8px;
+    height: 15.8px;
+    margin-top: 70.7px;
+    margin-left: 4px;
+    border-radius: 2.4px;
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+
+  module.exports = {
+    data: {
+      titlebar: '',
+      data:
+        [
+          {
+            link: '更多',
+            title: "睡前故事",
+            uri: "./img/arrow.png",
+            list: [
+              { title: "海尔智慧工厂", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧港口", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧工厂", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧公交", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧机场", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧物流", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧医疗", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "长江索道VR", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "海尔智慧工厂", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧港口", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧工厂", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧公交", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧机场", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧物流", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧医疗", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "长江索道VR", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "海尔智慧工厂", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧港口", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧工厂", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧公交", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧机场", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "智慧物流", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+              { title: "智慧医疗", img: './img/page-list-img-2.jpg', icon: "./img/icon.png" },
+              { title: "长江索道VR", img: './img/page-list-img-1.jpg', icon: "./img/icon.png" },
+            ]
+          }
+        ]
+    },
+    route(item) {
+      // 点击跳转音频播放页面，跳转参数都封装到了itme里面（可修改）
+      // 参数包含：音乐名称（title）,封面图片（img），音频资源路径（uri）
+      router.push({
+        uri: '/Page_Audio',
+        params: { item: item }
+      });
+    },
+    findMore() {
+      // 预留点击事件，可根据业务需求进行实现
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: this.titlebar, textColor: '#1A1A1A' });
+    },
+  }
+</script>
