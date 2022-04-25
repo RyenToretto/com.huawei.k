@@ -1,4 +1,4 @@
-<!-- 
+<!--
 音乐播放页面，需要打开titleBar,manifest.json文件默认titleBar关闭,请在manifest.json文件中配置display.pages设置以下信息：
    "Page_VideoDetail": {
                 "titleBar": true,
@@ -399,7 +399,7 @@
             // this.$page.setTitleBar方法设置titleBar的标题，titleBar的背景颜色，字体颜色等
             // 是否关闭titleBar,以及页面背景颜色，请在manifest中进行设置
             // 参考页面上方说明
-            this.$page.setTitleBar({ text: this.currentTitle, menu: false, textColor: '#1A1A1A', backgroundColor: '#FFFFFF' });
+            this.$page.setTitleBar({ text: this.currentTitle, menu: false, backgroundColor: '#FFFFFF' });
             this.currentTitle = this.music[this.select].title;
             this.image = this.music[this.select].image;
             audio.src = this.music[this.select].src;
@@ -558,12 +558,12 @@
         showCatalog() {
             this.catalogStatus = true;
             //设置标题栏背景
-            this.$page.setTitleBar({ menu: false, textColor: '#1A1A1A', backgroundColor: 'rgba(0,0,0,0.5)' });
+            this.$page.setTitleBar({ menu: false, backgroundColor: 'rgba(0,0,0,0.5)' });
         },
         closeCatalog() {
             this.catalogStatus = false;
             //设置标题栏背景
-            this.$page.setTitleBar({ menu: false, textColor: '#1A1A1A', backgroundColor: '#FFFFFF' });
+            this.$page.setTitleBar({ menu: false, backgroundColor: '#FFFFFF' });
         },
         toHearing(item, index) {
             audio.stop();

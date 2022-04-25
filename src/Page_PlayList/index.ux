@@ -1,4 +1,4 @@
-<!-- 
+<!--
 播放列表页面，需要打开titleBar,manifest.json文件默认titleBar关闭,请在manifest.json文件中配置display.pages设置以下信息：
    "Page_VideoDetail": {
                 "titleBar": true,
@@ -93,7 +93,7 @@
       // this.$page.setTitleBar方法设置titleBar的标题，titleBar的背景颜色，字体颜色等
       // 是否关闭titleBar,以及页面背景颜色，请在manifest中进行设置
       // 参考页面上方说明
-      this.$page.setTitleBar({ text: '播放列表', textColor: '#1A1A1A', backgroundColor: '#ffffff' });
+      this.$page.setTitleBar({ text: '播放列表', backgroundColor: '#ffffff' });
     }
   }
 </script>

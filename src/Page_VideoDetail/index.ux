@@ -1,4 +1,4 @@
-<!-- 
+<!--
 视频详情页面为全屏页面，需要关闭titleBar、menu,请在manifest.json文件中配置display.pages设置以下信息：
    "Page_VideoDetail": {
                 "titleBar": false,
@@ -262,14 +262,14 @@
         }
       });
       this.currentTitle = this.episode + this.list[0].title;
-      // this.$page.setTitleBar({ text: this.currentTitle, textColor: '#1A1A1A', backgroundColor: '#FFFFFF' });
+      // this.$page.setTitleBar({ text: this.currentTitle, backgroundColor: '#FFFFFF' });
       this.videoSource = this.list[0].url;
 
 
       // this.$page.setTitleBar方法设置titleBar的标题，titleBar的背景颜色，字体颜色等
       // 是否关闭titleBar,以及页面背景颜色，请在manifest中进行设置
       // 参考页面上方说明
-      this.$page.setTitleBar({ menu: false, text: this.currentTitle, textColor: '#1A1A1A', backgroundColor: '#FFFFFF' });
+      this.$page.setTitleBar({ menu: false, text: this.currentTitle, backgroundColor: '#FFFFFF' });
     },
 
     routePageBack() {
@@ -335,7 +335,7 @@
       this.videoSource = item.url;
       this.btnstart();
       this.currentTitle = this.episode + item.title;
-      this.$page.setTitleBar({ menu: false, text: this.currentTitle, textColor: '#1A1A1A', backgroundColor: '#FFFFFF' });
+      this.$page.setTitleBar({ menu: false, text: this.currentTitle, backgroundColor: '#FFFFFF' });
       this.videoIndex = idx;
     }
   }

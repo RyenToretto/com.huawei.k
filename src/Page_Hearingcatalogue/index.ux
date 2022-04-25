@@ -27,7 +27,6 @@
       this.$page.setTitleBar({
         //titlebar的状态，在manifest.json中display设置的
         text:'目录',
-        textColor: '#1A1A1A',
         menu: false
       });
     },

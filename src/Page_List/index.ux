@@ -168,7 +168,7 @@
       // 预留点击事件，可根据业务需求进行实现
     },
     onInit: function () {
-      this.$page.setTitleBar({ text: this.titlebar, textColor: '#1A1A1A' });
+      this.$page.setTitleBar({ text: this.titlebar });
     },
   }
 </script>
