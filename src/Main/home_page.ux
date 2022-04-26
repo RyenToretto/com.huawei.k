@@ -1,0 +1,38 @@
+<import name="do-search-bar" src="./component/do_search_bar"></import>
+<import name="book-swiper" src="./Book_Swiper/book_swiper"></import>
+
+<template>
+  <div class="home-page">
+
+    <do-search-bar></do-search-bar>
+
+    <book-swiper></book-swiper>
+
+  </div>
+
+</template>
+
+<style>
+    .home-page {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+    }
+</style>
+
+<script>
+  import router from '@system.router'
+
+  module.exports = {
+    data: {
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'k小说' });
+    },
+    showSearchPage() {
+      router.push({
+        uri: '/Page_Search'
+      })
+    }
+  }
+</script>

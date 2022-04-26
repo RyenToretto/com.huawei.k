@@ -1,79 +1,43 @@
 {
-  "package": "com.huawei.k",
-  "name": "k小说",
-  "versionName": "1.0.30",
-  "versionCode": 6,
-  "icon": "/Common/logo.png",
-  "minPlatformVersion": 1045,
-  "features": [
-    {
-      "name": "system.audio"
+    "package": "com.huawei.k",
+    "name": "k小说",
+    "versionName": "1.0.30",
+    "versionCode": 6,
+    "icon": "/Common/logo.png",
+    "minPlatformVersion": 1045,
+    "features": [
+        {
+            "name": "system.router"
+        },
+        {
+            "name": "system.image"
+        }
+    ],
+    "config": {
+        "designWidth": "device-width"
     },
-    {
-      "name": "system.router"
+    "router": {
+        "entry": "Main",
+        "pages": {
+            "Main": {
+                "component": "home_page",
+                "path": "/Main"
+            },
+            "Page_Search": {
+                "component": "search_page",
+                "path": "/Page_Search"
+            }
+        }
     },
-    {
-      "name": "system.image"
-    },
-    {
-      "name": "system.device"
+    "display": {
+        "titleBarTextColor": "#17181a",
+        "backgroundColor": "#f5f5f5",
+        "titleBarBackgroundColor": "#f5f5f5",
+        "orientation": "auto",
+        "pages": {
+            "Main": {
+                "menu": true
+            }
+        }
     }
-  ],
-  "config": {
-    "designWidth": "device-width"
-  },
-  "router": {
-    "entry": "Main",
-    "pages": {
-      "Main": {
-        "component": "index",
-        "path": "/Main"
-      },
-      "Page_Audio": {
-        "component": "index",
-        "path": "/Page_Audio"
-      },
-      "Page_VideoDetail": {
-        "component": "index",
-        "path": "/Page_VideoDetail"
-      },
-      "Page_PlayHistory": {
-        "component": "index",
-        "path": "/Page_PlayHistory"
-      },
-      "Page_PlayList": {
-        "component": "index",
-        "path": "/Page_PlayList"
-      },
-      "Page_Search": {
-        "component": "index",
-        "path": "/Page_Search"
-      },
-      "Page_List": {
-        "component": "index",
-        "path": "/Page_List"
-      },
-      "Page_Hearingcatalogue": {
-        "component": "index",
-        "path": "/Page_Hearingcatalogue"
-      }
-    }
-  },
-  "display": {
-    "titleBarTextColor": "#17181a",
-    "backgroundColor": "#f5f5f5",
-    "titleBarBackgroundColor": "#f5f5f5",
-    "orientation": "auto",
-    "pages": {
-      "Main": {
-        "menu": true
-      },
-      "Page_List": {
-        "menu": true
-      },
-      "Page_Hearingcatalogue": {
-        "menu": true
-      }
-    }
-  }
 }

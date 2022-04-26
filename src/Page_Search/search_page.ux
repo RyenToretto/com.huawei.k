@@ -1,4 +1,4 @@
-<import name="texts" src="./component/c_showText"></import>
+<import name="search-result-item" src="./component/search_result_item"></import>
 <template>
     <div class="p-history-container">
 
@@ -39,7 +39,7 @@
                 <block for="{{list}}">
                     <div class="history-item">
                         <image src="{{$item.img}}"></image>
-                        <texts prop1="{{$item.title}}" prop2="{{inputvalue}}"></texts>
+                        <search-result-item prop1="{{$item.title}}" prop2="{{inputvalue}}"></search-result-item>
                     </div>
                     <div class="lines"></div>
                 </block>
@@ -187,20 +187,21 @@
                 img_search: 'img/search.png',
                 img_back: 'img/back.png',
                 img_cancel: 'img/cancel.png',
-                records: [{
-                    title: '华为最新系列手机',
-                    icon: 'img/search.png'
-                }, {
-                    title: '产品宣传片',
-                    icon: 'img/search.png'
-                }
+                records: [
+                    {
+                        title: '华为最新系列手机',
+                        icon: 'img/search.png'
+                    }, 
+                    {
+                        title: '产品宣传片',
+                        icon: 'img/search.png'
+                    }
                 ]
             },
             list: [
-                { img: 'img/page-search-img-1.jpg', title: '华为nova7系列介绍' },
-                { img: 'img/page-search-img-1.jpg', title: '华为最新手机' },
-                { img: 'img/page-search-img-1.jpg', title: '宣传片' },
-                { img: 'img/page-search-img-1.jpg', title: '产品宣传片' }
+                { img: 'img/page-search-img-1.jpg', title: '斗破苍穹' },
+                { img: 'img/page-search-img-1.jpg', title: '大主宰' },
+                { img: 'img/page-search-img-1.jpg', title: '武动乾坤' }
             ]
         },
         cleanInput() {

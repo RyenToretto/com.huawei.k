@@ -1,0 +1,21 @@
+<template>
+  <div class="book-swiper">
+      <text>book-swiper</text>
+  </div>
+
+</template>
+
+<style>
+    .book-swiper {
+        width: 100%;
+    }
+</style>
+
+<script>
+  module.exports = {
+    data: {
+    },
+    onInit: function () {
+    }
+  }
+</script>
