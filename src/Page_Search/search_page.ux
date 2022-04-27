@@ -49,10 +49,10 @@
     </div>
 </template>
 
-<style lang="sass">
-    @import '../Common/css/variable.scss';
-    @import '../Common/css/common.scss';
-    @import '../Common/css/button.scss';
+<style lang="less">
+    @import '../Common/css/variable.less';
+    @import '../Common/css/common.less';
+    @import '../Common/css/button.less';
 
     .c-search-container {
         height: 48px;

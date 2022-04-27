@@ -21,9 +21,8 @@
     "eslint-plugin-hybrid": "0.0.5",
     "fa-toolkit": "file:fa-toolkit-12.2.1-Stable.300.tgz",
     "hap-toolkit": "*",
-    "sass": "^1.51.0",
-    "sass-loader": "^8.0.2",
-    "node-sass": "^4.13.1"
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0"
   },
   "dependencies": {
     "@hmscore/analytics-sdk-quickapp": "^6.4.1-300",

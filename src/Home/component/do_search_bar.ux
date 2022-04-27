@@ -7,10 +7,10 @@
     </div>
 </template>
 
-<style lang="sass">
-    @import '../../Common/css/variable.scss';
-    @import '../../Common/css/common.scss';
-    @import '../../Common/css/button.scss';
+<style lang="less">
+    @import '../../Common/css/variable.less';
+    @import '../../Common/css/common.less';
+    @import '../../Common/css/button.less';
 
     .do_search_bar {
         padding: 0 12px 14px;

@@ -30,6 +30,11 @@
     },
     onDestroy() {
       console.info('Application onDestroy');
+    },
+    onError(err) { //  监听应用错误的生命周期函数
+      try {
+        APP_STATISTICS.on_err(err); // 错误统计打点代码
+      } catch (error) {}
     }
   }
 </script>
