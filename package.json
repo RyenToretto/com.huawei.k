@@ -1,0 +1,18 @@
+{
+  "name": "com.huawei.k",
+  "version": "1.0.30",
+  "description": "",
+  "scripts": {
+    "fa-build": "node node_modules/webpack/bin/webpack.js --progress --config ./node_modules/fa-toolkit/webpack.config.js",
+    "fa-watch": "node node_modules/webpack/bin/webpack.js --watch --progress --config ./node_modules/fa-toolkit/webpack.config.js",
+    "fa-release": "node ./node_modules/cross-env/src/bin/cross-env.js uglifyjs=true sign=release node_modules/webpack/bin/webpack.js --progress --config ./node_modules/fa-toolkit/webpack.config.js"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "fa-toolkit": "file:fa-toolkit-12.2.1-Stable.300.tgz"
+  },
+  "dependencies": {
+    "@hmscore/analytics-sdk-quickapp": "^6.4.1-300",
+    "md5": "^2.3.0"
+  }
+}

@@ -4,14 +4,16 @@
     "versionName": "1.0.30",
     "versionCode": 6,
     "icon": "/Common/logo.png",
-    "minPlatformVersion": 1045,
+    "minPlatformVersion": 1078,
     "features": [
-        {
-            "name": "system.router"
-        },
-        {
-            "name": "system.image"
-        }
+        { "name": "system.router" },
+        { "name": "system.image" },
+        { "name": "system.fetch" },
+        { "name": "system.storage" },
+        { "name": "system.device" },
+        { "name": "system.network" },
+        { "name": "service.account" },
+        { "name": "system.shortcut" }
     ],
     "config": {
         "designWidth": "device-width"

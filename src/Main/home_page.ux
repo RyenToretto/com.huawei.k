@@ -29,6 +29,12 @@
     onInit: function () {
       this.$page.setTitleBar({ text: 'k小说' });
     },
+    onShow(){
+      APP_STATISTICS.page_show( this ); // 页面打点 显示
+    },
+    onHide() {
+      APP_STATISTICS.page_hide( this ); // 页面打点 隐藏
+    },
     showSearchPage() {
       router.push({
         uri: '/Page_Search'

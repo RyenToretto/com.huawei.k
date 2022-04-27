@@ -51,6 +51,7 @@
             }
         },
         rediect() {
+            this.$app.$def.$analytics.onEvent("$Search", {});
             router.push({ uri: this.uri });
         }
     }
