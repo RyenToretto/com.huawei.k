@@ -3,16 +3,33 @@
   "version": "1.0.30",
   "description": "",
   "scripts": {
-    "fa-build": "node node_modules/webpack/bin/webpack.js --progress --config ./node_modules/fa-toolkit/webpack.config.js",
-    "fa-watch": "node node_modules/webpack/bin/webpack.js --watch --progress --config ./node_modules/fa-toolkit/webpack.config.js",
-    "fa-release": "node ./node_modules/cross-env/src/bin/cross-env.js uglifyjs=true sign=release node_modules/webpack/bin/webpack.js --progress --config ./node_modules/fa-toolkit/webpack.config.js"
+    "fa-build": "node node_modules/webpack/bin/webpack.js --config ./node_modules/fa-toolkit/webpack.config.js",
+    "fa-watch": "node node_modules/webpack/bin/webpack.js --watch --config ./node_modules/fa-toolkit/webpack.config.js",
+    "fa-release": "node ./node_modules/cross-env/src/bin/cross-env.js uglifyjs=true sign=release node_modules/webpack/bin/webpack.js --config ./node_modules/fa-toolkit/webpack.config.js",
+    "server": "hap server",
+    "postinstall": "hap postinstall",
+    "debug": "hap debug",
+    "build": "hap build",
+    "release": "hap release",
+    "watch": "hap watch",
+    "hap-update": "hap update"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "cross-env": "^7.0.2",
-    "fa-toolkit": "file:fa-toolkit-12.2.1-Stable.300.tgz"
+    "eslint": "^5.12.1",
+    "eslint-plugin-hybrid": "0.0.5",
+    "fa-toolkit": "file:fa-toolkit-12.2.1-Stable.300.tgz",
+    "hap-toolkit": "*",
+    "sass": "^1.51.0",
+    "sass-loader": "^8.0.2",
+    "node-sass": "^4.13.1"
   },
   "dependencies": {
     "@hmscore/analytics-sdk-quickapp": "^6.4.1-300",
     "md5": "^2.3.0"
+  },
+  "subversion": {
+    "toolkit": "0.2.2"
   }
 }

@@ -5,7 +5,7 @@
   import '@hmscore/analytics-sdk-quickapp';
 
   // 快应用官方: 轻粒子数据统计 http://developer.quickingdata.com/doc/developing/application/q_app.html
-  import './appStatistics.min.js'
+  import './Common/js/qinglizi/appStatistics.min.js'
 
   const agConnectConfig = {
     "agcgw": {
@@ -69,13 +69,13 @@
 
   module.exports = {
     onCreate() {
-      this.$agconnect = agconnect; 
+      this.$agconnect = agconnect;
 
       // 生产环境屏蔽以下两行
       agconnect.analytics.InitSettings.debugMode = true; // 启用调试模式
       agconnect.analytics.InitSettings.terminalName = "koujianfeng dev terminal"; // 调试模式下，自定义终端标识
 
-      this.$analytics = agconnect.analytics(); 
+      this.$analytics = agconnect.analytics();
 
       console.info('Application onCreate');
       APP_STATISTICS.app_sta_init( this ); // 统计打点

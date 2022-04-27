@@ -7,13 +7,19 @@
     "minPlatformVersion": 1078,
     "features": [
         { "name": "system.router" },
-        { "name": "system.image" },
         { "name": "system.fetch" },
         { "name": "system.storage" },
         { "name": "system.device" },
         { "name": "system.network" },
         { "name": "service.account" },
-        { "name": "system.shortcut" }
+        { "name": "system.shortcut" },
+        { "name": "system.file" },
+        { "name": "system.configuration" },
+        { "name": "system.websocketfactory" },
+        { "name": "system.downloadtask" },
+        { "name": "system.request" },
+        { "name": "system.requesttask" },
+        { "name": "system.uploadtask" }
     ],
     "config": {
         "designWidth": "device-width"

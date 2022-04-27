@@ -1,0 +1,252 @@
+@import './variable.scss';
+
+/* *******重置********** */
+input,
+textarea {
+  placeholder-color: rgba(0, 0, 0, 0.4);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+a,
+text,
+span {
+  color: $color-secondary;
+}
+
+.textarea {
+  width: 100%;
+  height: 300px;
+  background-color: #fff;
+  padding: 20px 30px;
+  font-size: 32px;
+  border-radius: $radius-small;
+}
+
+/* video */
+.video {
+  width: 100%;
+  height: 360px;
+}
+
+/* swiper */
+.swiper {
+  indicator-selected-color: #fff;
+  indicator-color: rgba(0, 0, 0, 0.1);
+  indicator-size: 12px;
+  indicator-bottom:32px;
+}
+
+/* slider */
+.slider {
+  color: rgba(0, 0, 0, 0.1);
+  selected-color: $color-blue-dark;
+  block-color: $color-blue-dark;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* *******基础样式********* */
+/* 页面容器 */
+.container {
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+
+/* 背景色 */
+.bg-green {
+  background-color: $color-green;
+}
+.bg-blue {
+  background-color: $color-blue;
+}
+.bg-gray {
+  background-color: $color-gray;
+}
+.bg-red {
+  background-color: $color-red;
+}
+.bg-white {
+  background-color: #fff;
+}
+
+/* 字体色 */
+.color-white {
+  color: #fff;
+}
+.color-a {
+  color: $color-a;
+}
+.color-secondary {
+  color: $color-secondary;
+}
+.color-primary {
+  color: $color-primary;
+}
+.color-black {
+  color: #000000;
+}
+
+/* flex */
+
+/* 主轴居中 */
+.row-center {
+  justify-content: center;
+}
+
+/* 侧轴居中 */
+.column-center {
+  align-items: center;
+}
+
+/* flex direction */
+.fdir-column {
+  flex-direction: column;
+}
+
+/* margin */
+
+/* 按钮上下间距 */
+.mt-btn {
+  margin-top: 32px;
+}
+
+/* 案例上下间距 */
+.mt-item {
+  margin-top: 40px;
+}
+
+/* 页面两边留白距离 */
+.mlr-container {
+  margin-right: $left-right-gap;
+  margin-left: $left-right-gap;
+}
+
+/* font style */
+.under-line {
+  text-decoration: underline;
+}
+
+/* border */
+.divider-border-color {
+  border-color: $color-divider-border;
+}
+
+.border-bottom-1{
+  border-bottom-width: 1px;
+}
+
+/* 其它 */
+.bro-l {
+  border-radius: $radius-big;
+}
+
+.bro-s {
+  border-radius: $radius-small;
+}
+
+/* padding */
+
+/* *******组件样式********* */
+
+/* 展示容器 */
+.item-container {
+  margin-left: $left-right-gap;
+  margin-right: $left-right-gap;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: $radius-big;
+  flex-direction: column;
+}
+
+/* 示例标题 */
+.case-title {
+  margin-left: $left-right-gap;
+  margin-right: $left-right-gap;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.case-title .title {
+  color: $color-secondary;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+/* 信息展示容器 */
+.info-container {
+  margin-left: $left-right-gap;
+  margin-right: $left-right-gap;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: #fff;
+  border-radius: $radius-big;
+  flex-direction: column;
+}
+
+.info-container .info-item {
+  height: 120px;
+  border-bottom-color: $color-divider-border;
+}
+
+.info-container .info-item .title {
+  flex-shrink: 0;
+  font-size: 32px;
+  color: $color-primary;
+}
+
+.info-container .info-item .result {
+  width: 100%;
+  justify-content: flex-end;
+  text-align: right;
+  color: #999;
+}
+
+/* 滚动列表 */
+.infinite-list-container {
+  margin-left: $left-right-gap;
+  margin-right: $left-right-gap;
+  flex-direction: column;
+}
+
+.infinite-list-container .list-item {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-bottom-width: 1px;
+  border-bottom-color: $color-divider-border;
+  flex-direction: column;
+}
+
+.infinite-list-container .active-item {
+  background-color: #fff;
+}
+
+.infinite-list-container .title {
+  font-size: 34px;
+}
+
+.infinite-list-container .info-line {
+  height: 50px;
+}
+
+.infinite-list-container .info-line .info-title {
+  padding-right: 20px;
+}
+
+/* form */
+/* input */
+.input-big {
+  width: 100%;
+  background-color: #fff;
+  height: 100px;
+  border-radius: 50px;
+  padding-left: 30px;
+  font-size: 32px;
+}
+
+.radio {
+  width: 75px;
+}
+
+.checkbox {
+  width: 75px;
+}

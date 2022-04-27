@@ -1,0 +1,34 @@
+@import './variable.scss';
+
+.btn-blue {
+  background-color: $color-a;
+  width: 100%;
+  height: 80px;
+  border-radius: 40px;
+  color: #fff;
+  font-size: 32px;
+  font-weight: $btn-font-weight;
+}
+
+.btn-gray {
+  background-color: rgba(0, 0, 0, 0.05);
+  width: 100%;
+  height: 80px;
+  border-radius: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-gray text {
+  font-size: 32px;
+  text-align: center;
+  font-weight: $btn-font-weight;
+}
+
+/* 无背景button */
+.btn-transparent{
+  height: 80px;
+  color: $color-a;
+  font-size: 32px;
+  font-weight: $btn-font-weight;
+}

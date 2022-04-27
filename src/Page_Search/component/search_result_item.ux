@@ -13,7 +13,11 @@
   </div>
 </template>
 
-<style>
+<style lang="sass">
+  @import '../../Common/css/variable.scss';
+  @import '../../Common/css/common.scss';
+  @import '../../Common/css/button.scss';
+
   .choosed {
     font-size: 15px;
     line-height: 19.5px;

@@ -12,7 +12,11 @@
 
 </template>
 
-<style>
+<style lang="sass">
+    @import '../Common/css/variable.scss';
+    @import '../Common/css/common.scss';
+    @import '../Common/css/button.scss';
+
     .home-page {
         width: 100%;
         height: 100%;
