@@ -1,4 +1,4 @@
-export const strToDate = function (dateStr) {
+const strToDate = function (dateStr) {
     let splitArr = dateStr.split(' ');
     let dateArr = splitArr[0].split('-');
     let timeArr = splitArr[1] ? splitArr[1].split(':') : [];
@@ -10,11 +10,17 @@ export const strToDate = function (dateStr) {
     return newDate;
 }
 
-export const lessTenFormat = function(num){
-    if(isNaN(num) || num < 0)
-    {
+const lessTenFormat = function (num) {
+    if (isNaN(num) || num < 0) {
         return '';
     }
     let newNum = Number(num);
     return newNum >= 10 ? newNum : `0${num}`
 }
+
+const utils = {
+    strToDate,
+    lessTenFormat
+}
+
+export default utils
