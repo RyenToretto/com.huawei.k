@@ -19,7 +19,9 @@
         { "name": "system.downloadtask" },
         { "name": "system.request" },
         { "name": "system.requesttask" },
-        { "name": "system.uploadtask" }
+        { "name": "system.uploadtask" },
+        { "name": "service.ad" },
+        { "name": "system.prompt" }
     ],
     "config": {
         "designWidth": "device-width"

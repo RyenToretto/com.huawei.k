@@ -1,0 +1,384 @@
+<template>
+  <stack class="ask-ad-right">
+    <div class="ad-btn-box">
+      <input type="button" class="btn" value="请求激励视频广告" onclick="showRewardedAd(allowAdNonPersonnal)" />
+      <input type="button" class="btn" value="请求Banner广告" onclick="showBannerAd(allowAdNonPersonnal)" />
+      <input type="button" class="btn" value="hide bannerAd" onclick="hideBanerAd" />
+      <input type="button" class="btn" value="show banner Ad" onclick="showBanner" />
+    </div>
+
+    <div if="{{isShowConsent}}" class="dialog-ad-protocol-modal">
+      <div class="dialog-ad-protocol-box">
+        <text class="txt-ad-protocol">{{ consent_title }}</text>
+        <list show="{{!showmore}}">
+          <list-item type="content1">
+            <text class="txt-ad-protocol">{{ consent_init_text1 }}</text>
+          </list-item>
+          <list-item type="content2">
+            <text class="txt-ad-protocol">
+              {{ consent_init_text2 }}
+              <a style="color: #0000ff; text-decoration: underline" onclick="more">here</a>
+            </text>
+          </list-item>
+
+          <list-item type="content3">
+            <text class="txt-ad-protocol">{{ consent_init_text3 }}</text>
+          </list-item>
+        </list>
+
+        <list show="{{showmore}}">
+          <list-item type="content1">
+            <text class="txt-ad-protocol">{{ consent_more_info_text1 }}</text>
+          </list-item>
+
+          <list-item type="content2" style="flex-direction: column">
+            <block for="{{adproviders}}">
+              <a style="color: #0000ff; text-decoration: underline" href="{{$item.privacyPolicyUrl}}" value="{{$item.name}}"></a>
+            </block>
+
+            <text class="txt-ad-protocol">{{ consent_more_info_text2 }}</text>
+          </list-item>
+        </list>
+
+        <!-- bottom buttons -->
+        <div style="width: 100%; justify-content: center; margin-top: 26px">
+          <input type="button" value="跳过" class="dlgbtn" show="{{!showmore}}" onclick="skip"></input>
+          <input type="button" value="同意" class="dlgbtn" show="{{!showmore}}" onclick="agree"></input>
+          <input type="button" value="返回" class="dlgbtn" onclick="backInitConsent" show="{{showmore}}"></input>
+        </div>
+      </div>
+    </div>
+  </stack>
+</template>
+
+<style lang="less">
+  .ask-ad-right {
+    flex-direction: column;
+    .ad-btn-box {
+      margin-top: 50px;
+      margin-right: 60px;
+      margin-left: 60px;
+      flex-direction: column;
+      justify-content: center;
+      .btn {
+        height: 80px;
+        width: 80%;
+        background-color: #00bfff;
+        color: #ffffff;
+        border-radius: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      .btn:active {
+        background-color: #058fbd;
+      }
+    }
+    .dialog-ad-protocol-modal {
+      position: fixed;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      background-color: rgba(48, 47, 47, 0.8);
+      animation-name: Modal;
+      animation-duration: 130ms;
+      animation-timing-function: ease-in;
+      .dialog-ad-protocol-box {
+        flex-direction: column;
+        width: 80%;
+        height: 80%;
+        background-color: #f8f8ff;
+        align-items: center;
+        justify-content: center;
+        padding: 0 34px 34px;
+        border-radius: 34px;
+        .txt-ad-protocol {
+          font-size: 16px;
+          margin-top: 20px;
+          color: #1b1515;
+        }
+        .dlgbtn {
+          width: 100%;
+          color: white;
+          border-radius: 16px;
+          height: 80px;
+          margin-bottom: 20px;
+          background-color: #00bfff;
+          margin-left: 20px;
+        }
+      }
+    }
+  }
+  .adbtn {
+    width: 100px;
+    height: 50px;
+    color: #ffffff;
+    background-color: #00bfff;
+    border-radius: 8px;
+    position: absolute;
+    align-self: flex-end;
+    bottom: 20px;
+    right: 20px;
+  }
+  .adbtn:active {
+    background-color: #058fbd;
+  }
+  .item-content {
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 30px;
+    margin-bottom: 100px;
+    align-items: flex-start;
+  }
+  image {
+    width: 100%;
+  }
+  .ad-video {
+    width: 100%;
+    height: 415px;
+  }
+</style>
+<script>
+  import ad from "@service.ad";
+  import prompt from "@system.prompt";
+  import storage from "@system.storage";
+  let rewardedVideoAd;
+  let bannerAd;
+  export default {
+    data: {
+      consentflag: "同意标志",
+      provider: "",
+      allowAdNonPersonnal: 0,
+      adproviders: [],
+      showmore: false,
+      isShowConsent: false,
+      consent_title: "HUAWEI X 广告协议",
+      consent_init_text1: "HUAWEI X 中的广告是与我们的广告合作伙伴合作提供的。 为提供此服务，我们需要与这些合作伙伴共享您的某些信息，包括您所在城市的位置以及您对新闻服务的使用记录。",
+      consent_init_text2: "有关我们的合作伙伴以及如何处理您的数据的更多信息，请点击",
+      consent_init_text3: '触摸“同意”，即表示您同意与我们的合作伙伴共享上述个人信息，以便他们可以根据通过分析您的个人信息识别或预测的兴趣和偏好，代表他们的客户为您提供个性化广告。\n \n您可以随时前往 [应用设置] 撤回您的同意。\n\n如果您触摸 SKIP，您的数据将不会与我们的合作伙伴共享，您也不会收到个性化广告。',
+      consent_more_info_text1: "HUAWEI X 中的广告是与我们的合作伙伴合作提供的。 您可以在此处找到每个国家/地区的完整合作伙伴列表：",
+      consent_more_info_text2: `为了向您提供个性化的广告，我们需要与合作伙伴共享以下信息：\n\n
+            用户信息，包括广告 ID、居住城市、国家和语言。\n\n
+            设备信息，包括设备名称和型号、操作系统版本、屏幕大小和网络类型。\n\n
+            服务使用信息，包括新闻 ID 以及新闻内容和广告的查看、点击、不喜欢、分享和评论的记录。\n\n
+     经您同意，上述信息将与我们的合作伙伴共享，以便他们根据通过分析您的个人信息识别或预测的兴趣和偏好，代表他们的客户为您提供个性化广告。\n\n
+     您可以通过转到应用设置随时撤回您的同意。\n\n
+     未经您的同意，我们不会与我们的合作伙伴共享任何数据，您也不会收到个性化广告。`,
+      rewarded: { // 激励广告
+        adUnitId: "testx9dtjwj8hp",
+        isShow: true,
+        errStr: ""
+      },
+      bannerAD: { // Banner广告
+        adUnitId: "x0kvs12iu6",
+        adIntervals: 30,
+        style: {
+          left: 0,
+          top: 0,
+          width: -1,
+          height: -2
+        }
+      }
+    },
+    onInit() {
+      this.$page.setTitleBar({ text: "广告征求示例" });
+    },
+    onReady(options) {
+      this.checkAdConsent();
+    },
+    getAdProvider: function () {
+      this.provider = ad.getProvider(); // 获取设备厂商
+    },
+    hideAll() {
+      this.native.isShow = false;
+      this.native.isShowImg = false;
+      this.native.isShowVideo = false;
+      this.rewarded.isShow = false;
+    },
+    checkAdConsent: function () {
+      console.info("\n\n======== 广告同意检测开始 ========");
+      var that = this;
+      this.getAdProvider();
+      if (this.provider !== "huawei") {
+        console.info("当前设备不支持华为广告功能。");
+        return;
+      }
+      // 首次启动快应用时，检查是否需要弹窗征得用户同意.
+      // true 表示用户未达到同意年龄，不能请求个性化广告。 在这种情况下，调用 requestConsentUpdate 时回调总是会失败，并且不需要弹窗.
+      // 当需要用户同意时，调用 ad.setUnderAgeOfPromise(false).
+      ad.setUnderAgeOfPromise(false);
+      ad.requestConsentUpdate({ // 更新用户意见状态
+        success: function (data) { // 广告技术提供商等信息
+          // 并进一步判断isNeedConsent的值
+          console.log("更新用户意见状态 成功 data = " + JSON.stringify(data));
+
+          // 确保每次访问代码演示时都会显示一个对话框。 一般情况下不需要添加代码。
+          that.checkShowConsentDialog(data);
+
+          if (data.isNeedConsent) { // 如果值为true，则用户在EEA或其他敏感区域，必须征得用户同意。
+            if (data.consentStatus === 2) {
+              // 显示一个弹出窗口以获取用户同意并调用 ad.setConsentStatus 设置用户同意。 如果弹出窗口已显示，则无需再次显示。
+              that.checkShowConsentDialog(data);
+            } else {
+              // 可以请求个性化广告。
+              that.allowAdNonPersonnal = 0;
+            }
+          } else { // 如果为 false，则可以通过 HUAWEI Ads SDK 请求个性化广告。
+            // 可以请求个性化广告。
+            that.allowAdNonPersonnal = 0;
+          }
+        },
+        fail: function (data) {
+          // 失败时回调。可以请求非个性化广告。
+          console.log("更新用户意见状态 失败 data = " + JSON.stringify(data));
+          that.allowAdNonPersonnal = 1;
+        },
+        complete: function () { }
+      });
+    },
+    showConsentDialog() {
+      this.isShowConsent = true;
+    },
+    hideConsentDialog() {
+      this.isShowConsent = false;
+    },
+    checkShowConsentDialog: function (data) {
+      this.adproviders = data.AdProviderList;
+      var that = this;
+      storage.get({
+        key: this.consentflag,
+        success: function (data) {
+          console.log("广告同意弹框 storage.get 处理成功的 data = " + data);
+          if (data !== "") {
+            that.allowAdNonPersonnal = data;
+          } else {
+            that.showConsentDialog();
+          }
+        },
+        fail: function (data, code) {
+          console.log("广告同意弹框 storage.get 处理成功的 code = " + code);
+          that.showConsentDialog();
+        }
+      });
+    },
+    showRewardedAd(contentStatus) {
+      console.info("\n\n======== 加载激励视频广告开始 ========");
+      this.getAdProvider();
+      if (this.provider !== "huawei") {
+        console.info("当前设备不支持华为广告功能。");
+        return;
+      }
+      ad.setTagForUnderAgeOfPromise(1);
+      ad.setNonPersonalizedAd(contentStatus);
+      rewardedVideoAd = ad.createRewardedVideoAd({
+        adUnitId: this.rewarded.adUnitId
+      });
+      rewardedVideoAd.onLoad(() => {
+        this.rewarded.errStr = "";
+      });
+      rewardedVideoAd.onError(e => {
+        prompt.showToast({
+          message: "广告拉取失败",
+          duration: 2000,
+          gravity: "center"
+        });
+        console.error("加载激励视频广告 error:" + JSON.stringify(e));
+        this.rewarded.errStr = JSON.stringify(e);
+      });
+      rewardedVideoAd.onClose(() => {
+        console.info("激励视频广告关闭");
+      });
+      rewardedVideoAd.load();
+      setTimeout(() => {
+        rewardedVideoAd.show();
+        this.rewarded.isShow = true;
+      }, 1000);
+    },
+    showBannerAd: function (contentStatus) {
+      console.info("\n\n======== 加载Banner广告开始 ========");
+      this.getAdProvider();
+      if (this.provider !== "huawei") {
+        console.info("当前设备不支持华为广告功能。");
+        return;
+      }
+      ad.setTagForUnderAgeOfPromise(1);
+      ad.setNonPersonalizedAd(contentStatus);
+      if (bannerAd) {
+        bannerAd.destroy();
+      }
+      bannerAd = ad.createBannerAd({
+        adUnitId: this.bannerAD.adUnitId,
+        style: this.bannerAD.style,
+        adIntervals: this.bannerAD.adIntervals
+      });
+      bannerAd.onLoad(e => {
+        console.info("Banner广告加载成功~！ e=" + JSON.stringify(e));
+        console.info("Banner广告展示样式:" + JSON.stringify(bannerAd.style));
+      });
+      bannerAd.onError(e => {
+        prompt.showToast({
+          message: "广告拉取失败",
+          duration: 2000,
+          gravity: "center"
+        });
+        console.error("Banner广告加载错误 err =" + JSON.stringify(e));
+      });
+      bannerAd.onClose(e => {
+        console.info("Banner广告关闭");
+      });
+      bannerAd.show();
+    },
+    hideBanerAd() {
+      if (bannerAd) {
+        bannerAd.hide();
+      }
+    },
+    showBanner() {
+      if (bannerAd) {
+        bannerAd.show();
+      }
+    },
+    onDestroy() {
+      rewardedVideoAd && rewardedVideoAd.destroy();
+      bannerAd && bannerAd.destroy();
+    },
+    more: function () {
+      this.showmore = true;
+    },
+    backInitConsent: function () {
+      this.showmore = false;
+    },
+    agree: function () {
+      // 0：用户同意接收个性化和非个性化广告。
+      this.updateConsentStatus(0);
+      this.hideConsentDialog();
+    },
+    skip: function () {
+      // 1 (NON_PERSONALIZED): 用户已同意仅接收非个性化广告。 如果用户未选择同意选项，则只能请求非个性化广告.
+      // 2 (UNKNOWN): 用户既不同意也不拒绝接收个性化或非个性化广告.
+      this.updateConsentStatus(1);
+      this.hideConsentDialog();
+    },
+    saveContentStatus: function (consentStatus) {
+      console.info("保存同意状态 consentStatus =" + consentStatus);
+      storage.set({
+        key: this.consentflag,
+        value: consentStatus,
+        success: function (data) {
+          console.log("保存同意状态成功");
+        },
+        fail: function (data, code) {
+          console.log("保存同意状态失败, code = " + code);
+        }
+      });
+    },
+    updateConsentStatus: function (consentStatus) {
+      console.info("更新同意状态 consentStatus =" + consentStatus);
+      this.allowAdNonPersonnal = consentStatus;
+      ad.setConsentStatus(consentStatus); // 设置用户同意状态.
+      this.saveContentStatus(consentStatus); // 保存用户同意状态
+    }
+  };
+</script>

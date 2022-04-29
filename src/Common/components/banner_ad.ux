@@ -1,0 +1,114 @@
+<template>
+  <div class="banner-ad">
+    <input type="button" class="btn" value="requestBannerAd" onclick="wrapInRootEle(allowAdNonPersonnal)" />
+    <input type="button" class="btn with-margin" value="hide bannerAd" onclick="hideBanerAd" />
+
+    <input type="button" class="btn" value="show banner Ad" onclick="showBanner" />
+  </div>
+</template>
+<style lang="less">
+    .banner-ad {
+      flex-direction: column;
+      align-items: center;
+      background-color: #4682b4;
+      padding: 0 20px;
+      transition: padding 0.3s linear;
+      .btn {
+        height: 80px;
+        background-color: #00bfff;
+        color: #ffffff;
+        border-radius: 20px;
+        width: 80%;
+      }
+      .with-margin {
+        margin: 20px 0;
+      }
+      .btn:active {
+        background-color: #058fbd;
+      }
+    }
+</style>
+<script>
+    import ad from "@service.ad";
+    import prompt from '@system.prompt';
+    let bannerAd;
+    export default {
+        data: {
+            provider: "",
+            bannerAD: {
+                adUnitId: "x0kvs12iu6",
+                adIntervals: 60,
+                style: {
+                    left: 0,
+                    top: 100,
+                    width: 360,
+                    height: 57
+                }
+            }
+        },
+        getAdProvider: function () {
+            this.provider = ad.getProvider();
+            prompt.showToast({
+                message: "getProvider : " + this.provider,
+                duration: 2000,
+                gravity: "center"
+            });
+        },
+        wrapInRootEle: function () {
+            const rootEle = this.$element()
+            if (!rootEle) {
+                this.showBannerAd()
+                return
+            }
+            rootEle.getBoundingClientRect({
+                success: (pos) => {
+                    this.bannerAD.style.top = pos.top + 75
+                    this.bannerAD.style.left = pos.left
+                    this.showBannerAd()
+                }
+            })
+        },
+        showBannerAd: function () {
+            this.getAdProvider();
+            if (this.provider !== "huawei") {
+                console.info("当前设备不支持广告服务.");
+                return;
+            }
+            if (bannerAd) {
+                bannerAd.destroy();
+            }
+            bannerAd = ad.createBannerAd({
+                adUnitId: this.bannerAD.adUnitId,
+                style: this.bannerAD.style,
+                adIntervals: this.bannerAD.adIntervals
+            });
+            bannerAd.onLoad(e => {
+                console.info("Banner广告加载成功!!!!!");
+                const rootEle = this.$element()
+                console.log('\n\n90 old rootEle.style.paddingTop = ', rootEle.style.paddingTop)
+                rootEle.style.paddingTop = `${bannerAd.style.realHeight}px`
+                console.log('rootEle.style.paddingTop = ', rootEle.style.paddingTop)
+            });
+            bannerAd.onError(e => {
+                console.error("Banner广告 onError " + JSON.stringify(e));
+            });
+            bannerAd.onClose(e => {
+                console.info("Banner广告 onClose");
+            });
+            bannerAd.show();
+        },
+        hideBanerAd: function () {
+            if (bannerAd) {
+                bannerAd.hide();
+            }
+        },
+        onDestroy() {
+            bannerAd && bannerAd.destroy();
+        },
+        showBanner: function () {
+            if (bannerAd) {
+                bannerAd.show();
+            }
+        }
+    };
+</script>

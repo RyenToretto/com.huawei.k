@@ -1,0 +1,272 @@
+<template>
+  <div class="origin-ad">
+    <div if="native.isShow" class="origin-ad-box">
+      <div class="origin-ad-header">
+        <div class="origin-ad-title">
+          <text>{{native.adData.title}}</text>
+          <input if="native.isShowBtn" type="button" class="adbtn" value="{{native.btnTxt}}" onclick="clickAdBtn()" />
+        </div>
+
+        <div class="closeImg">
+          <image src="/Common/close.png" onclick="closeAd"></image>
+        </div>
+      </div>
+
+      <video id="video" if="native.isShowVideo" src="{{native.adVideoSrc}}" autoplay="true" onclick="reportNativeClick()" class="ad-video"></video>
+
+      <stack class="origin-ad-stack" onclick="reportNativeClick()">
+        <image if="native.isShowImg" class="img" src="{{native.adImgSrc}}"></image>
+      </stack>
+    </div>
+    <text if="native.errStr">{{ native.errStr }}</text>
+  </div>
+</template>
+
+<style lang="less">
+    .origin-ad {
+      padding: 0 20px;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      align-content: center;
+      .img {
+        width: 100%;
+        resize-mode: contain;
+      }
+      .btn {
+        height: 80px;
+        width: 60%;
+        background-color: #00bfff;
+        color: #ffffff;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        &:active {
+          background-color: #058fbd;
+        }
+      }
+      .origin-ad-box {
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 50px;
+        .origin-ad-header {
+          justify-content: space-between;
+          align-items: center;
+          .origin-ad-title {
+            align-items: center;
+            .adbtn {
+              margin: 0 0 0 4px;
+              padding: 0 10px;
+              color: #ffffff;
+              background-color: #00bfff;
+              border-radius: 8px;
+            }
+            .adbtn:active {
+              background-color: #058fbd;
+            }
+          }
+          .closeImg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+          }
+        }
+        .ad-video {
+          width: 100%;
+          height: 415px;
+        }
+        .origin-ad-stack {
+          width: 100%;
+          padding: 4px 0 0 0;
+          height: 300px;
+        }
+      }
+    }
+</style>
+
+<script>
+    import ad from "@service.ad";
+    import prompt from "@system.prompt";
+    let nativeAd;
+    export default {
+        data: {
+            componentName: "ad",
+            provider: "",
+            native: {
+                adUnitId: "testu7m3hc4gvm",
+                isShow: false,
+                adData: {},
+                isShowImg: true,
+                isShowVideo: true,
+                isShowBtn: true,
+                errStr: "",
+                btnTxt: "",
+                adImgSrc: "http://cs02-pps-drcn.dbankcdn.com/cc/creative/upload/20191226/b750592e-04be-4132-9971-52494b1e5b43.jpg",
+                adVideoSrc: ""
+            }
+        },
+        onInit() {
+        },
+        onReady(options) {
+            console.info("原生广告 onReady");
+            this.showNativeAd();
+        },
+        onShow(options) {
+            if (this.native.isShow) {
+                this.reportNativeShow();
+            }
+        },
+        getAdProvider: function () {
+            this.provider = ad.getProvider();
+            prompt.showToast({
+                message: "设备厂商 : " + this.provider,
+                duration: 2000,
+                gravity: "center"
+            });
+        },
+        isDownloadAd(creativeType) {
+            let downloadTypes = [103, 106, 107, 108, 101, 102, 110];
+            return downloadTypes.includes(creativeType);
+        },
+        showNativeAd() {
+            this.getAdProvider();
+            if (this.provider !== "huawei") {
+                console.info("当前设备不支持广告服务.");
+                return;
+            }
+            console.info("\n\n\n===============> 139 原生广告开始加载");
+            nativeAd = ad.createNativeAd({ adUnitId: this.native.adUnitId });
+            nativeAd.onLoad(data => {
+                console.info("141 广告数据已加载 data =" + JSON.stringify(data));
+                this.native.adData = data.adList[0];
+                if (this.native.adData) {
+                    if (this.native.adData.imgUrlList) {
+                        this.native.adImgSrc = this.native.adData.imgUrlList[0];
+                        console.info("146 this.native.adImgSrc =" + this.native.adImgSrc);
+                        this.native.isShowImg = true;
+                    } else {
+                        this.native.isShowImg = false;
+                        this.native.adImgSrc = "";
+                    }
+                    if (this.native.adData.clickBtnTxt) {
+                        this.native.btnTxt = this.native.adData.clickBtnTxt;
+                        this.native.isShowBtn = true;
+                    } else {
+                        this.native.isShowBtn = false;
+                        this.native.btnTxt = "";
+                    }
+                    if (this.native.adData.videoUrlList && this.native.adData.videoUrlList[0]) {
+                        this.native.adVideoSrc = this.native.adData.videoUrlList[0];
+                        this.native.isShowVideo = true;
+                    } else {
+                        this.native.isShowVideo = false;
+                        this.native.adVideoSrc = "";
+                    }
+                    this.native.isShow = true;
+                    this.native.errStr = "";
+                    this.reportNativeShow();
+                }
+            });
+            nativeAd.onError(e => {
+                prompt.showToast({
+                    message: "广告拉取失败",
+                    duration: 2000,
+                    gravity: "center"
+                });
+                console.error("172 广告加载错误 error =" + JSON.stringify(e));
+                this.native.isShowImg = false;
+                this.native.isShowVideo = false;
+                this.native.isShow = false;
+                this.native.errStr = JSON.stringify(e);
+            });
+            nativeAd.load();
+        },
+        reportNativeShow() {
+            if (nativeAd) {
+                nativeAd.reportAdShow({ adId: this.native.adData.adId });
+            }
+        },
+        reportNativeClick() {
+            nativeAd.reportAdClick({
+                adId: this.native.adData.adId
+            });
+        },
+        listenNativeAdDownloadStatus(downloadstatus) {
+            if (downloadstatus === "INSTALLED") {
+                this.native.btnTxt = "OPEN";
+            }
+        },
+        clickAdBtn(evt) {
+            evt.stopPropagation();
+            // 判断是否带下载按钮
+            let createType = this.native.adData.creativeType;
+            let ans = this.isDownloadAd(createType);
+            console.info("200 点击按钮 处理下载 ans=" + ans);
+            if (ans) {
+                this.dealdownload();
+            } else {
+                this.reportNativeClick();
+            }
+        },
+        dealdownload: function () {
+            let downloadstatus = nativeAd.getAppStatus({
+                adId: this.native.adData.adId
+            });
+            console.log("211 下载状态 downloadstatus = " + downloadstatus);
+            if (downloadstatus === "DOWNLOAD") {
+                //下载未开始，应用初始状态。
+                const resultCode = nativeAd.startDownload({
+                    adId: this.native.adData.adId
+                });
+                console.log("217 开始下载  resultCode= " + resultCode);
+                const progress = nativeAd.getDownloadProgress({
+                    adId: this.native.adData.adId
+                });
+                console.log("221 下载进度 progress = " + progress);
+                nativeAd.onDownloadProgress(data => {
+                    console.log("223 下载中 data = ", data);
+                    this.native.btnTxt = data.progress + "%";
+                });
+                nativeAd.onStatusChanged(data => {
+                    console.log("227 广告状态变更 data = ", data);
+                    let status = data.status;
+                    this.listenNativeAdDownloadStatus(status);
+                });
+            } else if (downloadstatus === "DOWNLOADING") {
+                this.native.btnTxt = "pause";
+                nativeAd.pauseDownload({
+                    adId: this.native.adData.adId
+                });
+            } else if (downloadstatus === "PAUSE") {
+                this.native.btnTxt = "resume download";
+                nativeAd.resumeDownload({
+                    adId: this.native.adData.adId
+                });
+            } else {
+                this.reportNativeClick();
+            }
+        },
+        removeAdListen: function () {
+            if (nativeAd) {
+                nativeAd.offDownloadProgress();
+                nativeAd.offError(() => {
+                    console.log("249 原生广告关闭错误 offError");
+                });
+                nativeAd.offLoad(() => {
+                    console.log("252 原生广告加载错误 offLoad");
+                });
+                nativeAd.offStatusChanged();
+            }
+        },
+        onDestroy() {
+            if (nativeAd) {
+                nativeAd.cancelDownload({
+                    adId: this.native.adData.adId
+                });
+                nativeAd.destroy();
+            }
+        },
+        closeAd: function () {
+            this.native.isShow = false;
+        }
+    };
+</script>
