@@ -1,33 +1,11 @@
 <template>
-  <div class="banner-ad">
-    <input type="button" class="btn" value="requestBannerAd" onclick="wrapInRootEle(allowAdNonPersonnal)" />
-    <input type="button" class="btn with-margin" value="hide bannerAd" onclick="hideBanerAd" />
-
-    <input type="button" class="btn" value="show banner Ad" onclick="showBanner" />
-  </div>
+  <div class="banner-ad"></div>
 </template>
+
 <style lang="less">
-    .banner-ad {
-      flex-direction: column;
-      align-items: center;
-      background-color: #4682b4;
-      padding: 0 20px;
-      transition: padding 0.3s linear;
-      .btn {
-        height: 80px;
-        background-color: #00bfff;
-        color: #ffffff;
-        border-radius: 20px;
-        width: 80%;
-      }
-      .with-margin {
-        margin: 20px 0;
-      }
-      .btn:active {
-        background-color: #058fbd;
-      }
-    }
+    .banner-ad {}
 </style>
+
 <script>
     import ad from "@service.ad";
     import prompt from '@system.prompt';
@@ -48,13 +26,8 @@
         },
         getAdProvider: function () {
             this.provider = ad.getProvider();
-            prompt.showToast({
-                message: "getProvider : " + this.provider,
-                duration: 2000,
-                gravity: "center"
-            });
         },
-        wrapInRootEle: function () {
+        getAdBanner: function () {
             const rootEle = this.$element()
             if (!rootEle) {
                 this.showBannerAd()
@@ -62,7 +35,7 @@
             }
             rootEle.getBoundingClientRect({
                 success: (pos) => {
-                    this.bannerAD.style.top = pos.top + 75
+                    this.bannerAD.style.top = pos.top + 74
                     this.bannerAD.style.left = pos.left
                     this.showBannerAd()
                 }
@@ -83,21 +56,22 @@
                 adIntervals: this.bannerAD.adIntervals
             });
             bannerAd.onLoad(e => {
-                console.info("Banner广告加载成功!!!!!");
-                const rootEle = this.$element()
-                console.log('\n\n90 old rootEle.style.paddingTop = ', rootEle.style.paddingTop)
-                rootEle.style.paddingTop = `${bannerAd.style.realHeight}px`
-                console.log('rootEle.style.paddingTop = ', rootEle.style.paddingTop)
+                console.info('Banner广告加载成功!');
             });
             bannerAd.onError(e => {
                 console.error("Banner广告 onError " + JSON.stringify(e));
+                prompt.showToast({
+                    message: "Banner广告加载异常",
+                    duration: 2000,
+                    gravity: "center"
+                });
             });
             bannerAd.onClose(e => {
                 console.info("Banner广告 onClose");
             });
             bannerAd.show();
         },
-        hideBanerAd: function () {
+        hideAdBaner: function () {
             if (bannerAd) {
                 bannerAd.hide();
             }
@@ -105,7 +79,7 @@
         onDestroy() {
             bannerAd && bannerAd.destroy();
         },
-        showBanner: function () {
+        showAdBaner: function () {
             if (bannerAd) {
                 bannerAd.show();
             }

@@ -6,40 +6,60 @@
 
 <template>
   <div class="home-page">
-
     <do-search-bar></do-search-bar>
 
-    <!-- <text class="test-case-title">Banner 广告 =></text> -->
-    <!-- <banner-ad></banner-ad> -->
+    <banner-ad id="refBannerAd"></banner-ad>
+    <div class="test-case-btn-group">
+      <input type="button" class="btn" value="请求Banner广告" onclick="getBannerAd(allowAdNonPersonnal)" />
+      <input type="button" class="btn with-mgn-top" value="hide bannerAd" onclick="hideBanerAd" />
+      <input type="button" class="btn with-mgn-top" value="show banner Ad" onclick="showBannerAd" />
+    </div>
+    
 
     <book-swiper></book-swiper>
 
     <!-- <text class="test-case-title">广告用户协议 =></text> -->
     <!-- <ask-ad-right></ask-ad-right> -->
 
-    <!-- <text class="test-case-title">原生广告 =></text> -->
-    <!-- <origin-ad></origin-ad> -->
-
+    <text class="test-case-title">原生广告 =></text>
+    <origin-ad></origin-ad>
   </div>
-
 </template>
 
 <style lang="less">
-    @import '../Common/css/variable.less';
-    @import '../Common/css/common.less';
-    @import '../Common/css/button.less';
+  @import "../Common/css/variable.less";
+  @import "../Common/css/common.less";
+  @import "../Common/css/button.less";
 
-    .home-page {
-        width: 100%;
-        height: 100%;
-        flex-direction: column;
-        .test-case-title {
-          margin-bottom: 10px;
-          padding: 0 4px;
-          border-top: 1px solid #000000;
-          border-bottom: 1px solid #000000;
-        }
+  .home-page {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    .test-case-title {
+      margin-bottom: 10px;
+      padding: 0 4px;
+      border-top: 1px solid #000000;
+      border-bottom: 1px solid #000000;
     }
+    .test-case-btn-group {
+      flex-direction: column;
+      align-items: center;
+      background-color: #4682b4;
+      .btn {
+        height: 80px;
+        background-color: #00bfff;
+        color: #ffffff;
+        border-radius: 20px;
+        width: 80%;
+      }
+      .with-mgn-top {
+        margin-top: 20px;
+      }
+      .btn:active {
+        background-color: #058fbd;
+      }
+    }
+  }
 </style>
 
 <script>
@@ -51,11 +71,20 @@
     onInit: function () {
       this.$page.setTitleBar({ text: 'k小说' });
     },
-    onShow(){
-      APP_STATISTICS.page_show( this ); // 页面打点 显示
+    onShow() {
+      APP_STATISTICS.page_show(this); // 页面打点 显示
     },
     onHide() {
-      APP_STATISTICS.page_hide( this ); // 页面打点 隐藏
+      APP_STATISTICS.page_hide(this); // 页面打点 隐藏
+    },
+    getBannerAd() {
+      this.$child('refBannerAd').getAdBanner()
+    },
+    hideBanerAd() {
+      this.$child('refBannerAd').hideAdBaner()
+    },
+    showBannerAd() {
+      this.$child('refBannerAd').showAdBaner()
     },
     showSearchPage() {
       router.push({

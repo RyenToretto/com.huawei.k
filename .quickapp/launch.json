@@ -16,5 +16,7 @@
     }
   ],
   "currentWidgetUri": "Home",
-  "currentAlias": "Default"
+  "currentAlias": "Default",
+  "lastWidgetUri": "Home",
+  "lastAlias": "Default"
 }
