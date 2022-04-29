@@ -4,6 +4,7 @@
 <import name="ask-ad-right" src="../Common/components/ask_ad_right"></import>
 <import name="origin-ad" src="../Common/components/origin_ad"></import>
 <import name="rewarded-ad" src="../Common/components/rewarded_ad"></import>
+<import name="ins-screen-ad" src="../Common/components/ins_screen_ad"></import>
 
 <template>
   <div class="home-page">
@@ -16,7 +17,7 @@
     <book-swiper></book-swiper>
 
     <div class="test-case-btn-group">
-      <input type="button" class="btn" value="请求Banner广告" onclick="getBannerAd(allowAdNonPersonnal)" />
+      <input type="button" class="btn" value="获取Banner广告" onclick="getBannerAd(allowAdNonPersonnal)" />
       <input type="button" class="btn with-mgn-top" value="隐藏Banner广告" onclick="hideBanerAd" />
       <input type="button" class="btn with-mgn-top" value="显示Banner广告" onclick="showBannerAd" />
     </div>
@@ -24,11 +25,19 @@
     <text class="test-case-title">原生广告 =></text>
     <origin-ad></origin-ad>
 
-    <!--  --><text class="test-case-title">激励视频广告 =></text>
+    <text class="test-case-title">激励视频广告 =></text>
     <rewarded-ad id="refRewardedAd"></rewarded-ad>
     <div class="test-case-btn-group">
       <input type="button" class="btn" value="展示激励视频广告" onclick="getRewardedAd" />
     </div>
+
+    <text class="test-case-title">插屏广告 =></text>
+    <ins-screen-ad id="refInsScreenAd"></ins-screen-ad>
+    <div class="test-case-btn-group">
+      <input type="button" class="btn" value="显示插屏图片广告" onclick="getInsImageScreenAd" />
+      <input type="button" class="btn with-mgn-top" value="显示插屏视频广告" onclick="getInsVideoScreenAd" />
+    </div>
+
   </div>
 </template>
 
@@ -76,17 +85,23 @@
     data: {
       allowAdNonPersonnal: 0
     },
-    getBannerAd() {
-      this.$child('refBannerAd').getAdBanner()
-    },
     hideBanerAd() {
       this.$child('refBannerAd').hideAdBaner()
     },
     showBannerAd() {
       this.$child('refBannerAd').showAdBaner()
     },
+    getBannerAd() {
+      this.$child('refBannerAd').getAdBanner()
+    },
     getRewardedAd () {
       this.$child('refRewardedAd').getAdRewarded()
+    },
+    getInsImageScreenAd () {
+      this.$child('refInsScreenAd').getAdInsImageScreen()
+    },
+    getInsVideoScreenAd () {
+      this.$child('refInsScreenAd').getAdInsVideoScreen()
     },
     onInit: function () {
       this.$page.setTitleBar({ text: 'k小说' });

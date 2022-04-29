@@ -1,0 +1,109 @@
+<template>
+  <div class="ins-screen-ad"></div>
+</template>
+
+<style lang="less">
+    .ins-screen-ad {
+    }
+</style>
+
+<script>
+    import ad from "@service.ad";
+    import prompt from "@system.prompt";
+
+    let interstitialAd;
+    module.exports = {
+        data: {
+            adDta: {
+                videoAdId: "testb4znbuh3n2",
+                imageAdId: "teste9ih9j0rc3"
+            }
+        },
+        onReady(options) {
+        },
+        onShow(options) { },
+        onDestroy: function () {
+            if (interstitialAd) {
+                interstitialAd.destroy(() => {
+                    console.log("插屏广告已销毁");
+                });
+            }
+        },
+        getAdInsImageScreen: function () {
+            let provider = ad.getProvider();
+            if (provider !== "huawei") {
+                prompt.showToast({
+                    message: "当前设备不支持华为广告功能。",
+                    duration: 2000,
+                    gravity: "center"
+                });
+                return;
+            }
+            if (interstitialAd) {
+                interstitialAd.destroy();
+            }
+            interstitialAd = ad.createInterstitialAd({
+                adUnitId: this.adDta.imageAdId
+            });
+            interstitialAd.load();
+            interstitialAd.onLoad(function (data) {
+                console.log(
+                    "图片插屏广告已加载 data= " + JSON.stringify(data)
+                );
+                interstitialAd.show();
+            });
+            interstitialAd.onError(err => {
+                console.log("图片插屏广告异常 error = " + JSON.stringify(err));
+            });
+            interstitialAd.onClose(() => {
+                console.log("图片插屏广告已关闭");
+                interstitialAd.destroy(() => {
+                    console.log("图片插屏广告已销毁");
+                });
+            });
+            interstitialAd.onClick(() => {
+                console.log("图片插屏广告被点击");
+            });
+        },
+        getAdInsVideoScreen: function () {
+            let provider = ad.getProvider();
+            if (provider !== "huawei") {
+                prompt.showToast({
+                    message: "当前设备不支持华为广告功能。",
+                    duration: 2000,
+                    gravity: "center"
+                });
+                return;
+            }
+            interstitialAd = ad.createInterstitialAd({
+                adUnitId: this.adDta.videoAdId
+            });
+            interstitialAd.load().then(
+                data => {
+                    console.info("请求视频插屏广告成功 data=" + JSON.stringify(data));
+                },
+                data => {
+                    console.info("请求视频插屏广告失败 data=" + JSON.stringify(data));
+                }
+            );
+            interstitialAd.onLoad(function (data) {
+                console.log(
+                    "视频插屏广告已加载 data= " + JSON.stringify(data)
+                );
+                interstitialAd.show();
+            });
+            interstitialAd.onError(err => {
+                console.log("视频插屏广告异常 error = " + JSON.stringify(err));
+            });
+            interstitialAd.onClose(() => {
+                console.log("视频插屏广告已关闭");
+                interstitialAd.destroy(() => {
+                    console.log("视频插屏广告已销毁");
+                });
+            });
+            interstitialAd.onClick(() => {
+                console.log("视频插屏广告被点击");
+            });
+        }
+    };
+</script>
