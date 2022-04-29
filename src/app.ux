@@ -25,11 +25,11 @@
 
       this.$analytics = agconnect.analytics();
 
-      console.info('Application onCreate');
+      console.info('快应用已创建');
       APP_STATISTICS.app_sta_init( this ); // 统计打点
     },
     onDestroy() {
-      console.info('Application onDestroy');
+      console.info('快应用已销毁');
     },
     onError(err) { //  监听应用错误的生命周期函数
       try {
