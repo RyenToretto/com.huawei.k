@@ -3,7 +3,8 @@
 </template>
 
 <style lang="less">
-    .banner-ad {}
+    .banner-ad {
+    }
 </style>
 
 <script>
@@ -35,7 +36,7 @@
             }
             rootEle.getBoundingClientRect({
                 success: (pos) => {
-                    this.bannerAD.style.top = pos.top + 74
+                    this.bannerAD.style.top = pos.top + 23
                     this.bannerAD.style.left = pos.left
                     this.showBannerAd()
                 }
@@ -44,7 +45,11 @@
         showBannerAd: function () {
             this.getAdProvider();
             if (this.provider !== "huawei") {
-                console.info("当前设备不支持广告服务.");
+                prompt.showToast({
+                    message: "当前设备不支持华为广告功能。",
+                    duration: 2000,
+                    gravity: "center"
+                });
                 return;
             }
             if (bannerAd) {

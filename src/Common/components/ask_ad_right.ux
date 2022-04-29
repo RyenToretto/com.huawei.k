@@ -1,15 +1,9 @@
 <template>
   <stack class="ask-ad-right">
-    <div class="ad-btn-box">
-      <input type="button" class="btn" value="请求激励视频广告" onclick="showRewardedAd(allowAdNonPersonnal)" />
-      <input type="button" class="btn" value="请求Banner广告" onclick="showBannerAd(allowAdNonPersonnal)" />
-      <input type="button" class="btn" value="hide bannerAd" onclick="hideBanerAd" />
-      <input type="button" class="btn" value="show banner Ad" onclick="showBanner" />
-    </div>
-
     <div if="{{isShowConsent}}" class="dialog-ad-protocol-modal">
       <div class="dialog-ad-protocol-box">
-        <text class="txt-ad-protocol">{{ consent_title }}</text>
+        <text class="txt-ad-protocol title-ad-protocol">{{ consent_title }}</text>
+
         <list show="{{!showmore}}">
           <list-item type="content1">
             <text class="txt-ad-protocol">{{ consent_init_text1 }}</text>
@@ -41,7 +35,7 @@
         </list>
 
         <!-- bottom buttons -->
-        <div style="width: 100%; justify-content: center; margin-top: 26px">
+        <div style="width: 100%; justify-content: space-around; margin-top: 26px">
           <input type="button" value="跳过" class="dlgbtn" show="{{!showmore}}" onclick="skip"></input>
           <input type="button" value="同意" class="dlgbtn" show="{{!showmore}}" onclick="agree"></input>
           <input type="button" value="返回" class="dlgbtn" onclick="backInitConsent" show="{{showmore}}"></input>
@@ -74,63 +68,43 @@
       }
     }
     .dialog-ad-protocol-modal {
-      position: fixed;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       width: 100%;
       height: 100%;
       margin: auto;
       background-color: rgba(48, 47, 47, 0.8);
+      position: fixed;
       animation-name: Modal;
       animation-duration: 130ms;
       animation-timing-function: ease-in;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       .dialog-ad-protocol-box {
-        flex-direction: column;
+        padding: 12px 20px 20px;
         width: 80%;
         height: 80%;
-        background-color: #f8f8ff;
-        align-items: center;
-        justify-content: center;
-        padding: 0 34px 34px;
         border-radius: 34px;
+        background-color: #f8f8ff;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .title-ad-protocol {
+          margin-top: 12px;
+        }
         .txt-ad-protocol {
           font-size: 16px;
-          margin-top: 20px;
+          margin-bottom: 12px;
           color: #1b1515;
         }
         .dlgbtn {
-          width: 100%;
-          color: white;
+          padding: 0 24px;
           border-radius: 16px;
-          height: 80px;
-          margin-bottom: 20px;
           background-color: #00bfff;
-          margin-left: 20px;
+          color: white;
+          font-size: 14px;
         }
       }
     }
-  }
-  .adbtn {
-    width: 100px;
-    height: 50px;
-    color: #ffffff;
-    background-color: #00bfff;
-    border-radius: 8px;
-    position: absolute;
-    align-self: flex-end;
-    bottom: 20px;
-    right: 20px;
-  }
-  .adbtn:active {
-    background-color: #058fbd;
-  }
-  .item-content {
-    flex-direction: column;
-    background-color: #ffffff;
-    padding: 30px;
-    margin-bottom: 100px;
-    align-items: flex-start;
   }
   image {
     width: 100%;
@@ -144,8 +118,7 @@
   import ad from "@service.ad";
   import prompt from "@system.prompt";
   import storage from "@system.storage";
-  let rewardedVideoAd;
-  let bannerAd;
+
   export default {
     data: {
       consentflag: "同意标志",
@@ -157,33 +130,15 @@
       consent_title: "HUAWEI X 广告协议",
       consent_init_text1: "HUAWEI X 中的广告是与我们的广告合作伙伴合作提供的。 为提供此服务，我们需要与这些合作伙伴共享您的某些信息，包括您所在城市的位置以及您对新闻服务的使用记录。",
       consent_init_text2: "有关我们的合作伙伴以及如何处理您的数据的更多信息，请点击",
-      consent_init_text3: '触摸“同意”，即表示您同意与我们的合作伙伴共享上述个人信息，以便他们可以根据通过分析您的个人信息识别或预测的兴趣和偏好，代表他们的客户为您提供个性化广告。\n \n您可以随时前往 [应用设置] 撤回您的同意。\n\n如果您触摸 SKIP，您的数据将不会与我们的合作伙伴共享，您也不会收到个性化广告。',
+      consent_init_text3: '选择“同意”，即表示您同意与我们的合作伙伴共享上述个人信息，以便他们可以根据通过分析您的个人信息识别或预测的兴趣和偏好，代表他们的客户为您提供个性化广告。\n\n您可以随时前往 [应用设置] 撤回您的同意。\n\n如果您选择跳过，您的数据将不会与我们的合作伙伴共享，您也不会收到个性化广告。',
       consent_more_info_text1: "HUAWEI X 中的广告是与我们的合作伙伴合作提供的。 您可以在此处找到每个国家/地区的完整合作伙伴列表：",
-      consent_more_info_text2: `为了向您提供个性化的广告，我们需要与合作伙伴共享以下信息：\n\n
-            用户信息，包括广告 ID、居住城市、国家和语言。\n\n
-            设备信息，包括设备名称和型号、操作系统版本、屏幕大小和网络类型。\n\n
-            服务使用信息，包括新闻 ID 以及新闻内容和广告的查看、点击、不喜欢、分享和评论的记录。\n\n
-     经您同意，上述信息将与我们的合作伙伴共享，以便他们根据通过分析您的个人信息识别或预测的兴趣和偏好，代表他们的客户为您提供个性化广告。\n\n
-     您可以通过转到应用设置随时撤回您的同意。\n\n
-     未经您的同意，我们不会与我们的合作伙伴共享任何数据，您也不会收到个性化广告。`,
-      rewarded: { // 激励广告
-        adUnitId: "testx9dtjwj8hp",
-        isShow: true,
-        errStr: ""
-      },
-      bannerAD: { // Banner广告
-        adUnitId: "x0kvs12iu6",
-        adIntervals: 30,
-        style: {
-          left: 0,
-          top: 0,
-          width: -1,
-          height: -2
-        }
-      }
-    },
-    onInit() {
-      this.$page.setTitleBar({ text: "广告征求示例" });
+      consent_more_info_text2: `为了向您提供个性化的广告，我们需要与合作伙伴共享以下信息：\n
+用户信息，包括广告 ID、居住城市、国家和语言。\n
+设备信息，包括设备名称和型号、操作系统版本、屏幕大小和网络类型。\n
+服务使用信息，包括新闻 ID 以及新闻内容和广告的查看、点击、不喜欢、分享和评论的记录。\n
+经您同意，上述信息将与我们的合作伙伴共享，以便他们根据通过分析您的个人信息识别或预测的兴趣和偏好，代表他们的客户为您提供个性化广告。\n
+您可以通过转到应用设置随时撤回您的同意。\n
+未经您的同意，我们不会与我们的合作伙伴共享任何数据，您也不会收到个性化广告。`
     },
     onReady(options) {
       this.checkAdConsent();
@@ -191,18 +146,16 @@
     getAdProvider: function () {
       this.provider = ad.getProvider(); // 获取设备厂商
     },
-    hideAll() {
-      this.native.isShow = false;
-      this.native.isShowImg = false;
-      this.native.isShowVideo = false;
-      this.rewarded.isShow = false;
-    },
     checkAdConsent: function () {
       console.info("\n\n======== 广告同意检测开始 ========");
       var that = this;
       this.getAdProvider();
       if (this.provider !== "huawei") {
-        console.info("当前设备不支持华为广告功能。");
+        prompt.showToast({
+          message: "当前设备不支持华为广告功能。",
+          duration: 2000,
+          gravity: "center"
+        });
         return;
       }
       // 首次启动快应用时，检查是否需要弹窗征得用户同意.
@@ -263,87 +216,7 @@
         }
       });
     },
-    showRewardedAd(contentStatus) {
-      console.info("\n\n======== 加载激励视频广告开始 ========");
-      this.getAdProvider();
-      if (this.provider !== "huawei") {
-        console.info("当前设备不支持华为广告功能。");
-        return;
-      }
-      ad.setTagForUnderAgeOfPromise(1);
-      ad.setNonPersonalizedAd(contentStatus);
-      rewardedVideoAd = ad.createRewardedVideoAd({
-        adUnitId: this.rewarded.adUnitId
-      });
-      rewardedVideoAd.onLoad(() => {
-        this.rewarded.errStr = "";
-      });
-      rewardedVideoAd.onError(e => {
-        prompt.showToast({
-          message: "广告拉取失败",
-          duration: 2000,
-          gravity: "center"
-        });
-        console.error("加载激励视频广告 error:" + JSON.stringify(e));
-        this.rewarded.errStr = JSON.stringify(e);
-      });
-      rewardedVideoAd.onClose(() => {
-        console.info("激励视频广告关闭");
-      });
-      rewardedVideoAd.load();
-      setTimeout(() => {
-        rewardedVideoAd.show();
-        this.rewarded.isShow = true;
-      }, 1000);
-    },
-    showBannerAd: function (contentStatus) {
-      console.info("\n\n======== 加载Banner广告开始 ========");
-      this.getAdProvider();
-      if (this.provider !== "huawei") {
-        console.info("当前设备不支持华为广告功能。");
-        return;
-      }
-      ad.setTagForUnderAgeOfPromise(1);
-      ad.setNonPersonalizedAd(contentStatus);
-      if (bannerAd) {
-        bannerAd.destroy();
-      }
-      bannerAd = ad.createBannerAd({
-        adUnitId: this.bannerAD.adUnitId,
-        style: this.bannerAD.style,
-        adIntervals: this.bannerAD.adIntervals
-      });
-      bannerAd.onLoad(e => {
-        console.info("Banner广告加载成功~！ e=" + JSON.stringify(e));
-        console.info("Banner广告展示样式:" + JSON.stringify(bannerAd.style));
-      });
-      bannerAd.onError(e => {
-        prompt.showToast({
-          message: "广告拉取失败",
-          duration: 2000,
-          gravity: "center"
-        });
-        console.error("Banner广告加载错误 err =" + JSON.stringify(e));
-      });
-      bannerAd.onClose(e => {
-        console.info("Banner广告关闭");
-      });
-      bannerAd.show();
-    },
-    hideBanerAd() {
-      if (bannerAd) {
-        bannerAd.hide();
-      }
-    },
-    showBanner() {
-      if (bannerAd) {
-        bannerAd.show();
-      }
-    },
-    onDestroy() {
-      rewardedVideoAd && rewardedVideoAd.destroy();
-      bannerAd && bannerAd.destroy();
-    },
+    onDestroy() {},
     more: function () {
       this.showmore = true;
     },

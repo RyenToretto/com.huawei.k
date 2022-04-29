@@ -3,26 +3,32 @@
 <import name="banner-ad" src="../Common/components/banner_ad"></import>
 <import name="ask-ad-right" src="../Common/components/ask_ad_right"></import>
 <import name="origin-ad" src="../Common/components/origin_ad"></import>
+<import name="rewarded-ad" src="../Common/components/rewarded_ad"></import>
 
 <template>
   <div class="home-page">
+    <ask-ad-right></ask-ad-right>
+
     <do-search-bar></do-search-bar>
 
-    <banner-ad id="refBannerAd"></banner-ad>
-    <div class="test-case-btn-group">
-      <input type="button" class="btn" value="请求Banner广告" onclick="getBannerAd(allowAdNonPersonnal)" />
-      <input type="button" class="btn with-mgn-top" value="hide bannerAd" onclick="hideBanerAd" />
-      <input type="button" class="btn with-mgn-top" value="show banner Ad" onclick="showBannerAd" />
-    </div>
-    
+    <!--  --><banner-ad id="refBannerAd"></banner-ad>
 
     <book-swiper></book-swiper>
 
-    <!-- <text class="test-case-title">广告用户协议 =></text> -->
-    <!-- <ask-ad-right></ask-ad-right> -->
-
+    <div class="test-case-btn-group">
+      <input type="button" class="btn" value="请求Banner广告" onclick="getBannerAd(allowAdNonPersonnal)" />
+      <input type="button" class="btn with-mgn-top" value="隐藏Banner广告" onclick="hideBanerAd" />
+      <input type="button" class="btn with-mgn-top" value="显示Banner广告" onclick="showBannerAd" />
+    </div>
+    
     <text class="test-case-title">原生广告 =></text>
     <origin-ad></origin-ad>
+
+    <!--  --><text class="test-case-title">激励视频广告 =></text>
+    <rewarded-ad id="refRewardedAd"></rewarded-ad>
+    <div class="test-case-btn-group">
+      <input type="button" class="btn" value="展示激励视频广告" onclick="getRewardedAd" />
+    </div>
   </div>
 </template>
 
@@ -36,17 +42,18 @@
     height: 100%;
     flex-direction: column;
     .test-case-title {
-      margin-bottom: 10px;
+      margin: 40px 0 10px;
       padding: 0 4px;
       border-top: 1px solid #000000;
       border-bottom: 1px solid #000000;
     }
     .test-case-btn-group {
+      padding: 20px 0;
       flex-direction: column;
       align-items: center;
       background-color: #4682b4;
       .btn {
-        height: 80px;
+        height: 40px;
         background-color: #00bfff;
         color: #ffffff;
         border-radius: 20px;
@@ -67,15 +74,7 @@
 
   module.exports = {
     data: {
-    },
-    onInit: function () {
-      this.$page.setTitleBar({ text: 'k小说' });
-    },
-    onShow() {
-      APP_STATISTICS.page_show(this); // 页面打点 显示
-    },
-    onHide() {
-      APP_STATISTICS.page_hide(this); // 页面打点 隐藏
+      allowAdNonPersonnal: 0
     },
     getBannerAd() {
       this.$child('refBannerAd').getAdBanner()
@@ -85,6 +84,18 @@
     },
     showBannerAd() {
       this.$child('refBannerAd').showAdBaner()
+    },
+    getRewardedAd () {
+      this.$child('refRewardedAd').getAdRewarded()
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: 'k小说' });
+    },
+    onShow() {
+      APP_STATISTICS.page_show(this); // 页面打点 显示
+    },
+    onHide() {
+      APP_STATISTICS.page_hide(this); // 页面打点 隐藏
     },
     showSearchPage() {
       router.push({

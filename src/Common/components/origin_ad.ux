@@ -47,7 +47,6 @@
       .origin-ad-box {
         flex-direction: column;
         width: 100%;
-        margin-bottom: 50px;
         .origin-ad-header {
           justify-content: space-between;
           align-items: center;
@@ -72,12 +71,10 @@
         }
         .ad-video {
           width: 100%;
-          height: 415px;
         }
         .origin-ad-stack {
           width: 100%;
           padding: 4px 0 0 0;
-          height: 300px;
         }
       }
     }
@@ -107,7 +104,6 @@
         onInit() {
         },
         onReady(options) {
-            console.info("原生广告 onReady");
             this.showNativeAd();
         },
         onShow(options) {
@@ -117,11 +113,6 @@
         },
         getAdProvider: function () {
             this.provider = ad.getProvider();
-            prompt.showToast({
-                message: "设备厂商 : " + this.provider,
-                duration: 2000,
-                gravity: "center"
-            });
         },
         isDownloadAd(creativeType) {
             let downloadTypes = [103, 106, 107, 108, 101, 102, 110];
@@ -130,18 +121,19 @@
         showNativeAd() {
             this.getAdProvider();
             if (this.provider !== "huawei") {
-                console.info("当前设备不支持广告服务.");
+                prompt.showToast({
+                    message: "当前设备不支持华为广告功能。",
+                    duration: 2000,
+                    gravity: "center"
+                });
                 return;
             }
-            console.info("\n\n\n===============> 139 原生广告开始加载");
             nativeAd = ad.createNativeAd({ adUnitId: this.native.adUnitId });
             nativeAd.onLoad(data => {
-                console.info("141 广告数据已加载 data =" + JSON.stringify(data));
                 this.native.adData = data.adList[0];
                 if (this.native.adData) {
                     if (this.native.adData.imgUrlList) {
                         this.native.adImgSrc = this.native.adData.imgUrlList[0];
-                        console.info("146 this.native.adImgSrc =" + this.native.adImgSrc);
                         this.native.isShowImg = true;
                     } else {
                         this.native.isShowImg = false;
@@ -172,7 +164,6 @@
                     duration: 2000,
                     gravity: "center"
                 });
-                console.error("172 广告加载错误 error =" + JSON.stringify(e));
                 this.native.isShowImg = false;
                 this.native.isShowVideo = false;
                 this.native.isShow = false;
@@ -200,7 +191,6 @@
             // 判断是否带下载按钮
             let createType = this.native.adData.creativeType;
             let ans = this.isDownloadAd(createType);
-            console.info("200 点击按钮 处理下载 ans=" + ans);
             if (ans) {
                 this.dealdownload();
             } else {
@@ -211,23 +201,22 @@
             let downloadstatus = nativeAd.getAppStatus({
                 adId: this.native.adData.adId
             });
-            console.log("211 下载状态 downloadstatus = " + downloadstatus);
             if (downloadstatus === "DOWNLOAD") {
                 //下载未开始，应用初始状态。
                 const resultCode = nativeAd.startDownload({
                     adId: this.native.adData.adId
                 });
-                console.log("217 开始下载  resultCode= " + resultCode);
+                console.info("开始下载  resultCode= " + resultCode);
                 const progress = nativeAd.getDownloadProgress({
                     adId: this.native.adData.adId
                 });
-                console.log("221 下载进度 progress = " + progress);
+                console.info("下载进度 progress = " + progress);
                 nativeAd.onDownloadProgress(data => {
-                    console.log("223 下载中 data = ", data);
+                    console.info("下载中 data = ", data);
                     this.native.btnTxt = data.progress + "%";
                 });
                 nativeAd.onStatusChanged(data => {
-                    console.log("227 广告状态变更 data = ", data);
+                    console.info("广告状态变更 data = ", data);
                     let status = data.status;
                     this.listenNativeAdDownloadStatus(status);
                 });
@@ -248,11 +237,9 @@
         removeAdListen: function () {
             if (nativeAd) {
                 nativeAd.offDownloadProgress();
-                nativeAd.offError(() => {
-                    console.log("249 原生广告关闭错误 offError");
+                nativeAd.offError((e) => {
                 });
-                nativeAd.offLoad(() => {
-                    console.log("252 原生广告加载错误 offLoad");
+                nativeAd.offLoad((e) => {
                 });
                 nativeAd.offStatusChanged();
             }

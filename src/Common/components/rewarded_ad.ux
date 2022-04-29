@@ -1,0 +1,76 @@
+<template>
+  <div class="rewarded-ad"></div>
+</template>
+
+<style lang="less">
+  .rewarded-ad {
+  }
+</style>
+
+<script>
+  import ad from "@service.ad";
+  import prompt from "@system.prompt";
+
+  let rewardedVideoAd;
+  export default {
+    data: {
+      provider: "",
+      rewarded: {
+        adUnitId: "testx9dtjwj8hp",
+        errStr: ""
+      }
+    },
+    onReady(options) {
+      this.loadRewardAd();
+    },
+    getAdProvider: function () {
+      this.provider = ad.getProvider();
+    },
+    loadRewardAd() {
+      this.getAdProvider();
+      if (this.provider !== "huawei") {
+        prompt.showToast({
+          message: "当前设备不支持华为广告功能。",
+          duration: 2000,
+          gravity: "center"
+        });
+        return;
+      }
+      rewardedVideoAd = ad.createRewardedVideoAd({
+        adUnitId: this.rewarded.adUnitId
+      });
+      rewardedVideoAd.onLoad(() => {
+        this.rewarded.errStr = "";
+      });
+      rewardedVideoAd.onError(e => {
+        console.error("激励视频加载异常 error:" + JSON.stringify(e));
+        this.rewarded.errStr = JSON.stringify(e);
+        prompt.showToast({
+          message: "激励视频加载异常",
+          duration: 2000,
+          gravity: "center"
+        });
+      });
+      rewardedVideoAd.onClose(res => {
+        if (res.isEnded) {
+          prompt.showToast({
+            message: "广告观看成功，奖励已到账",
+            duration: 2000,
+            gravity: "center"
+          });
+        }
+        // rewardedVideoAd.offError(() => { console.log('offError'); })
+        // rewardedVideoAd.offLoad(() => { console.log('offLoad'); })
+        // rewardedVideoAd.destroy();
+        rewardedVideoAd.load(); // 下一次广告预加载
+      });
+      rewardedVideoAd.load();
+    },
+    onDestroy() {
+      rewardedVideoAd && rewardedVideoAd.destroy();
+    },
+    getAdRewarded: function () {
+      rewardedVideoAd.show();
+    },
+  };
+</script>
