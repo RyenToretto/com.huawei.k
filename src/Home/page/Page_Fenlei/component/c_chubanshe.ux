@@ -1,0 +1,75 @@
+<template>
+    <div class="cbs-content">
+        <div class="cbs-title">
+            <text class="title_text">热门出版社</text>
+            <div>
+                <text class="text_more">更多</text>
+                <image class="arrow" src={{arrow}}></image>
+            </div>
+        </div>
+        <div class="cbs-bottom">
+            <block for="{{list}}">
+                <image src={{$item}}></image>
+            </block>
+        </div>
+    </div>
+</template>
+
+<style>
+    .cbs-content {
+        flex-direction: column;
+        padding: 0 49px;
+    }
+
+    .cbs-title {
+        justify-content: space-between;
+    }
+
+    .title_text {
+        font-size: 31px;
+        color: #1A1A1A;
+        font-weight: bold;
+        align-self: center;
+    }
+
+    .text_more {
+        color: rgba(26, 26, 26, 0.5);
+        font-size: 27.08px;
+        text-align: right;
+        padding-right: 27px;
+        background-size: auto;
+        background-position: right;
+        background-repeat: no-repeat;
+    }
+
+    .arrow {
+        width: 16px;
+        height: 28px;
+        align-self: center;
+    }
+
+    .cbs-bottom {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding-top: 19px;
+    }
+
+    .cbs-bottom image {
+        width: 144px;
+        height: 64px;
+        margin-bottom: 16px;
+    }
+</style>
+
+<script>
+    export default {
+        data: {
+
+        },
+        props: [
+            'list',
+            'arrow'
+        ]
+
+    }
+</script>

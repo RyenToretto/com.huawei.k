@@ -1,0 +1,731 @@
+<template>
+  <div class="container">
+    <div class="detail_content">
+      <text class="top_tittel">{{tingshuData.chapterTitle}}</text>
+      <div class="book_image">
+        <image class="book_image_png" src={{tingshuData.bookImage}}></image>
+      </div>
+      <text class="book_name">{{tingshuData.bookTitle}}</text>
+      <text class="book_author">{{tingshuData.author}}</text>
+      <div class="book_evaluate">
+        <image src={{tingshuData.scoreImage}}></image>
+        <text class="book_score">{{tingshuData.score}}</text>
+      </div>
+      <div class="middle_massege">
+        <div for={{tingshuData.list}}>
+          <text class="middle_massege_title">{{$item.title}}</text>
+          <text class="middle_massege_name">{{$item.name}}</text>
+        </div>
+      </div>
+      <div class="book_detail">
+        <text class="detail_text">{{tingshuData.description}}</text>
+      </div>
+
+    </div>
+    <div class="buttom_audio">
+      <div class="audio-content">
+        <div class="content">
+          <div class="audio-progress">
+            <text class="audio-time">{{showTime}}</text>
+            <slider class="slider" style="selected-color: {{dynamicallyColor}};block-color:{{dynamicallyColor}}" value="{{time}}" onchange="getValue('time')"
+              max="{{total}}"></slider>
+            <text class="audio-time">{{showTotal}}</text>
+          </div>
+        </div>
+        <div class="audio-control">
+          <image class="audio-repeat" src="./img/add.png" onclick="loop"></image>
+          <div class="pre_container" style="background-color: {{dynamicallyColor}}">
+            <image class="audio-last" src="./img/pre.png" onclick="last"></image>
+          </div>
+          <div class="play_container" style="background-color: {{dynamicallyColor}}">
+            <image if="{{isPlayImg}}" class="audio-play" src="./img/play.png" onclick="play"></image>
+            <image else class="audio-pause" src="./img/stop.png" onclick="pause"></image>
+          </div>
+          <div class="next_container" style="background-color: {{dynamicallyColor}}">
+            <image class="audio-next" src="./img/next.png" onclick="next"></image>
+          </div>
+          <image class="audio-more" onclick="showCatalog()" src="./img/list.png"></image>
+        </div>
+      </div>
+    </div>
+
+    <div class="{{catalogStatus===true?'hearing-shadow-show':'hearing-shadow-none'}}" onclick="closeCatalog()">
+      <div class="{{catalogStatus===true?'hearing-catalog-show':'hearing-catalog-none'}}">
+        <text class="catalog-top">目录 ({{music.length}})</text>
+        <list class="catalog-list">
+          <list-item type="catalog-item" class="catalog-item" for="item in music" onclick="toHearing(item,$idx)">
+            <div class="left">
+              <div class="top">
+                <text class="title_name {{item.isHearing?'activate':''}}">
+                  {{item.chapterTitle}}
+                </text>
+              </div>
+              <div class="bottom">
+                <image class="clock" src="./img/clock.png"></image>
+                <text class="time"> {{item.duration}}</text>
+              </div>
+            </div>
+            <div class="right">
+              <image class="{{item.isHearing?'music-paly-png':'music-paly-png-none'}}" src="./img/ic_music_paly.png"></image>
+            </div>
+          </list-item>
+        </list>
+        <text class="catalog-bottom" onclick="closeCatalog()">关闭</text>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    height:100%;
+  }
+
+  .detail_content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 75px;
+  }
+
+  .top_tittel {
+    text-align: center;
+    font-size: 37.5px;
+    color: #1a1a1a;
+    padding: 0px 20px;
+  }
+
+  .book_image {
+    justify-content: center;
+    margin-top: 46px;
+    margin-bottom: 10px;
+  }
+
+  .book_image_png {
+    width: 217px;
+    height: 289px;
+  }
+
+  .book_name {
+    color: #000000;
+    font-size: 37.5px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .book_author {
+    font-size: 25px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 13px;
+    opacity: 0.5;
+  }
+
+  .book_evaluate {
+    margin-bottom: 31px;
+    align-items: center;
+  }
+
+  .book_score {
+    font-size: 25px;
+    color: #FFBF00;
+    margin-left: 10px;
+  }
+
+  .middle_massege {
+    align-items: center;
+    width: 548px;
+    flex-wrap: wrap;
+  }
+
+  .middle_massege div {
+    width: 273px;
+  }
+
+  .middle_massege_title {
+    font-size: 25px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-right: 8px;
+  }
+
+  .middle_massege_name {
+    font-size: 25px;
+    color: rgba(0, 0, 0, 1);
+  }
+
+  .book_detail {
+    margin: 34px 108px 3px 108px;
+  }
+
+  .detail_text {
+    lines: 9;
+    color: #000000;
+    font-size: 27.1px;
+    line-height: 44px;
+  }
+
+  .buttom_audio {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 270px;
+  }
+
+  /* 音频播放组件 */
+
+  .content {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .audio-back {
+    width: 100%;
+    height: 100px;
+    align-items: center;
+  }
+
+  .audio-back image {
+    margin-left: 33px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .audio-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    padding-left: 34px;
+    padding-right: 34px;
+  }
+
+  .audio-title {
+    color: #1A1A1A;
+    font-size: 37.5px;
+    margin-top: 16.7px;
+  }
+
+  .audio-img {
+    width: 467px;
+    height: 467px;
+    border-radius: 233.5px;
+    margin-bottom: 155px;
+    margin-top: 155px;
+  }
+
+  .audio-progress {
+    width: 680px;
+    justify-content: space-between;
+  }
+
+  .audio-time {
+    width: 60px;
+    height: 32px;
+    color: #1A1A1A;
+    font-size: 22.7px;
+    opacity: 0.75;
+  }
+
+  .slider {
+    selected-color: #007DFF;
+    color: #E5E5E5;
+    width: 500px;
+    padding-left: 22.4px;
+    padding-right: 22.7px;
+  }
+
+  .audio-control {
+    width: 100%;
+    margin: 34px 0px 58px 0px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .audio-repeat {
+    width: 50px;
+    height: 50px;
+  }
+
+
+
+  .play_container {
+    width: 135px;
+    height: 135px;
+    margin: 0px 65px 0px 65px;
+    border-radius: 100px;
+  }
+
+  .pre_container {
+    width: 82px;
+    height: 82px;
+    margin-left: 76px;
+    border-radius: 40px;
+  }
+
+  .next_container {
+    width: 83px;
+    height: 83px;
+    border-radius: 40px;
+  }
+
+  .audio-last {
+    width: 83px;
+    height: 83px;
+    resize-mode: center;
+  }
+
+  .audio-next {
+    width: 83px;
+    height: 83px;
+    resize-mode: center;
+  }
+
+  .audio-play {
+    width: 135px;
+    height: 135px;
+  }
+
+  .audio-pause {
+    width: 135px;
+    height: 135px;
+  }
+
+  .audio-more {
+    width: 50px;
+    height: 50px;
+    margin-left: 76px;
+  }
+
+  /* 播放列表 */
+
+  .hearing-shadow-show {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .hearing-shadow-none {
+    display: none;
+  }
+
+  .hearing-catalog-show {
+    position: fixed;
+    flex-direction: column;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 883px;
+    background-color: #f0f8ff;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+  }
+
+  .hearing-catalog-none {
+    display: none;
+  }
+
+  .catalog-list {
+    padding-top: 20px;
+    padding-left: 33px;
+    padding-right: 33px;
+  }
+
+  .catalog-item {
+    justify-content: space-between;
+    align-items: center;
+    height: 130px;
+    padding-top: 27px;
+    padding-bottom: 27px;
+    border-top-width: 0.5px;
+    border-top-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .left {
+    flex-direction: column;
+  }
+
+  .title_num {
+    font-size: 31.3px;
+    color: #1a1a1a;
+  }
+
+  .title_name {
+    font-size: 31.3px;
+    color: #1a1a1a;
+    lines: 1;
+    text-overflow: ellipsis;
+  }
+
+  .right {
+    align-items: center;
+    margin-left: 75px;
+  }
+
+  .music-paly-png {
+    width: 42px;
+  }
+
+  .music-paly-png-none {
+    display: none;
+  }
+
+  .bottom {
+    margin-top: 3px;
+    align-items: center;
+  }
+
+  .clock {
+    width: 25px;
+    height: 25px;
+  }
+
+  .time {
+    font-size: 27.1px;
+    color: #1A1A1A;
+    opacity: 0.5;
+    margin-left: 8px;
+  }
+
+  .activate {
+    color: #ff0000;
+  }
+
+  .catalog-top {
+    width: 100%;
+    font-size: 38px;
+    color: #1A1A1A;
+    margin: 28.6px 33px 17.8px 33px;
+  }
+
+  .catalog-bottom {
+    width: 100%;
+    height: 150px;
+    bottom: 0px;
+    text-align: center;
+    line-height: 50px;
+    color: #ff0000;
+    font-size: 28px;
+    background-color: #f0f8ff;
+  }
+</style>
+
+<script>
+  import audio from '@system.audio'
+  import image from '@system.image'
+  import device from '@system.device'
+
+  module.exports = {
+    data: {
+      tingshuData: {
+        chapterTitle: '第一回 命孤苦鬼节降草屋，家败落赌棚蒙羞辱',
+        bookImage: './TO_DELETE/Group.png',
+        bookTitle: '黑道教父杜月笙',
+        author: '云中鹤',
+        scoreImage: './img/star.png',
+        score: '9.4分',
+        list: [
+          {
+            title: '主播',
+            name: '圣徒'
+          },
+          {
+            title: '状态',
+            name: '连载中'
+          },
+          {
+            title: '集数',
+            name: '150集'
+          },
+          {
+            title: '作者',
+            name: '云中鹤'
+          }
+        ],
+        description: '1925年7月，杜月笙成立“三鑫公司”，垄断法租界鸦片提运。 斯特林.西格 老上海的黑帮大亨 老上海的黑帮大亨(3张) 雷夫在《宋家王朝》中描述了杜月笙鸦片销售这条通畅的“全球网络”。 同年，杜月笙出任法租界商会总联合会主席，兼纳税华人会监察。由于他在上海善待下台总统黎元洪，' +
+          '黎元洪的秘书长特撰一副对联：“春申门下三千客，小杜城南五尺天”。他因此被其党羽吹捧为“当代春申君”。 大学者章太炎、名士杨度、名律师秦联奎都是他的座上客。由此，杜月笙的社会地位不断提升。'
+      },
+
+      //音频组件
+      dynamicallyColor: 'rgba(0, 0, 0,0.5)',
+      title: '',
+      minTimeGap: 0,
+      image: './TO_DELETE/Bitmap.png',
+      select: 0,
+      isPlayImg: false,
+      isLoop: true,
+      routeStatus: false,
+      time: 0,
+      showTime: '00:00',
+      total: 0,
+      showTotal: '00:00',
+      music: [
+        { 'titleNum': 1, 'chapterTitle': "第一回 命孤苦鬼节降草屋，家败落赌棚蒙羞辱", 'image': './TO_DELETE/Group.png', 'isHearing': true, 'duration': `7'45"`, src: 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a' },
+        { 'titleNum': 2, 'chapterTitle': "第二回 求生计卖果拾旧习，寻出路木行把心依", 'image': './TO_DELETE/8.png', 'isHearing': false, 'duration': `7'45"`, src: 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a' },
+        { 'titleNum': 3, 'chapterTitle': "第三回，迷女色难耐欲中火，空妄想情场是非多", 'image': './TO_DELETE/Group.png', 'isHearing': false, 'duration': `7'45"`, src: 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a' },
+        { 'titleNum': 4, 'chapterTitle': "第四回，识阿姐受雇烟花弄，入八股机灵称霸王", 'image': './TO_DELETE/8.png', 'isHearing': false, 'duration': `7'45"`, src: 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a' },
+        { 'titleNum': 5, 'chapterTitle': "第五回，冒巡捕事败惹大祸，急救人九妹献玉身", 'image': './TO_DELETE/Group.png', 'isHearing': false, 'duration': `7'45"`, src: 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a' },
+        { 'titleNum': 6, 'chapterTitle': "第六回 八仙巧遇陈世昌，寻靠山进庙", 'image': './TO_DELETE/8.png', 'isHearing': false, 'duration': `7'45"`, src: 'http://od.qingting.fm/m4a/59db80de7cb8914779254b47_8041831_64.m4a' }
+      ],
+      catalogStatus: false
+    },
+
+    //音频组件
+    //初始化进来自动播放
+    onInit: function () {
+      this.$page.setTitleBar({
+        //titlebar的状态，在manifest.json中display设置的
+        text:"听书",
+        textColor: '##1A1A1A',
+        backgroundColor: '#ffffff',
+        menu: false
+      });
+
+      audio.stop();
+      this.title = this.music[this.select].title;
+      audio.src = this.music[this.select].src;
+
+      this.routeStatus = false;
+      // 获取传入的音频信息
+      if (this.item) {
+        let currentAuidoItem = JSON.parse(this.item);
+        audio.src = currentAuidoItem.src;
+        this.title = currentAuidoItem.title;
+        this.image = currentAuidoItem.img;
+      }
+
+      audio.autoplay = true; //自动播放
+      audio.loop = true; //是否循环
+      audio.currentTime = 0; //播放当前时间
+
+      // // 音频总时长
+      // this.total = audio.duration ? audio.duration : this.total;
+      // this.showTotal = this.changeTime(this.total);
+
+      audio.ondurationchange = () => {
+        // 音频总时长
+        this.total = audio.duration;
+        this.showTotal = this.changeTime(this.total);
+
+        // 滑动进度条的滑动的单位为秒
+        let percnettime = audio.duration * 0.1;
+        // 取 10秒或者 总时长十分之一的小者 作为最小滑动距离
+        this.minTimeGap = percnettime > 10 ? percnettime : 10;
+      };
+
+      audio.ontimeupdate = () => {
+        this.showTime = this.changeTime(audio.currentTime);
+        this.time = audio.currentTime;
+        if (audio.currentTime === audio.duration) {
+          this.next();
+        }
+      };
+      let _this = this;
+      device.getInfo({
+        success: function (data) {
+          if (data.engineProvider === 'huawei') {
+            //智能取色,需要判断是否是华为平台，非华为平台不做处理
+            _this.getColor();
+          }
+        }
+      });
+
+    },
+    //开始
+    play() {
+      audio.play();
+      this.isPlayImg = false;
+    },
+    //暂停
+    pause() {
+      audio.pause();
+      this.isPlayImg = true;
+    },
+    //上一首
+    last() {
+      if (this.select > 0) {
+        this.select = this.select - 1;
+        audio.src = this.music[this.select].src;
+        audio.currentTime = 0;
+        this.time = 0;
+        audio.play();
+        this.isPlayImg = false;
+        this.tingshuData.chapterTitle = this.music[this.select].chapterTitle;
+        this.tingshuData.bookImage = this.music[this.select].image;
+
+        this.music.forEach(element => {
+          element.isHearing = false;
+        });
+        this.music[this.select].isHearing = true;
+        let _this = this;
+        device.getInfo({
+          success: function (data) {
+            if (data.engineProvider === 'huawei') {
+              //智能取色,需要判断是否是华为平台，非华为平台不做处理
+              _this.getColor();
+            }
+          }
+        });
+      } else {
+        this.select = this.music.length - 1;
+        audio.src = this.music[this.select].src;
+        audio.currentTime = 0;
+        this.time = 0;
+        audio.play();
+        this.isPlayImg = false;
+        this.tingshuData.chapterTitle = this.music[this.select].chapterTitle;
+        this.tingshuData.bookImage = this.music[this.select].image;
+
+        this.music.forEach(element => {
+          element.isHearing = false;
+        });
+        this.music[this.select].isHearing = true;
+        let _this = this;
+        device.getInfo({
+          success: function (data) {
+            if (data.engineProvider === 'huawei') {
+              //智能取色,需要判断是否是华为平台，非华为平台不做处理
+              _this.getColor();
+            }
+          }
+        });
+      }
+    },
+    //下一首
+    next() {
+      if (this.select < this.music.length - 1) {
+        this.select = this.select + 1;
+        audio.src = this.music[this.select].src;
+        audio.currentTime = 0;
+        this.time = 0;
+        audio.play();
+        this.isPlayImg = false;
+        this.tingshuData.chapterTitle = this.music[this.select].chapterTitle;
+        this.tingshuData.bookImage = this.music[this.select].image;
+
+        this.music.forEach(element => {
+          element.isHearing = false;
+        });
+        this.music[this.select].isHearing = true;
+        let _this = this;
+        device.getInfo({
+          success: function (data) {
+            if (data.engineProvider === 'huawei') {
+              //智能取色,需要判断是否是华为平台，非华为平台不做处理
+              _this.getColor();
+            }
+          }
+        });
+      } else {
+        this.select = 0;
+        audio.src = this.music[this.select].src;
+        audio.currentTime = 0;
+        this.time = 0;
+        audio.play();
+        this.isPlayImg = false;
+        this.tingshuData.chapterTitle = this.music[this.select].chapterTitle;
+        this.tingshuData.bookImage = this.music[this.select].image;
+
+        this.music.forEach(element => {
+          element.isHearing = false;
+        });
+        this.music[this.select].isHearing = true;
+        let _this = this;
+        device.getInfo({
+          success: function (data) {
+            if (data.engineProvider === 'huawei') {
+              //智能取色,需要判断是否是华为平台，非华为平台不做处理
+              _this.getColor();
+            }
+          }
+        });
+      }
+    },
+    //是否循环播放
+    loop() {
+      this.isLoop = !this.isLoop;
+      audio.loop = this.isLoop;
+    },
+    getValue(name, e) {
+      let gap = Math.abs(e.progress - audio.currentTime);
+      if (gap > this.minTimeGap) {
+        this.time = e.progress;
+        audio.currentTime = e.progress;
+      }
+    },
+    changeTime(time) {
+      var result = "00:00";
+      if (time < 60) {
+        time = time < 10 ? "0" + time : time;
+        result = "00:" + time;
+      } else if (time >= 60) {
+        var minute = Math.floor(time / 60);
+        var timeInt = 60 * minute;
+        time = (time % timeInt < 10) ? "0" + time % timeInt : time % timeInt;
+        result = "0" + minute + ":" + time;
+      }
+      return result;
+    },
+
+    getColor() {
+      let _self = this;
+      image.pickColor({
+        uri: _self.music[_self.select].image,
+        success: function (data) {
+          _self.dynamicallyColor = data.color;
+        },
+        fail: function (data, code) {
+          console.log('handling fail, code = ' + code);
+        },
+        complete: function (data, code) {
+          console.log('handling complete, code = ' + code);
+        }
+      });
+    },
+
+    showCatalog() {
+      this.catalogStatus = true;
+      //设置标题栏背景
+      this.$page.setTitleBar({ menu: false, textColor: '#1A1A1A', backgroundColor: 'rgba(0,0,0,0.5)' });
+    },
+    closeCatalog() {
+      this.catalogStatus = false;
+      //设置标题栏背景
+      this.$page.setTitleBar({ menu: false, textColor: '#1A1A1A', backgroundColor: '#FFFFFF' });
+    },
+    toHearing(item, index) {
+      audio.stop();
+      this.music.forEach(element => {
+        element.isHearing = false;
+      });
+      item.isHearing = true;
+
+      //切换音频
+      this.select = index;
+      audio.src = this.music[index].src;
+      audio.currentTime = 0;
+      this.time = 0;
+      audio.play();
+      this.isPlayImg = false;
+      this.tingshuData.chapterTitle = this.music[index].chapterTitle;
+      this.tingshuData.bookImage = this.music[index].image;
+      let _this = this;
+      device.getInfo({
+        success: function (data) {
+          if (data.engineProvider === 'huawei') {
+            //智能取色,需要判断是否是华为平台，非华为平台不做处理
+            _this.getColor();
+          }
+        }
+      });
+    }
+  }
+</script>

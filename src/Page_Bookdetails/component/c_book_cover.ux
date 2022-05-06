@@ -1,0 +1,217 @@
+<template>
+
+	<div class="single-container">
+		<div class="single-product">
+			<div>
+				<image class="single-image" src="{{list.image}}"></image>
+			</div>
+			<div class="single-description">
+				<text class="description_title">{{list.title}}</text>
+				<div class="strats">
+					<image for="item in starts" class="strat_image" src="img/strat_light.png"></image>
+					<image class="strat_image" src="img/start_grey.png"></image>
+					<text class="description_score">9.4分</text>
+					<text class="description_peapel">{{list.score}}人评分</text>
+				</div>
+
+				<text class="single-brief">作者&nbsp; {{list.author}}</text>
+				<text class="single-brief">字数&nbsp; {{list.words}}</text>
+				<text class="single-brief">类型&nbsp; {{list.type}}</text>
+			</div>
+		</div>
+		<div class="description_content">
+			<text class="content_title">内容简介</text>
+			<text class="{{presentationClass}}" onclick="changePresentationClass">{{list.presentation}}</text>
+		</div>
+		<div class="key-words">
+			<text class="key-words-text">小说</text>
+			<text class="key-words-text">宫廷斗争</text>
+			<text class="key-words-text">残酷</text>
+			<text class="key-words-text">权力</text>
+		</div>
+		<div>
+
+			<div class="bottom_footer">
+				<div>
+					<text class="swiper-main-title">连载至 {{list.chapter}} 章</text>
+				</div>
+				<div>
+					<text class="swiper-link">更新于 2018/9/13</text>
+					<image class="swiper-arrow" src="{{list.arrow}}"></image>
+				</div>
+			</div>
+		</div>
+		<div class="seperate_line"></div>
+	</div>
+</template>
+
+<style>
+	.single-container {
+		flex-direction: column;
+
+	}
+
+	.single-product {
+		margin: 5px 0px 5px 0px;
+	}
+
+	.single-description {
+		flex-direction: column;
+		width: 434px;
+		align-self: center;
+	}
+
+	.strats {
+		align-items: center;
+		margin-bottom: 21px;
+
+	}
+
+	.strat_image {
+		width: 25px;
+		align-items: center;
+
+	}
+
+	.single-image {
+		width: 217px;
+		height: 289px;
+		margin-right: 50px;
+		margin-left: 67px;
+		border-radius: 8px;
+	}
+
+	.description_title {
+		color: #000000;
+		font-size: 37.5px;
+		margin-bottom: 9px;
+	}
+
+	.description_score {
+		align-items: center;
+
+		font-size: 25px;
+		color: #FFBF00;
+		margin-left: 4px;
+		margin-right: 9px;
+	}
+
+	.description_peapel {
+		font-size: 25px;
+		opacity: 0.5;
+	}
+
+	.single-brief {
+		color: #1A1A1A;
+		font-size: 25px;
+		margin-bottom: 8px;
+	}
+
+	.description_content {
+		margin-top: 42px;
+		padding-left: 34px;
+		flex-direction: column;
+	}
+
+	.content_title {
+		height: 100px;
+		padding-top: 41px;
+		color: #000000;
+		font-size: 31.3px;
+		font-weight: bold;
+	}
+
+	.content_text {
+		color: #000000;
+		font-size: 27.1px;
+		width: 650px;
+		lines: 3;
+		line-height: 43.75px;
+		text-overflow: ellipsis;
+	}
+
+	.whole_content_text {
+		color: #000000;
+		font-size: 27.1px;
+		width: 650px;
+		line-height: 43.75px;
+		text-overflow: ellipsis;
+	}
+
+	.key-words {
+		margin-top: 20px;
+		margin-left: 33px;
+	}
+
+	.key-words-text {
+		font-size: 25px;
+		color: #000000;
+		height: 50px;
+		padding: 0 17px;
+		background-color: rgba(80, 96, 117, 0.1);
+		border-radius: 8.3px;
+		margin-right: 17px;
+	}
+
+	.bottom_footer {
+		width: 695px;
+		margin-top: 50px;
+		margin-left: 33px;
+		justify-content: space-between;
+	}
+
+	.swiper-link {
+		font-size: 27px;
+		color: #8D8D8D;
+		align-self: center;
+		margin-right: 14px;
+	}
+
+	.swiper-arrow {
+		width: 16px;
+		height: 28px;
+		align-self: center;
+	}
+
+	.swiper-main-title {
+		height: 100px;
+		font-size: 31.3px;
+		color: #1A1A1A;
+		align-self: center;
+	}
+
+	.seperate_line {
+		width: 100%;
+		height: 17px;
+		background-color: #F2F2F2;
+		margin-top: 20px;
+
+	}
+</style>
+
+<script>
+	export default {
+		props: [
+			'list',
+			'param'
+		],
+		data: {
+			starts: [],
+			presentationClass: "content_text",
+			wholePresentation: true,
+		},
+
+		onInit() {
+			//循环出评价的星星
+			for (let i = 0; i < 4; i++) {
+				this.starts.push(i)
+			}
+		},
+
+		changePresentationClass() {
+			this.wholePresentation = !this.wholePresentation;
+			this.presentationClass = this.wholePresentation ? "content_text" : 'whole_content_text';
+		}
+
+	}
+</script>

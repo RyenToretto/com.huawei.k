@@ -1,0 +1,45 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="container">
+    <image class="goods_image" src="nothing.png"></image>
+    <text class="title">建设中</text>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .goods_image {
+    border-radius: 8px;
+    margin-top: 133px;
+  }
+
+
+  .title {
+    font-size: 33px;
+    color: #1a1a1a;
+    opacity: 0.3;
+  }
+</style>
+
+<script>
+  module.exports = {
+    protected: {
+      type: ''     //item 为将接收的路由参数
+    },
+    onInit() {
+      if(this.type){
+      this.$page.setTitleBar({
+        text: this.type,
+        textColor: '#1a1a1a',
+        backgroundColor: '#f2f2f2',
+        menu: true
+      })
+      }
+
+    }
+  }
+</script>

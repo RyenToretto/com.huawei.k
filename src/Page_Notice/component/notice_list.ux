@@ -1,0 +1,58 @@
+<template>
+  <div class="list_container">
+    <div for="{{list}}" class="list_content">
+      <image if="{{$item.type === 'ordinary'}}" class="icon_image" src="img/news_icon.png"></image>
+      <image if="{{$item.type === 'vip'}}" class="icon_image" src="img/vip_icon.png"></image>
+      <div class="notice_summary">
+        <text class="notice_title">{{$item.title}}</text>
+        <text class="notice_time">{{$item.time}}</text>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .list_container {
+    margin: 20px 33px 0px 33px;
+    flex-direction: column;
+  }
+
+  .list_content {
+    height: 133px;
+    align-items: center;
+  }
+
+  .icon_image {
+    width: 83px;
+    height: 83px;
+    margin-right: 33px;
+  }
+
+  .notice_summary {
+    flex-direction: column;
+  }
+
+  .notice_title {
+    lines: 1;
+    font-size: 31.3px;
+    color: #1a1a1a;
+  }
+
+  .notice_time {
+    font-size: 27.1px;
+    color: #000000;
+    opacity: 0.6;
+    margin-top: 4px;
+  }
+</style>
+
+<script>
+  export default {
+    data: {
+      props: [
+        'list',
+      ]
+    },
+
+  }
+</script>

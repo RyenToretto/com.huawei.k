@@ -1,0 +1,230 @@
+<import name='component_swiper' src='./component/c_swiper.ux'></import>
+<import name='swi' src='./component/c_item_container_swiper'></import>
+<import name='tingshu_single' src='./component/c_list_single'></import>
+<import name='teacherlist' src='./component/c_teacher_list'></import>
+<import name='audio_component' src='./component/c_recommend_audio'></import>
+
+<template>
+  <!-- template里只能有一个根节点 -->
+  <list class="container">
+    <!-- 轮播图 -->
+    <list-item type="listItem1" class="component1">
+      <component_swiper swiperdata={{swiperdata}}></component_swiper>
+    </list-item>
+    <!-- 分类 -->
+    <list-item type="listItem2" class="component2">
+      <swi list="{{subjectlist1}}" banner="{{banner1}}"></swi>
+    </list-item>
+    <!-- 每日一书 -->
+    <list-item type="listItem3" class="component3">
+      <tingshu_single list="{{everydayonebook}}"></tingshu_single>
+    </list-item>
+    <!-- 推荐音频列表 -->
+    <list-item type="listItem4" class="component4">
+      <audio_component recommendaudio="{{recommendaudio}}"></audio_component>
+    </list-item>
+    <!-- 分类 -->
+    <list-item type="listItem5" class="component5">
+      <swi list="{{subjectlist2}}" banner="{{banner2}}"></swi>
+    </list-item>
+    <!-- 大咖开讲 -->
+    <list-item type="listItem6" class="component6">
+      <teacherlist list="{{singleList1}}"></teacherlist>
+    </list-item>
+    <!-- 玄幻精品 -->
+    <list-item type="listItem7" class="component7">
+      <tingshu_single list="{{singleList2}}"></tingshu_single>
+    </list-item>
+  </list>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: #ffffff;
+  }
+
+  .component1 {
+    margin-top: 30px;
+  }
+
+  .component4 {
+    margin-top: 50px;
+  }
+
+  .component5 {
+    margin-top: 50px;
+  }
+
+  .component7 {
+    margin-top: 50px;
+  }
+</style>
+
+<script>
+  module.exports = {
+    data: {
+      // 轮播图
+      swiperdata:
+        [
+          { src: "./page/Page_Tingshu/TO_DELETE/banner1.png"},
+          { src: "./page/Page_Tingshu/TO_DELETE/banner2.png"},
+          { src: "./page/Page_Tingshu/TO_DELETE/banner3.png"}
+        ],
+      //分类
+      banner1:
+        {
+          title: '分类',
+          link: '更多',
+          uri: './page/Page_Tingshu/img/arrow.png'
+        },
+      subjectlist1:
+        [{
+          img: './page/Page_Tingshu/TO_DELETE/banner2.png'
+        },
+        {
+          img: './page/Page_Tingshu/TO_DELETE/banner1.png'
+        },
+        {
+          img: './page/Page_Tingshu/TO_DELETE/banner3.png'
+        }
+        ],
+      //每日一书
+      everydayonebook:
+        {
+          title: "每日一书",
+          subtitle: "更多",
+          arrow: "./page/Page_Tingshu/img/arrow.png",
+          list: [
+            {
+              uri: './page/Page_Tingshu/TO_DELETE/222.png',
+              title: '吐槽是门手艺',
+              brief: '《脱口秀大会》，《吐槽大会》原班人马，诺曼博士探讨了我们的生活为什么需要复杂，而不是简单',
+              author: '',
+              clazz: ['10万人在听']
+            }
+          ]
+        },
+      // 推荐音频
+      recommendaudio: [
+        {
+          'image': "./page/Page_Tingshu/TO_DELETE/audio1.png",
+          'content': "吃出漂亮：健康白领的女人都喜欢的美丽食品",
+          'timeurl': "./img/time.png",
+          'time': ''
+        },
+        {
+          'image': "./page/Page_Tingshu/TO_DELETE/audio2.png",
+          'content': "忽视黑天鹅现象的外在机制",
+          'timeurl': "./img/time.png",
+          'time': ''
+        },
+        {
+          'image': "./page/Page_Tingshu/TO_DELETE/audio1.png",
+          'content': "拒绝主食真的能减肥吗？",
+          'timeurl': "./img/time.png",
+          'time': ''
+        }
+      ],
+      //排行榜
+      banner2:
+        {
+          title: '排行榜',
+          link: '更多',
+          uri: './page/Page_Tingshu/img/arrow.png'
+        },
+      subjectlist2:
+        [{
+          img: './page/Page_Tingshu/TO_DELETE/banner1.png',
+          headphone: './page/Page_Tingshu/img/headphone.png'
+        },
+        {
+          img: './page/Page_Tingshu/TO_DELETE/banner2.png',
+          headphone: './page/Page_Tingshu/img/headphone.png'
+        },
+        {
+          img: './page/Page_Tingshu/TO_DELETE/banner3.png',
+          headphone: './page/Page_Tingshu/img/headphone.png'
+        }
+        ],
+      //大咖开奖
+      singleList1:
+        {
+          title: "大咖开奖",
+          subtitle: "更多",
+          arrow: "./page/Page_Tingshu/img/arrow.png",
+          list: [
+            {
+              uri: './page/Page_Tingshu/TO_DELETE/image1.png',
+              headphone: './page/Page_Tingshu/img/headphone.png',
+              title: '业绩倍增，顶级销售特训营',
+              brief: '讲述一个不依附于男人、有经济实力按自己意愿去尽享。',
+              author: '任翔飞',
+              clazz: ['13万人播放', '连载中']
+            },
+            {
+              uri: './page/Page_Tingshu/TO_DELETE/image1.png',
+              headphone: './page/Page_Tingshu/img/headphone.png',
+              title: '百亿CEO的商战课堂',
+              brief: '海归的高管，初入职场的乖乖女，犯傻的小职员，胡同里。',
+              author: '孙继东',
+              clazz: ['13万人播放', '连载中']
+            },
+            {
+              uri: './page/Page_Tingshu/TO_DELETE/image1.png',
+              headphone: './page/Page_Tingshu/img/headphone.png',
+              title: '幸福秘笈通往美满家庭',
+              brief: '活动的主体是人，即拥有可预测行为且容易犯错的个体。',
+              author: '海棠',
+              clazz: ['13万人播放', '连载中']
+            }
+          ]
+        },
+      //玄幻精品
+      singleList2:
+        {
+          title: "玄幻精品",
+          subtitle: "更多",
+          arrow: "./page/Page_Tingshu/img/arrow.png",
+          list: [
+            {
+              uri: './page/Page_Tingshu/TO_DELETE/44.png',
+              headphone: './page/Page_Tingshu/img/headphone.png',
+              title: '神墓',
+              brief: '该书以主角辰南寻找万年前爱人雨馨、追索神魔灭亡遗秘的行迹为线索，引出浩茫六道、天地棋局，演绎出一部充满热血、壮烈、凄美的传奇,可谓网络小说中优良之品。',
+              author: '辰东',
+              clazz: ['网文', '小说']
+            },
+            {
+              uri: './page/Page_Tingshu/TO_DELETE/44.png',
+              headphone: './page/Page_Tingshu/img/headphone.png',
+              title: '诛仙',
+              brief: '该书以主角辰南寻找万年前爱人雨馨、追索神魔灭亡遗秘的行迹为线索，引出浩茫六道、天地棋局，演绎出一部充满热血、壮烈、凄美的传奇,可谓网络小说中优良之品。',
+              author: '萧鼎',
+              clazz: ['网文', '小说']
+            },
+            {
+              uri: './page/Page_Tingshu/TO_DELETE/44.png',
+              headphone: './page/Page_Tingshu/img/headphone.png',
+              title: '斗破苍穹',
+              brief: '该书以主角辰南寻找万年前爱人雨馨、追索神魔灭亡遗秘的行迹为线索，引出浩茫六道、天地棋局，演绎出一部充满热血、壮烈、凄美的传奇,可谓网络小说中优良之品。',
+              author: '天蚕土豆',
+              clazz: ['网文', '小说']
+            }
+          ]
+        },
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        //titlebar的状态，在manifest.json中display设置的
+        text: '听书',
+        textColor: '##1A1A1A',
+        backgroundColor: 'rgba(242,242,242,0.95)',
+        menu: true
+      });
+    }
+  }
+</script>

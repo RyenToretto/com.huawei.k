@@ -1,227 +1,677 @@
-<import name="search-result-item" src="./components/search_result_item"></import>
+<!-- 搜索页面为全屏页面，需要关闭titleBar，请在manifest.json中配置dispaly.pages设置以下信息：
+"pages": {
+  "页面目录": { 
+    "titleBar": false,
+    "menu":false,
+    "titleBarBackgroundColor": "#ffffff"
+  }
+} 
+
+本页面引用了高亮组件，c_hight_light
+ -->
+<import name="page10_1" src="./components/c_hight_light"></import>
+<import name='swi' src='./components/c_item_container_swiper'></import>
 <template>
-    <div class="p-history-container">
+  <div class="container">
 
-        <!-- 搜索栏 -->
-        <div class="c-search-container">
-            <image class="c-search-back" src="{{data.img_back}}" onclick="back"></image>
-            <div class="c-search-middle">
-                <image class="image-search" src="{{data.img_search}}"></image>
-                <input value="{{inputvalue}}" onchange="setCurrentValue" placeholder="{{data.placeholder}}"></input>
-                <image class="image-cancel" src="{{data.img_cancel}}" onclick="cleanInput"></image>
-            </div>
+    <div class="search_bar_container">
+      <div class="image_search_back_div_search" onclick="back">
+        <image class="image_search_back" src="./img/search_back.png"></image>
+      </div>
+      <div class="search_close">
+        <div class="image_search_back_div" onclick="search">
+          <image class="image_search_result " src="./img/search.png"></image>
         </div>
-
-        <!-- 搜索历史 -->
-        <div if="{{inputvalue === ''}}" style="flex-direction: column;">
-
-            <div class="p-history-des">
-                <text class="p-history-text">搜索历史</text>
-                <text onclick="cleanRecord" class="p-action-clean">清空</text>
-            </div>
-
-            <!-- 历史记录展示 -->
-            <div class="p-history-list">
-                <block for="data.records">
-                    <div class="p-history-list-item" onclick="showSearchResult($item.title)">
-                        <image src="{{$item.icon}}"></image>
-                        <text>{{$item.title}}</text>
-                    </div>
-                    <div class="line"></div>
-                </block>
-            </div>
+        <input class="search" id="search" name="search" value="{{inputValue}}" placeholder="搜索书籍、作者" onchange="updateValue()"></input>
+        <div show="{{inputValue!=''}}" class="image_search_back_div" onclick="resetSearchValue">
+          <image class="image_search_result close_size" src="./img/search_close.png"></image>
         </div>
-
-        <!-- 搜索结果 -->
-        <div else>
-            <!-- 搜索结果 -->
-            <div class="history-content">
-                <block for="{{list}}">
-                    <div class="history-item">
-                        <image src="{{$item.img}}"></image>
-                        <search-result-item prop1="{{$item.title}}" prop2="{{inputvalue}}"></search-result-item>
-                    </div>
-                    <div class="lines"></div>
-                </block>
-            </div>
-        </div>
-
+      </div>
     </div>
+    <div class="panel">
+      <!-- 搜素热词、历史显示区域 -->
+      <block if="{{showPageType === 'searchBar'}}">
+        <!-- 大家都在看 -->
+        <div class="div_allsearch">
+          <div class="change_search">
+            <text class="all_find">大家都在看</text>
+            <a class="a_change_search" onclick="changeSearchWord">换一换</a>
+          </div>
+          <div class="spare_bar"></div>
+          <div class="change_content">
+            <block for="{{list}}">
+              <a class="a_item" onclick="setInputValue($item.name)">{{$item.name}}</a>
+            </block>
+          </div>
+        </div>
+        <div class="div_allsearch">
+          <div class="change_search">
+            <text class="all_find">书籍热搜榜</text>
+          </div>
+          <div class="spare_bar"></div>
+          <div class="shucheng-box-seven">
+            <swi list="{{subjectlist}}" banner="{{banner}}"></swi>
+          </div>
+        </div>
+        <div class="div_allsearch">
+          <div class="change_search">
+            <text class="all_find">搜索历史</text>
+            <a class="a_change_search" onclick="clearHis">清空</a>
+          </div>
+          <div class="spare_bar"></div>
+          <div class="change_content">
+            <block for="{{hisList}}">
+              <a class="a_item" onclick="setInputValue($item)">{{$item}}</a>
+            </block>
+          </div>
+        </div>
+      </block>
+
+      <!-- 搜索结果页面展示区域 -->
+      <block if="{{showPageType ==='result'}}">
+        <div class="result_number">
+          <text if="{{searchResults.length>0}}">找到{{searchResults.length}}本相关书籍</text>
+          <text else="{{searchResults.length<=0}}">没有找到相关书籍</text>
+        </div>
+        <div class="single-list">
+          <block for="{{searchResults}}">
+            <div class="single-item" onclick="clickToBookDetail()">
+              <div>
+                <image class="single-image" src="{{$item.src}}"></image>
+              </div>
+              <div class="single-description">
+                <text class="single-title">{{$item.name}}</text>
+                <text class="single-brief">现代学生穿越三生三世十里桃花的世界，成为白浅的妹妹，保护白浅不吃苦，不经历伤情，成全墨渊与白浅</text>
+                <div class="single-bottom">
+                  <text class="single-bottom-left">秋风雨</text>
+                  <text class="single-bottom-right">今日16520在读</text>
+                </div>
+              </div>
+            </div>
+            <div class="single-line">
+              <text></text>
+            </div>
+          </block>
+        </div>
+      </block>
+
+      <!-- 动态联想此条展示区域 -->
+      <block if="{{showPageType ==='auto'}}">
+        <div class="search-shujia">
+          <text>书架上找到2本书籍</text>
+          <div class="search-shujia-book">
+            <div class="shujia_hight_light_item">
+              <image class="shujia-book-image" src='./TO_DELETE/author.png'></image>
+              <div class="shujia_search_text margin_left">
+                <page10_1 prop1="三生三世十里桃花" prop2="{{inputValue}}"></page10_1>
+              </div>
+            </div>
+            <text class="read-shujia" onclick="clickToRead()">阅读</text>
+          </div>
+          <div class="search-shujia-more">
+            <text>更多</text>
+            <image src="./img/down_arrow.png"></image>
+          </div>
+        </div>
+        <text class="high-light-line"></text>
+        <div class="auto_div">
+          <block for="{{autoList}}">
+            <div class="hight_light_item" onclick="directResultPage($item.name)">
+              <image class="rs_item_image" src="{{$item.src}}"></image>
+              <div class="search_image_text margin_left">
+                <page10_1 prop1="{{$item.name}}" prop2="{{inputValue}}"></page10_1>
+              </div>
+            </div>
+          </block>
+        </div>
+      </block>
+    </div>
+  </div>
 </template>
 
-<style lang="less">
-    @import '../Common/css/variable.less';
-    @import '../Common/css/common.less';
-    @import '../Common/css/button.less';
+<style>
+  .container {
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
 
-    .c-search-container {
-        height: 48px;
-        background-color: #F2F2F2;
-        align-items: center;
-        width: 100%;
-    }
+  .panel {
+    width: 700px;
+    height: 100%;
+    margin-left: 33px;
+    margin-right: 33px;
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .c-search-back {
-        width: 24px;
-        height: 24px;
-        margin-left: 18px;
-        margin-right: 8.2px;
-    }
+  .title {
+    font-size: 100px;
+  }
 
-    input {
-        color: #1A1A1A;
-        font-size: 13px;
-        width: 216px;
-        margin-right: 22.1px;
-    }
+  .search_bar_container {
+    align-items: center;
+    width: 696px;
+    height: 100px;
+    margin-left: 17px;
+    margin-right: 33px;
+  }
 
-    .c-search-middle {
-        background-color: #ffffff;
-        width: 80%;
-        height: 32px;
-        border-radius: 3.8px;
-        align-items: center;
-    }
+  .search_close {
+    background-color: #f2f2f2;
+    align-items: center;
+    border-radius: 8px;
+    height: 64px;
+    width: 608px;
+  }
 
-    .image-search {
-        width: 15.8px;
-        height: 15.8px;
-        margin: 7.7px 7.7px 7.7px 8.2px;
-    }
+  .search {
+    width: 440px;
+    height: 40px;
+    color: #1a1a1a;
+    font-size: 28px;
+    line-height: 40px;
+    margin-right: 33px;
+  }
 
-    .image-cancel {
-        position: fixed;
-        width: 12.5px;
-        height: 12.5px;
-        top: 18px;
-        right: 28px;
-    }
+  .image_search_back_div_search {
+    width: 84px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
 
-    .p-history-container {
-        background-color: #ffffff;
-        flex-direction: column;
-    }
+  }
 
-    .p-history-des {
-        margin-top: 22.5px;
-        justify-content: space-between;
-    }
+  .image_search_back_div {
+    width: 84px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .p-history-text {
-        color: #1A1A1A;
-        font-size: 13px;
-        opacity: 0.5;
-        margin-left: 15.8px;
-    }
+  .image_search_back {
+    width: 40px;
+    height: 40px;
+  }
 
-    .p-action-clean {
-        color: #005BBA;
-        font-size: 13px;
-        margin-right: 15.8px;
-        line-height: 16.8px;
-    }
+  .search_text {
+    color: #cd853f;
+    font-size: 30px;
+  }
 
-    .p-history-list {
-        flex-direction: column;
-        margin-left: 15.8px;
-    }
+  .div_image {
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .p-history-list-item {
-        margin-top: 19.7px;
-    }
+  .div_allsearch {
+    border-radius: 5px;
+    flex-direction: column;
+  }
 
-    .p-history-list-item image {
-        width: 24px;
-        height: 24px;
-        margin-right: 16.2px;
-    }
+  .change_search {
+    width: 684px;
+    height: 30px;
+    margin-top: 41px;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-    .p-history-list-item text {
-        font-size: 15px;
-        color: #1A1A1A;
-        line-height: 19.5px;
-    }
+  .spare_bar {
+    width: 684px;
+    height: 16px;
+  }
 
-    .line {
-        border-bottom-width: 0.2px;
-        border-bottom-color: rgba(0, 0, 0, 0.2);
-        margin: 13.2px 15.8px 0 40.2px;
-    }
+  .a_change_search {
+    font-size: 27.1px;
+    color: #CD2325;
+    height: 34px;
+    line-height: 34px;
+    padding-left: 10px;
+    text-align: center;
+  }
 
-    .history-content {
-        flex-direction: column;
-        margin-top: 16.3px;
-        margin-left: 15.8px;
-    }
+  .all_find {
+    font-size: 31px;
+    color: #1a1a1a;
+    height: 34px;
+    line-height: 34px;
+  }
 
-    .history-content image {
-        width: 106.8px;
-        height: 60px;
-        margin-right: 15px;
-        border-radius: 3.8px;
-    }
+  .change_content {
+    width: 682px;
+    flex-wrap: wrap;
+  }
 
-    .history-content text {
-        color: #1A1A1A;
-        font-size: 15.8px;
-    }
+  .a_item {
+    background-color: rgba(0, 0, 0, 0.05);
+    text-align: center;
+    height: 50px;
+    border-radius: 8.3px;
+    line-height: 50px;
+    padding: 10px 20px;
+    margin: 17px 17px 0 0;
+    font-size: 25px;
+    color: #000000;
+    lines: 1;
+  }
 
-    .history-item {
-        width: 100%;
-        margin-bottom: 12px;
-    }
+  .image_search_result {
+    width: 33px;
+    height: 33px;
+    margin-left: 17px;
+    margin-right: 17px;
+  }
 
-    .lines {
-        width: 205.2px;
-        border-bottom-width: 0.2px;
-        margin-bottom: 12px;
-        margin-left: 122.6px;
-        border-bottom-color: rgba(255, 255, 255, 0.2);
-    }
+  .search-shujia {
+    flex-direction: column;
+    margin-top: 60px;
+  }
+
+  .search-shujia-book {
+    justify-content: space-between;
+    align-items: center;
+    width: 700px;
+    margin-top: 20px;
+  }
+
+  .shujia_hight_light_item {
+    width: 600px;
+    height: 134px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .shujia-book-image {
+    width: 70px;
+    height: 70px;
+  }
+
+  .shujia_search_text {
+    width: 500px;
+  }
+
+  .read-shujia {
+    width: 117px;
+    height: 58px;
+    border: 2.1px solid #000000;
+    border-radius: 8.3px;
+    text-align: center;
+  }
+
+  .search-shujia-more {
+    justify-content: center;
+    height: 70px;
+    align-items: center;
+  }
+
+  .search-shujia-more text {
+    padding: 10px 16px;
+    font-size: 25px;
+    color: #1A1A1A;
+    margin-right: 8px;
+  }
+
+  .search-shujia-more image {
+    width: 33px;
+  }
+
+  .high-light-line {
+    width: 100%;
+    height: 0.5px;
+    margin-top: 17px;
+    background-color: #f2f2f2;
+  }
+
+  .auto_div {
+    width: 100%;
+    height: 100%;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  .auto_item {
+    width: 620px;
+    height: 80px;
+    padding-left: 40px;
+    line-height: 80px;
+  }
+
+  .border_bottom {
+    width: 620px;
+    height: 1px;
+    background-color: #a9a9a9;
+  }
+
+  .result_number {
+    width: 700px;
+    font-size: 20px;
+    margin-bottom: 17px;
+  }
+
+  .search_item_div {
+    align-items: flex-start;
+    ;
+    height: 317px;
+    width: 700px;
+  }
+
+  .search_item_image {
+    align-items: flex-start;
+    width: 217px;
+    height: 289px;
+    margin-right: 30px;
+    margin-bottom: 11px;
+  }
+
+  .rs_item_image {
+    width: 70px;
+    height: 85px;
+    border-radius: 6px;
+  }
+
+  .rs_item_image_result {
+    width: 217px;
+    height: 289px;
+  }
+
+  .search_image_text {
+    align-items: center;
+    justify-content: space-between;
+    width: 610px;
+    height: 120px;
+    border-bottom-color: #182233;
+    border-bottom-width: 0.5px;
+  }
+
+  .search_image_text_result {
+    flex-direction: column;
+    width: 600px;
+    height: 289px;
+    border-bottom-color: #182233;
+    border-bottom-width: 0.5px;
+
+  }
+
+  .result_title {
+    width: 600px;
+    height: 40px;
+    margin-top: 15px;
+  }
+
+  .result_content {
+    width: 489px;
+    height: 210px;
+    flex-direction: column;
+    margin-top: 24px;
+  }
+
+  .result_content_main {
+    width: 489px;
+    height: 175px;
+    margin-bottom: 42px;
+
+  }
+
+  .result_content_main_text {
+    font-size: 30px;
+    color: #a9a9a9;
+  }
+
+  .result_content_foot {
+    width: 489px;
+    height: 35px;
+    justify-content: space-between;
+
+  }
+
+  .result_content_foot_author {
+    font-size: 26px;
+    color: #a9a9a9;
+    height: 35px;
+    line-height: 35px;
+    width: 100px;
+  }
+
+  .result_content_foot_read {
+    width: 140px;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    background-color: #f1f1f1;
+    color: #a9a9a9;
+    font-size: 18px;
+    border-radius: 4.2px;
+
+  }
+
+  .margin_left {
+    margin-left: 40px;
+  }
+
+  .hight_light_item {
+    width: 700px;
+    height: 120px;
+    align-items: center;
+  }
+
+  .close_size {
+    width: 30px;
+    height: 30px;
+  }
+
+
+  /* 搜索结果列表 */
+
+  .single-list {
+    border-color: #0000ff;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .single-item {
+    margin: 17px 0 11px 0;
+  }
+
+  .single-line {
+    justify-content: flex-end;
+  }
+
+  .single-line text {
+    width: 434px;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .single-product {
+    margin: 5px 0px 5px 0px;
+  }
+
+  .single-description {
+    flex-direction: column;
+    width: 434px;
+    align-self: center;
+  }
+
+  .single-image {
+    width: 217px;
+    height: 290px;
+    margin-right: 33px;
+    border-radius: 8px;
+  }
+
+  .single-title {
+    color: #000000;
+    font-size: 31.3px;
+    line-height: 40.6px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+
+  .single-brief {
+    color: #1A1A1A;
+    opacity: 0.5;
+    font-size: 27.1px;
+    line-height: 34.9px;
+    margin-bottom: 49px;
+  }
+
+  .single-bottom {
+    justify-content: space-between;
+  }
+
+  .single-bottom-left {
+    color: #1A1A1A;
+    opacity: 0.5;
+    font-size: 27.1px;
+    align-self: center;
+  }
+
+  .single-bottom-right {
+    color: #000000;
+    opacity: 0.5;
+    font-size: 16.7px;
+    line-height: 24px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 8.3px;
+    align-self: center;
+    margin-left: 10px;
+    text-align: center;
+    padding: 10px 20px;
+  }
 </style>
 
 <script>
-    import router from '@system.router';
-    module.exports = {
-        data: {
-            inputvalue: '',
-            data: {
-                uri: '/Page_Search_Result',
-                placeholder: 'P40发布会',
-                img_search: 'img/search.png',
-                img_back: 'img/back.png',
-                img_cancel: 'img/cancel.png',
-                records: [
-                    {
-                        title: '华为最新系列手机',
-                        icon: 'img/search.png'
-                    }, 
-                    {
-                        title: '产品宣传片',
-                        icon: 'img/search.png'
-                    }
-                ]
-            },
-            list: [
-                { img: 'img/page-search-img-1.jpg', title: '斗破苍穹' },
-                { img: 'img/page-search-img-1.jpg', title: '大主宰' },
-                { img: 'img/page-search-img-1.jpg', title: '武动乾坤' }
-            ]
+  import router from '@system.router';
+
+  export default {
+    data: {
+      //
+      key: "",
+      inputValue: "",
+      showPageType: "searchBar",
+      isAutoClick: false,
+      list: [],
+      hisList: [],
+      autoList: [],
+      searchResults: [],
+      subjectlist:
+        [{
+          img: './TO_DELETE/banner1.png',
+          title: "活着活着就"
         },
-        cleanInput() {
-            this.inputvalue = '';
+        {
+          img: './TO_DELETE/banner2.png',
+          title: "森林的秘密"
         },
-        back() {
-            router.back()
+        {
+          img: './TO_DELETE/banner1.png',
+          title: "你就是我的"
         },
-        setCurrentValue(obj) {
-            this.inputvalue = obj.text;
+        {
+          img: './TO_DELETE/banner2.png',
+          title: "皮囊"
         },
-        cleanRecord() {
-            this.data.records = [];
-        },
-        showSearchResult(title) {
-            this.inputvalue = title;
+        {
+          img: './TO_DELETE/banner1.png',
+          title: "小王子"
         }
+        ]
+    },
+    onInit: function () {
+      //titlebar的状态，在manifest.json中display设置的
+      this.$page.setTitleBar({
+        menu: false
+      });
+      // TODO 数据接口说明：
+      // 搜索热词设置接口：
+      this.list.push({ name: "悟空传" }, { name: "微微一笑很倾城" }, { name: "大明那些事儿" }, { name: "三生三世十里桃花" }, { name: "斗破苍穹" });
+      // 搜索提示词，当用户输入时，根据服务器返回搜索关键词提示。没有可以不设置。
+      this.autoList.push({ name: "三生三", src: './TO_DELETE/banner1.png', }, { name: "三生三世十里桃花", src: './TO_DELETE/banner2.png', }, { name: "三生三世十里桃花", src: './TO_DELETE/banner1.png', }, { name: "三生三世十里桃花", src: './TO_DELETE/banner2.png', });
+      // 搜索结果类型，需要说明数据结构和参数含义。
+      //搜索结果为：由name、图片路径组成的对象；name为搜索的词条名称，src为对应的图片
+      this.searchResults.push({ name: "三生三世十里菊花", src: './TO_DELETE/banner1.png', }, { name: "三生三世十里杏花", src: './TO_DELETE/banner2.png', }, { name: "三生三世十里荷花", src: './TO_DELETE/banner1.png', });
+    },
+    //增加搜索结果记录
+    addHistory() {
+      var isContain = false;
+      for (var i = 0; i < this.hisList.length; i++) {
+        if (this.hisList[i] === this.inputValue) {
+          isContain = true;
+          break;
+        }
+      }
+      if (!isContain) {
+        this.hisList.push(this.inputValue);
+      }
+      //TODO 本地或云端存储搜索记录
+    },
+    find() {
+      if (this.inputValue === null || this.inputValue === undefined || this.inputValue === "") {
+        return;
+      }
+      //增加历史搜索记录
+      this.addHistory();
+    },
+    search() {
+      if (this.inputValue === null || this.inputValue === undefined || this.inputValue === "") {
+        return;
+      }
+      this.showPageType = "result";
+      this.isAutoClick = false;
+      this.find();
+    },
+    updateValue(e) {
+      this.inputValue = e.text;
+      if (this.inputValue !== "" && this.inputValue !== undefined && this.inputValue !== null) {
+        if (this.isAutoClick) {
+          this.showPageType = "result";
+          this.find();
+        } else {
+          this.showPageType = "auto";
+        }
+
+        this.isAutoClick = false;
+      }
+    },
+    setInputValue(text) {
+      this.inputValue = text || "请输入搜索词汇";
+    },
+    changeSearchWord() {
+      this.list = [{ name: "无问西东" }, { name: "厉害了，我的国" }];
+    },
+    clearHis() {
+      this.hisList = [];
+    },
+    back() {
+      router.back();
+    },
+    resetSearchValue() {
+      this.showPageType = "searchBar";
+      this.inputValue = "";
+    },
+    directResultPage(text) {
+      this.isAutoClick = true;
+      this.showPageType = "result";
+      this.inputValue = text;
+      this.find();
+    },
+
+    //点击搜索结果跳转至书籍详情页
+    clickToBookDetail() {
+      router.push({
+        uri: '/Page_Bookdetails',
+        params: { testId: 'testId' }
+      })
+    },
+    clickToRead() {
+      router.push({
+        uri: '/Page_Read',
+        params: { testId: 'testId' }
+      })
     }
+  }
 </script>

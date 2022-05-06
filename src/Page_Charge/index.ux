@@ -1,0 +1,58 @@
+<import name="charge" src="./component/c_charge_list"></import>
+<template>
+  <div class="container">
+    <charge list="{{chargeList}}"></charge>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+  }
+</style>
+
+<script>
+
+  module.exports = {
+    data: {
+      chargeList: [
+        {
+          mooncakes: 600,
+          money: 6
+        },
+        {
+          mooncakes: 1200,
+          money: 12
+        },
+        {
+          mooncakes: 3000,
+          money: 30
+        },
+        {
+          mooncakes: 5000,
+          money: 50
+        },
+        {
+          mooncakes: 10000,
+          money: 100,
+          voucher: 600
+        },
+        {
+          mooncakes: 20000,
+          money: 200
+        }
+      ]
+    },
+
+    onInit() {
+      this.$page.setTitleBar({
+        //titlebar的状态，在manifest.json中display设置的
+        text: '充值',
+        textColor: '#1A1A1A',
+        backgroundColor: 'rgba(242,242,242,0.95)',
+        menu: false
+      });
+    },
+
+  }
+</script>

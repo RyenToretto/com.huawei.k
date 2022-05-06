@@ -1,0 +1,91 @@
+<template>
+	<div class="recommend-audio-container">
+		<block for={{recommendaudio}}>
+			<div class="content-list">
+				<div class="content-left">
+					<image src={{$item.image}}></image>
+				</div>
+				<div class="content-right">
+					<text class="audio-description">{{$item.content}}</text>
+					<div class="audio-time">
+						<image src={{$item.timeurl}}></image>
+						<text>39'45"</text>
+					</div>
+				</div>
+			</div>
+		</block>
+	</div>
+</template>
+
+<style>
+	.recommend-audio-container {
+		margin: 0px 34px;
+		flex-direction: column;
+	}
+
+	.content-list {
+		height: 133px;
+		width: 100%;
+		align-items: center;
+	}
+
+	.content-left {
+		width: 83px;
+		height: 83px;
+		margin-right: 33px;
+	}
+
+	.content-right {
+		width: 560px;
+		height: 100%;
+		flex-direction: column;
+		border-bottom-color: #F2F2F2;
+		border-bottom-width: 1px;
+		justify-content: center;
+	}
+
+	.audio-description {
+		color: #1A1A1A;
+		font-size: 31.3px;
+		margin-bottom: 5px;
+		lines: 1;
+		text-overflow: ellipsis;
+	}
+
+	.audio-time {
+		align-items: center;
+	}
+
+	.audio-time image {
+		width: 25px;
+		height: 25px;
+	}
+
+	.audio-time text {
+		color: #1A1A1A;
+		font-size: 27.1px;
+		margin-left: 15px;
+	}
+</style>
+
+<script>
+	import router from '@system.router';
+
+	export default {
+		data: {
+			props: [
+				'recommendaudio',
+			]
+		},
+		press(item) {
+			console.error("on press event param : " + item);
+		},
+
+		routePage(url) {
+			//跳转到应用内的某个页面
+			router.push({
+				uri: "/Page_Hearingdetail"
+			})
+		},
+	}
+</script>

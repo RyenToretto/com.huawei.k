@@ -1,0 +1,63 @@
+<template>
+	<div class="sincla-container">
+		<div class="sincla-product">
+			<div class="sincla-item" for="{{list}}">
+				<div class="sincla-image">
+					<image src="{{$item.uri}}"></image>
+				</div>
+				<div class="sincla-description">
+					<text class="sincla-title">{{$item.title}}</text>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+	.sincla-container {
+		justify-content: center;
+		padding: 17px 49px 0 49px;
+	}
+
+	.sincla-product {
+		margin-right: 32px;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	.sincla-item {
+		width: 50%;
+		height: 134px;
+		margin: 0 0px 46px 0;
+	}
+
+	.sincla-description {
+		align-self: center;
+	}
+
+	.sincla-image {
+		width: 90px;
+		height: 120px;
+		margin-right: 27px;
+	}
+
+	.sincla-title {
+		color: #1a1a1a;
+		font-size: 27.1px;
+		line-height: 34.9px;
+	}
+</style>
+
+<script>
+	export default {
+		props: [
+			'list'
+		],
+		data: {
+
+		},
+		press(item) {
+			console.error("on press event param : " + item);
+		}
+	}
+</script>

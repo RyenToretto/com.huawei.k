@@ -1,0 +1,67 @@
+<template>
+    <!-- 搜索栏组件 -->
+    <div class="container">
+        <div class="div_search" onclick="clickToSearch">
+            <image class="image_search" src={{searchbar}}></image>
+            <text class="place_holder">{{placeholder}}</text>
+        </div>
+    </div>
+</template>
+
+<style>
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 100px;
+    }
+
+    .div_search {
+        background-color: #f2f2f2;
+        width: 684px;
+        height: 64px;
+        margin-left: 33px;
+        margin-right: 33px;
+        border-radius: 8px;
+        align-items: center;
+    }
+
+    .image_search {
+        width: 33px;
+        height: 33px;
+        margin: 17px;
+    }
+
+    .place_holder {
+        width: 500px;
+        height: 40px;
+        font-size: 27px;
+        color: #1A1A1A;
+        opacity: 0.3;
+    }
+</style>
+
+<script>
+    import router from '@system.router';
+
+    export default {
+        data: {
+            placeholder: '设计中的设计'
+        },
+        props: [
+            'url',
+            'searchbar'
+        ],
+        onInit: function () {
+        },
+        clickToSearch() {
+            //跳转至搜索页面
+            router.push({ uri: '/Page_Search' });
+        }
+
+    }
+</script>

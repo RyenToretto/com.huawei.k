@@ -6,10 +6,13 @@
     "icon": "/Common/logo.png",
     "minPlatformVersion": 1078,
     "features": [
-        { "name": "system.router" },
         { "name": "system.fetch" },
         { "name": "system.storage" },
+        { "name": "system.prompt" },
         { "name": "system.device" },
+        { "name": "system.audio" },
+        { "name": "system.router" },
+        { "name": "system.image" },
         { "name": "system.network" },
         { "name": "service.account" },
         { "name": "system.shortcut" },
@@ -20,8 +23,7 @@
         { "name": "system.request" },
         { "name": "system.requesttask" },
         { "name": "system.uploadtask" },
-        { "name": "service.ad" },
-        { "name": "system.prompt" }
+        { "name": "service.ad" }
     ],
     "config": {
         "designWidth": "device-width"
@@ -33,9 +35,53 @@
                 "component": "home_page",
                 "path": "/Home"
             },
+            "Page_Novelclassify": {
+              "component": "index",
+              "path": "/Page_Novelclassify"
+            },
+            "Page_Paihang": {
+              "component": "index",
+              "path": "/Page_Paihang"
+            },
+            "Page_Bookdetails": {
+              "component": "index",
+              "path": "/Page_Bookdetails"
+            },
+            "Page_Charge": {
+              "component": "index",
+              "path": "/Page_Charge"
+            },
+            "Page_Catalogue": {
+              "component": "index",
+              "path": "/Page_Catalogue"
+            },
             "Page_Search": {
-                "component": "search_page",
-                "path": "/Page_Search"
+              "component": "search_page",
+              "path": "/Page_Search"
+            },
+            "Page_Read": {
+              "component": "index",
+              "path": "/Page_Read"
+            },
+            "Page_Hearingdetail": {
+              "component": "index",
+              "path": "/Page_Hearingdetail"
+            },
+            "Page_About": {
+              "component": "index",
+              "path": "/Page_About"
+            },
+            "Page_In_Build": {
+              "component": "index",
+              "path": "/Page_In_Build"
+            },
+            "Page_Notice": {
+              "component": "index",
+              "path": "/Page_Notice"
+            },
+            "Page_Activity": {
+              "component": "index",
+              "path": "/Page_Activity"
             },
             "Page_Test_Ad": {
                 "component": "test_ad_page",

@@ -1,0 +1,42 @@
+<import name="about" src="./component/c_about.ux"></import>
+<template>
+	<about header="{{header}}" agreement="{{agreement}}" rightinfo="{{rightinfo}}"></about>
+</template>
+<style>
+</style>
+
+<script>
+	import app from "@system.app"
+
+	export default {
+		data() {
+			return {
+				// 关于页面About入参：
+				header: {
+					appName: app.getInfo().name,
+					appVersion: app.getInfo().versionName,
+				},
+				agreement: {
+					termsLink: [{
+						name: "XXXX用户协议",
+						url: "https://www.baidu.com"
+					}, {
+						name: "XXXX隐私协议",
+						url: "https://www.baidu.com"
+					}],
+				},
+				rightinfo: {
+					copyrightInfo: "版权所有@2013-2018 XXXX 公司保留一切权利",
+					technologySupport: "技术支持：XXXX公司"
+				},
+			}
+		},
+		onInit() {
+			this.$page.setTitleBar({
+				text: "关于",
+				textColor:'#1a1a1a',
+				backgroundColor:'#ffffff'
+			})
+		}
+	}
+</script>

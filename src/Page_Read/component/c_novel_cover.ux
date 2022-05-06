@@ -1,0 +1,100 @@
+<template>
+  <div class="container">
+    <div class="container_cover" if="{{display}}" onclick="clickToHide()">
+      <div class="content">
+        <!-- <div class="left">
+          <image src={{novelcover.left_arrows}}></image>
+          <text class="left_text"> 上一页</text>
+        </div> -->
+        <div class="center">
+          <text class="center_text"> 点击中间</text>
+          <text class="center_text"> 呼出菜单</text>
+          <image class="center_image" src={{novelcover.point}} onclick="clickToHide()"></image>
+          <image class="center_hand_image" src={{novelcover.hand}} onclick="clickToHide()"></image>
+        </div>
+        <!-- <div class="right">
+          <image src={{novelcover.right_arrows}}></image>
+          <text class="right_text"> 下一页</text>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<style>
+  .container_cover {
+    position: fixed;
+    width: 100%;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .content {
+    height: 100%;
+    margin: 0 42px;
+    justify-content: space-between;
+  }
+
+  .center_hand_image {
+    position: fixed;
+    left: 371px;
+    top: 530px;
+  }
+
+  .center {
+    flex-direction: column;
+    width: 30%;
+    padding-top: 360px;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .center_image {
+    width: 50%;
+    margin-top: 40px;
+  }
+
+  .left {
+    flex-direction: column;
+    margin-top: 517px;
+    padding: 0 30px 0 40px;
+
+  }
+
+  .right {
+    flex-direction: column;
+    margin-top: 517px;
+    padding: 0 40px 0 30px;
+  }
+
+  .center_text {
+    color: #ffffff;
+    font-size: 31.3px;
+  }
+
+  .left_text,
+  .right_text {
+    color: #ffffff;
+    font-size: 31.3px;
+    margin-top: 40px;
+  }
+</style>
+
+<script>
+
+  module.exports = {
+    props: [
+      'novelcover'
+    ],
+    data: {
+      display: true
+    },
+
+    clickToHide() {
+      this.display = false;
+    }
+  }
+</script>

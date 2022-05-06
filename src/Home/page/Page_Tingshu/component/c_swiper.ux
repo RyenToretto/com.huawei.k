@@ -1,0 +1,43 @@
+<template>
+    <div class="container">
+        <div class="item-container">
+            <swiper class="swiper" autoplay=true>
+                <image for={{swiperdata}} class="bg-image" src={{$item.src}}></image>
+            </swiper>
+        </div>
+    </div>
+</template>
+
+<style>
+
+    .item-container {
+        margin-bottom: 50px;
+        margin-right: 60px;
+        margin-left: 60px;
+        flex-direction: column;
+    }
+
+    .swiper {
+        width: 683px;
+        height: 400px;
+        indicator-color: rgba(0,0,0,0.2);
+        indicator-selected-color: #ffffff;
+    }
+
+    .bg-image {
+        width: 683px;
+        height: 400px;
+        border-radius: 16.7px;
+    }
+</style>
+
+<script>
+
+    export default {
+        props: [
+            'swiperdata'
+        ],
+        data: {
+        }
+    }
+</script>

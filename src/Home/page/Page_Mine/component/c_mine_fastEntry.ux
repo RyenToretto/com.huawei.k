@@ -1,0 +1,110 @@
+<template>
+	<div class="fastentry-content">
+		<block for="{{list}}">
+			<div class="fastentry-box" onclick="clickFastEntryItem($item.title)">
+				<div>
+					<image class="fastentry-img" src="{{$item.icon}}"></image>
+					<text class="fastentry-number" if="{{$item.number?true:false}}">{{$item.number}}</text>
+				</div>
+				<div class="fastentry-box-bottom">
+					<text class="fastentry-text">{{$item.title}}</text>
+					<text class="fastentry-tips" if="{{$item.isNew}}"></text>
+				</div>
+			</div>
+		</block>
+	</div>
+</template>
+
+<style>
+	.fastentry-content {
+		padding: 16px 0px 0px 0px;
+	}
+
+	.fastentry-box {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 20%;
+	}
+
+	.fastentry-box-bottom {
+		justify-content: center;
+	}
+
+	.fastentry-number {
+		height: 26px;
+		margin: 0px 0px 0px -25px;
+		padding: 0px 5px;
+		font-size: 18.8px;
+		color: #ffffff;
+		border-radius: 12.5px;
+		background-color: #FF1400;
+	}
+
+	.fastentry-text {
+		padding-top: 17px;
+		color: #1A1A1A;
+		font-size: 25px;
+	}
+
+	.fastentry-img {
+		width: 84px;
+		height: 84px;
+	}
+
+	.fastentry-tips {
+		width: 17px;
+		height: 17px;
+		margin: 25px 0px 0px 12px;
+		border-radius: 17px;
+		background-color: #FF1400;
+	}
+</style>
+
+<script>
+	import router from '@system.router'
+
+	module.exports = {
+		props: {
+			list: Array
+		},
+		onInit: function () {
+			this.$page.setTitleBar({
+				textColor: '#ffffff',
+				backgroundColor: '#007DFF',
+				backgroundOpacity: 0.5,
+				menu: false
+			})
+		},
+		clickFastEntryItem(type) {
+			if (type === "签到") {
+				//跳转至签到页面
+				router.push({
+					uri: '/Page_In_Build',
+					params: { type: type }
+				})
+			} else if (type === "充值") {
+				//跳转至充值页面
+				router.push({
+					uri: '/Page_Charge'
+				})
+			} else if (type === "礼品") {
+				//跳转至礼品页面
+				router.push({
+					uri: '/Page_In_Build',
+					params: { type: type }
+				})
+			} else if (type === "活动") {
+				//跳转至活动页面
+				router.push({
+					uri: '/Page_Activity'
+				})
+			} else if (type === "消息") {
+				//跳转至消息页面
+				router.push({
+					uri: '/Page_Notice'
+				})
+			}
+		}
+	}
+</script>

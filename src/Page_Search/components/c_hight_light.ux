@@ -1,0 +1,76 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+  <!-- 联想词条展示插件 -->
+  <div>
+    <block for="{{list}}">
+      <text class="red" if="{{$item == prop2}}">
+        {{prop2}}
+      </text>
+      <text if="{{$item !=prop2}}">
+        {{$item}}
+      </text>
+    </block>
+  </div>
+</template>
+
+<style>
+  .red {
+    color: rgb(187, 17, 17);
+  }
+</style>
+
+<script>
+  /**
+   * 本组件主要作用是实现搜索词汇高亮显示，高亮颜色为红色。
+   * prop1 ：就是联想到的词条，就是包含需被高亮词汇prop2的词条
+   * prop2 ：就是用户输入的搜索词
+   */
+  export default {
+    props: [
+      'prop1',
+      'prop2'
+    ],
+    data: {
+      list: []
+    },
+    isNull(str) {
+      if (str === null || str === undefined || str === "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    /**
+     * 高亮实现逻辑：
+     * 由于快应用div中不支持显示文本，支持text span等显示文本的标签，所以，只能根据用户输入的词汇prop2分拆联想词汇prop1，然后设置颜色为红色
+     */
+    watchPropsChange() {
+      if (this.isNull(this.prop1) || this.isNull(this.prop2)) {
+        return;
+      }
+      var source = this.prop1;
+      var search = this.prop2;
+      var ss1, tempArr = [], length = search.length;
+      while (source.indexOf(search) !== -1) {
+        if (0 !== source.indexOf(search)) {
+          ss1 = source.substring(0, source.indexOf(search));
+          source = source.substring(source.indexOf(search), source.length);
+
+        } else {
+          ss1 = source.substring(0, source.indexOf(search) + search.length);
+          source = source.substring(source.indexOf(search) + length, source.length);
+        }
+        if (ss1 !== "") {
+          tempArr.push(ss1);
+        }
+      }
+      tempArr.push(source);
+      this.list = tempArr;
+    },
+    onInit() {
+      //初始化数据，避免空白界面
+      this.watchPropsChange();
+      this.$watch('prop2', 'watchPropsChange');
+    }
+  }
+</script>

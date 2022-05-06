@@ -1,0 +1,307 @@
+<template>
+  <div class="shujia-list">
+    <div class="shujia-box-top" if="{{!foo}}">
+      <div class="close_img" onclick="cloce">
+        <image src={{img.closeImage}}></image>
+      </div>
+      <text class="top_title">{{topTitle}}</text>
+    </div>
+
+    <block for={{shujiarows}}>
+      <div class="{{$idx==shujiarows.length-1?'last-list-row':'list-row'}}">
+        <div class="shujia-books">
+          <block for="value in $item">
+            <stack>
+              <div class="image_div" style=" background-image: {{value.image}}" id="btnclick" onclick="clickToRead(value)" onlongpress="longPress(value)">
+                <div class="select_box" onclick="select(value)" if="showCheckBox">
+                  <image class="select_box_image" src={{img.noSelect}} if="!value.selectImage"></image>
+                  <image class="select_box_image" src={{img.select}} if="value.selectImage"></image>
+                </div>
+              </div>
+              <div if="value.bookType1!=='no'" class="book_type_1" style="background-image: {{img.type1}}">
+                <text if="value.bookType1==='shidu'">试读</text>
+                <text if="value.bookType1==='update'">更新</text>
+              </div>
+              <div if="value.bookType2==='tingshu'" class="book_type_2" style="background-image: {{img.type2}}">
+              </div>
+            </stack>
+          </block>
+        </div>
+        <div class="shujia-line" style="background-image:{{img.shujiaLine}}"></div>
+      </div>
+    </block>
+
+    <tabs class="tabs" if="{{!foo}}">
+      <tab-bar>
+        <block for="item in checkedlist">
+          <div class="tab-item" onclick="tabClickEvent(item)">
+            <image class="image-active" src="{{item.image}}" />
+            <text style="color: {{item.color}}" class="title">{{item.title}}</text>
+          </div>
+        </block>
+      </tab-bar>
+    </tabs>
+
+  </div>
+</template>
+
+
+<style>
+  .shujia-list {
+    width: 698px;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .shujia-box-top {
+    width: 100%;
+    height: 100px;
+    padding: 30px 34px 36px 34px;
+    position: fixed;
+    top: 0px;
+    background-color: rgba(242, 242, 242, 0.95);
+    align-items: center;
+  }
+
+  .close_img {
+    width: 50px;
+    height: 50px;
+    margin-right: 30px;
+  }
+
+  .top_title {
+    font-size: 37.5px;
+    color: #1A1A1A;
+  }
+
+  .list-row {
+    width: 100%;
+    flex-direction: column;
+    margin-bottom: 50px;
+  }
+
+  .last-list-row {
+    width: 100%;
+    flex-direction: column;
+
+  }
+
+  .shujia-books {
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+
+  .image_div {
+    width: 188px;
+    height: 250px;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  .select_box {
+    margin: 7px;
+  }
+
+  .select_box_image {
+    width: 40px;
+  }
+
+  .checkbox {
+    width: 60px;
+  }
+
+  .shujia-line {
+    height: 30px;
+    width: 100%;
+    background-repeat: no-repeat;
+  }
+
+  .shujia-line img {
+    width: 100%;
+  }
+
+  .tabs {
+    background-color: #F2F2F2;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+
+  }
+
+  .tab-item {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 33px;
+    margin-right: 33px;
+    padding-top: 14px;
+    padding-bottom: 11px;
+    width: 170.8px;
+    height: 104.2px;
+  }
+
+  .image-active {
+    width: 33px;
+    height: 33px;
+    resize-mode: contain;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  /* 书架左上角标 */
+
+  .book_type_1 {
+    width: 67px;
+    height: 34px;
+    margin-top: 16px;
+    left: 0px;
+  }
+
+  .book_type_1 text {
+    width: 100%;
+    font-size: 20.8px;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  /* 书架左下角 */
+
+  .book_type_2 {
+    width: 34px;
+    height: 34px;
+    margin-top: 210px;
+    margin-left: 8px;
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+  import prompt from '@system.prompt'
+
+  module.exports = {
+    props: [
+      'list',
+      'checkedlist',
+      'img',
+      'foo',
+    ],
+    data: {
+      topTitle: '未选择',
+      showCheckBox: false,
+      selectImage: false,
+      shujiarows: [],
+      chooseBookArr: []
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        textColor: '#ffffff',
+        backgroundColor: '#007DFF',
+        backgroundOpacity: 0.5,
+        menu: false
+      });
+      this.shujiarows = this.sliceArray(this.list);
+    },
+
+    sliceArray(array) {
+      let result = [];
+      for (var i = 0, len = array.length; i < len; i += 3) {
+        result.push(array.slice(i, i + 3));
+      }
+      return result;
+    },
+
+    clickToRead(value) {
+      if (this.showCheckBox) {
+        this.showCheckBox = false; //隐藏选择框
+        this.foo = true;           //切换下方tabBar
+        this.hideSelectImage();    //清空选择的书籍
+      } else {
+        if (value.bookType2 === 'tingshu') {
+          router.push({
+            uri: "/Page_Hearingdetail"
+          })
+        } else if (value.bookType2 === 'novel') {
+          router.push({
+            uri: '/Page_Read',
+            params: { item: value }
+          })
+        }
+
+      }
+
+    },
+    //长按显示选择框
+    longPress(value) {
+      this.foo = false;         //切换下方tabBar
+      this.showCheckBox = true; //显示选择框
+      this.chooseBookArr = [];  //每次长按都清空chooseBookArr
+    },
+
+    cloce() {
+      this.showCheckBox = false; //隐藏选择框
+      this.foo = true;           //切换下方tabBar
+      this.hideSelectImage();    //清空选择的书籍
+    },
+
+    select(value) {
+      value.selectImage = !value.selectImage;
+      if (value.selectImage) {
+        //将勾选的书放入chooseBookArr
+        this.chooseBookArr.push(value);
+      } else {
+        //取消勾选时，将当前项从chooseBookArr中删除
+        let valueIndex = this.chooseBookArr.indexOf(value);
+        if (valueIndex !== -1) {
+          this.chooseBookArr.splice(valueIndex, 1);
+        }
+      }
+      if (this.chooseBookArr.length === 0) {
+        this.topTitle = "未选择";
+      } else {
+        this.topTitle = "已选择" + this.chooseBookArr.length + "项";
+      }
+    },
+    //底部tabBar 点击事件
+    tabClickEvent(item, event) {
+
+      if (item.title === '删除') {
+        if (this.chooseBookArr.length === 0) {
+          prompt.showToast({
+            message: '还未选择书籍',
+            duration: 2000,
+            gravity: 'bottom'
+          })
+        } else {
+          prompt.showDialog({
+            message: '是否删除所选' + this.chooseBookArr.length + '本书籍',
+            buttons: [{ text: '删除', color: '#CD2325' }, { text: '取消', color: '#CD2325' }],
+            success: function (res) {
+              if (res.index === 0) {
+                prompt.showToast({
+                  message: '已成功删除所选书籍',
+                  duration: 2000,
+                  gravity: 'bottom'
+                })
+              }
+            },
+          });
+        }
+      }
+    },
+
+    hideSelectImage() {
+      this.chooseBookArr = [];
+      this.list.forEach(item => {
+        item.selectImage = false;
+      });
+      if (this.chooseBookArr.length === 0) {
+        this.topTitle = "未选择";
+      } else {
+        this.topTitle = "已选择" + this.chooseBookArr.length + "项";
+      }
+    }
+
+  }
+</script>

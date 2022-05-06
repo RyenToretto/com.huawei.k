@@ -1,40 +1,38 @@
-<import name="do-search-bar" src="./component/do_search_bar"></import>
-<import name="book-swiper" src="./Book_Swiper/book_swiper"></import>
+<import name='fixedmaintab' src='./components/c_fixed_maintab.ux'></import>
 
 <template>
-  <div class="home-page">
-
-    <do-search-bar></do-search-bar>
-
-    <book-swiper></book-swiper>
-
-  </div>
+  <!-- template里只能有一个根节点 -->
+  <fixedmaintab datas="{{datas}}"></fixedmaintab>
 </template>
 
-<style lang="less">
-  @import "../Common/css/variable.less";
-  @import "../Common/css/common.less";
-  @import "../Common/css/button.less";
-
-  .home-page {
-    width: 100%;
-    height: 100%;
-    flex-direction: column;
-  }
+<style>
 </style>
 
 <script>
   module.exports = {
-    data: {
+    data() {
+      return {
+        datas: {
+          color_normal: '#878787',
+          color_active: '#FF7500',
+          list: [
+            { i: 0, color: '#878787', pic: './img/shujia.png', pic_choice: './img/clicked-shujia.png', show: false, title: '书架' },
+            { i: 1, color: '#878787', pic: './img/shucheng.png', pic_choice: './img/clicked-shucheng.png', show: false, title: '书城' },
+            { i: 2, color: '#878787', pic: './img/tingshu.png', pic_choice: './img/clicked-tingshu.png', show: false, title: '听书' },
+            { i: 3, color: '#878787', pic: './img/fenlei.png', pic_choice: './img/clicked-fenlei.png', show: false, title: '分类' },
+            { i: 4, color: '#878787', pic: './img/wode.png', pic_choice: './img/clicked-wode.png', show: false, title: '我的' }
+          ]
+        }
+      }
     },
-    onInit: function () {
-      this.$page.setTitleBar({ text: '首页' });
+    onInit() {
+      this.$page.setTitleBar({
+        //titlebar的状态在manifest.json中display设置的
+        textColor: '#1a1a1a',
+        backgroundColor: '#f2f2f2',
+        text: '阅读',
+        menu: true
+      });
     },
-    onShow() {
-      APP_STATISTICS.page_show(this); // 页面打点 显示
-    },
-    onHide() {
-      APP_STATISTICS.page_hide(this); // 页面打点 隐藏
-    }
   }
 </script>

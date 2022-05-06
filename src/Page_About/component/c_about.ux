@@ -1,0 +1,92 @@
+<template>
+	<div class="center_container">
+		<div class="center_container">
+			<image class="logo_style" src="/Common/logo.png"></image>
+			<text id="app_name" class="text_appname">{{header.appName}}</text>
+			<text id="app_version" class="text_grey">{{header.appVersion}}</text>
+		</div>
+		<div class="center_container" style="height:600px;">
+		</div>
+		<div class="center_container bottom_con">
+			<div>
+				<text class="text_link" @click="openCodeLicenseLink('termsLink1')">{{agreement.termsLink[0].name}}</text>
+				<text class="text_link" style="margin-left: 10px" @click="openCodeLicenseLink('termsLink2')">{{agreement.termsLink[1].name}}</text>
+			</div>
+			<text class="text_copy">{{rightinfo.copyrightInfo}}</text>
+			<text class="text_copy">{{rightinfo.technologySupport}}</text>
+		</div>
+	</div>
+</template>
+
+<style>
+	.bottom_con {
+		position: fixed;
+		bottom: 33px;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.text_appname {
+		color: rgb(26, 26, 26);
+		font-size: 31px;
+		margin-top: 22px;
+		margin-bottom: 13px;
+	}
+
+	.text_grey {
+		color: rgba(26, 26, 26, 0.5);
+		font-size: 27.1px;
+	}
+
+	.text_copy {
+		color: rgba(26, 26, 26, 0.5);
+		font-size: 21px;
+	}
+
+	.text_link {
+		color: #005BBA;
+		font-size: 20.8px;
+	}
+
+	.center_container {
+		width: 100%;
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+		align-items: center;
+	}
+
+	.logo_style {
+		height: 150px;
+		width: 150px;
+		margin-top: 117px;
+		border-radius: 30px;
+	}
+</style>
+
+<script>
+	import router from "@system.router"
+	module.exports = {
+		data: {},
+		props: [
+			'header',
+			'agreement',
+			'rightinfo'
+		],
+		routerRedirect(url) {
+			router.push({
+				uri: url
+			});
+		},
+		openCodeLicenseLink: function (e) {
+			//应该根据入参判断
+			if (e === "openCodeLicense") {
+				this.routerRedirect(this.agreement.openCodeLicense.url);
+			} else if (e === "termsLink1") {
+				this.routerRedirect(this.agreement.termsLink[0].url);
+			} else {
+				this.routerRedirect(this.agreement.termsLink[1].url);
+			}
+		}
+	}
+</script>

@@ -1,0 +1,159 @@
+<import name='reader_main_shujia_component_searchbar' src='./component/Component_SearchBar.ux'></import>
+<import name='shujia_list' src='./component/c_shujia_list.ux'></import>
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="shujia-box">
+    <div class="shujia-box-top">
+      <reader_main_shujia_component_searchbar searchbar={{searchbar}}></reader_main_shujia_component_searchbar>
+    </div>
+    <div class="shujia-box-bottom">
+      <shujia_list list={{list}} checkedlist={{checkedList}} img={{img}} foo={{foo}}></shujia_list>
+    </div>
+  </div>
+</template>
+
+<style>
+  .shujia-box {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .shujia-box-top {
+    width: 683px;
+    margin: 17px 34px 36px 34px;
+  }
+
+  .shujia-box-bottom {
+    width: 698px;
+    margin: 0px 26px 0 26px;
+  }
+</style>
+
+<script>
+  module.exports = {
+    props: [
+      'foo',
+    ],
+    data: {
+      // 书架列表数据
+      list: [
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/1.png",
+          "name": "one",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/2.png",
+          "name": "two",
+          "selectImage": false,
+          "bookType1": "shidu",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/1.png",
+          "name": "three",
+          "selectImage": false,
+          "bookType1": "update",
+          "bookType2": "tingshu"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/2.png",
+          "name": "four",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/1.png",
+          "name": "five",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "tingshu"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/2.png",
+          "name": "six",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/1.png",
+          "name": "seven",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/2.png",
+          "name": "eight",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/1.png",
+          "name": "nine",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/2.png",
+          "name": "ten",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/2.png",
+          "name": "eight",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/1.png",
+          "name": "nine",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+        {
+          "image": "./page/Page_Shujia/TO_DELETE/2.png",
+          "name": "ten",
+          "selectImage": false,
+          "bookType1": "no",
+          "bookType2": "novel"
+        },
+      ],
+      checkedList: [
+        { i: 0, color: '#878787', image: './page/Page_Shujia/img/delete.png', title: '删除' },
+        { i: 2, color: '#878787', image: './page/Page_Shujia/img/share.png', title: '分享' },
+        { i: 3, color: '#878787', image: './page/Page_Shujia/img/all.png', title: '全选' }
+      ],
+      img: {
+        closeImage: "./page/Page_Shujia/img/icon_close.png",
+        noSelect: "./page/Page_Shujia/img/no_select.png",
+        select: "./page/Page_Shujia/img/select.png",
+        type1: "./page/Page_Shujia/img/image1.png",
+        type2: "./page/Page_Shujia/img/headphone.png",
+        shujiaLine: "./page/Page_Shujia/img/shujia.png"
+      },
+
+      //搜索框数据
+      searchbar: "./page/Page_Shujia/img/c_search_search.png"
+    },
+    
+    onInit() {
+       this.$page.setTitleBar({
+        //titlebar的状态在manifest.json中display设置的
+        menu: false
+      });
+    },
+  }
+</script>

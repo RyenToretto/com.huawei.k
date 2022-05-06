@@ -1,0 +1,147 @@
+<import name='shujia' src='../page/Page_Shujia/index'></import>
+<import name='shucheng' src='../page/Page_Shucheng/index'></import>
+<import name='fenlei' src='../page/Page_Fenlei/index'></import>
+<import name='tingshu' src='../page/Page_Tingshu/index'></import>
+<import name='mine' src='../page/Page_Mine/index'></import>
+
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="container">
+    <tabs onchange="switchContent">
+      <tab-content>
+        <shujia foo={{foo}}></shujia>
+        <shucheng></shucheng>
+        <tingshu></tingshu>
+        <fenlei></fenlei>
+        <mine></mine>
+      </tab-content>
+      <tab-bar>
+        <block for="datas.list">
+          <div class="tab-item">
+            <image if="{{$item.show}}" class="image-active" src="{{$item.show?$item.pic_choice:$item.pic}}" />
+            <image else class="image-normal" src="{{$item.show?$item.pic_choice:$item.pic}}" />
+            <text style="color: {{$item.color}}" class="title">{{$item.title}}</text>
+          </div>
+        </block>
+      </tab-bar>
+    </tabs>
+  </div>
+
+</template>
+
+<style>
+	.container {
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.tabs {
+		background-color: #f2f2f2;
+		height: 100px;
+		width: 100%;
+		position: fixed;
+		bottom: 0px;
+	}
+
+	.tab-content {
+		margin-bottom: 100px;
+	}
+
+	.tab-item {
+		flex-direction: column;
+		align-items: center;
+		margin-left: 33px;
+		margin-right: 33px;
+		padding-top: 14px;
+		padding-bottom: 11px;
+		width: 170.8px;
+		height: 104.2px;
+	}
+
+	.image-active {
+		width: 50px;
+		height: 50px;
+		resize-mode: contain;
+	}
+
+	.image-normal {
+		width: 50px;
+		height: 50px;
+		resize-mode: contain;
+	}
+
+	.tab-item text {
+		font-size: 20.8px;
+		margin-top: 10px;
+		text-align: center;
+		color: rgba(0, 0, 0, 0.5);
+	}
+
+	.tab-item text:active {
+		font-size: 21px;
+		color: #cd2325;
+		margin-top: 6px;
+		text-align: center;
+	}
+
+	.maintab-shadow-bottom {
+		width: 100%;
+		height: 20px;
+	}
+</style>
+
+<script>
+
+  module.exports = {
+
+    props: [
+      'datas'
+    ],
+
+    data: {
+      foo: true,
+      array: {
+        color_normal: '#1A1A1A',
+        color_active: '#CD2325',
+        list: [
+          { title: '推荐', show_line: false, color: '#1A1A1A' },
+          { title: '玄幻', show_line: false, color: '#1A1A1A' },
+          { title: '武侠', show_line: false, color: '#1A1A1A' },
+          { title: '言情', show_line: false, color: '#1A1A1A' },
+          { title: '历史', show_line: false, color: '#1A1A1A' },
+          { title: '宫廷', show_line: false, color: '#1A1A1A' },
+          { title: '科幻', show_line: false, color: '#1A1A1A' },
+          { title: '悬疑', show_line: false, color: '#1A1A1A' },
+          { title: '儿童', show_line: false, color: '#1A1A1A' },
+          { title: '励志', show_line: false, color: '#1A1A1A' }
+        ]
+      }
+    },
+
+    switchContent: function (e) {
+      let index = e.index;
+      for (let i = 0; i < this.datas.list.length; i++) {
+        let element = this.datas.list[i];
+        element.show = false;
+        if (i === index) {
+          element.show = true;
+          this.$page.setTitleBar({
+            textColor: '#1a1a1a',
+            backgroundColor: '#f2f2f2',
+            text: '阅读',
+            menu: true,
+          });
+        }
+      }
+    },
+    longpress(longpress) {
+      this.showTabs = false;
+      this.showCeckbox = true;
+      longpress.stopPropagation();
+    },
+    unCecked() {
+      this.showCeckbox = false;
+      this.showTabs = true;
+    }
+  }
+</script>

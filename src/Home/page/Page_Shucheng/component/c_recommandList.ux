@@ -1,0 +1,135 @@
+<template>
+	<div class="main main_con">
+		<div class="recommend-title">
+			<text class="title_text">{{title}}</text>
+			<div>
+				<text class="text_more" onclick="openUrl('morelink')">更多</text>
+				<image class="arrow" src={{arrow}}></image>
+			</div>
+		</div>
+		<list class="list_container" for={{recommandlist}}>
+			<list-item type="appUrl">
+				<div class="list_item_con">
+
+					<div class="left_img">
+						<image src={{$item.backgroundimage}}></image>
+					</div>
+					<div class="main">
+						<list class="number_list">
+							<block for="{{$item.listItems}}">
+								<list-item type="listItem" class="list-item-ui">
+									<div onclick="openUrl()">
+										<div style="width:30px;margin-right: 17px;">
+											<text class="right_list_text">{{$idx+1}}</text>
+										</div>
+										<div style="width:364px;">
+											<text class="right_list_text">{{$item.name}}</text>
+										</div>
+									</div>
+								</list-item>
+							</block>
+						</list>
+					</div>
+				</div>
+			</list-item>
+		</list>
+	</div>
+</template>
+
+<style>
+	.number_list {
+		width: 450px;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.right_list_text {
+		color: rgba(26, 26, 26, 1);
+		font-size: 31.3px;
+	}
+
+	.list-item-ui {
+		height: 67px;
+		margin-left: 16px;
+		width: 684px;
+	}
+
+	.list_container {
+		height: 220px;
+		margin: 13.8px 0;
+	}
+
+	.left_img image {
+		height: 217px;
+		width: 217px;
+		border-radius: 8.3px;
+		align-items: center;
+	}
+
+	.list_item_con {
+		margin: 0px 10px;
+		height: 250px;
+	}
+
+	.more_link {
+		width: 200px
+	}
+
+	.text_more {
+		width: 300px;
+		color: rgba(26, 26, 26, 0.5);
+		font-size: 27.08px;
+		text-align: right;
+		padding-right: 27px;
+		background-size: auto;
+		background-position: right;
+		background-repeat: no-repeat;
+	}
+
+	.title_text {
+		font-size: 31px;
+		color: #1A1A1A;
+		font-weight: bold;
+		align-self: center;
+	}
+
+	.main {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.main_con {
+		padding: 0px 33px;
+		width: 750px;
+	}
+
+	.arrow {
+		width: 16px;
+		height: 28px;
+		align-self: center;
+	}
+
+	.recommend-title{
+		width:100%;
+		justify-content: space-between;
+	}
+</style>
+
+<script>
+	import router from "@system.router"
+	module.exports = {
+		data: {},
+		props: {
+			recommandlist: Array,
+			title: String,
+			morelink: String,
+			arrow:String
+		},
+		openUrl: function (e) {
+			//根据 e.target.children[0].attr.value && e.target.children[1].attr.value循环查找对应的url
+			router.push({
+				uri: ""//给出跳转url
+			});
+		}
+	}
+</script>

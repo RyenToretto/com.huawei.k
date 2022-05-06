@@ -1,0 +1,144 @@
+<import name="catalogue" src="./component/c_catalogue_list"></import>
+<template>
+  <div class="container">
+    <catalogue catalogue="{{catalogueList}}"></catalogue>
+  </div>
+</template>
+
+
+<style>
+  .container {
+    flex-direction: column;
+  }
+</style>
+
+<script>
+
+  module.exports = {
+    data: {
+      catalogueList: {
+        total: 26,
+        list: [
+          {
+            catalogueNumber: 1,
+            catalogueTitle: '机会',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 2,
+            catalogueTitle: '大战',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 3,
+            catalogueTitle: '回家',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 4,
+            catalogueTitle: '显灵',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 5,
+            catalogueTitle: '杀人灭口',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 6,
+            catalogueTitle: '被追杀',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 7,
+            catalogueTitle: '亲情',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 8,
+            catalogueTitle: '爱情',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 9,
+            catalogueTitle: '逆袭',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 10,
+            catalogueTitle: '完美',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 11,
+            catalogueTitle: '落幕',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 12,
+            catalogueTitle: '旅途',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 13,
+            catalogueTitle: '偶遇',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 14,
+            catalogueTitle: '夜幕',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 15,
+            catalogueTitle: '偷听',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 16,
+            catalogueTitle: '形势',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 17,
+            catalogueTitle: '风起云涌',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 18,
+            catalogueTitle: '卷土重来',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 19,
+            catalogueTitle: '奋不顾身',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 20,
+            catalogueTitle: '事与愿违',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 21,
+            catalogueTitle: '失去',
+            catalogueFree: 0
+          }, {
+            catalogueNumber: 22,
+            catalogueTitle: '悲壮',
+            catalogueFree: 1
+          }, {
+            catalogueNumber: 23,
+            catalogueTitle: '不顾一切',
+            catalogueFree: 1
+          }, {
+            catalogueNumber: 24,
+            catalogueTitle: '没死',
+            catalogueFree: 1
+          },
+          {
+            catalogueNumber: 25,
+            catalogueTitle: '养伤',
+            catalogueFree: 1
+          },
+          {
+            catalogueNumber: 26,
+            catalogueTitle: '寻找灵源',
+            catalogueFree: 1
+          },
+        ]
+      }
+    },
+
+    onInit() {
+      this.$page.setTitleBar({
+        //titlebar的状态，在manifest.json中display设置的
+        text: '目录',
+        textColor: '##1A1A1A',
+        backgroundColor: 'rgba(242,242,242,0.95)',
+        menu: false
+      });
+    },
+
+  }
+</script>

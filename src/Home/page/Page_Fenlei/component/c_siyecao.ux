@@ -1,0 +1,44 @@
+<template>
+    <div class="siyecao-content">
+        <block for="{{list}}">
+            <text onclick="routePage($item.url)" style="background-image:{{$item.backgroundImage}}">{{$item.title}}</text>
+        </block>
+    </div>
+</template>
+
+<style>
+    .siyecao-content {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0 49px;
+    }
+
+    .siyecao-content text {
+        width: 234px;
+        height: 84px;
+        text-align: center;
+        margin-bottom: 32px;
+        color: #000000;
+    }
+</style>
+
+<script>
+    import router from '@system.router';
+
+    export default {
+        props: [
+            'list'
+        ],
+        data: {
+
+        },
+
+        routePage(url) {
+            //跳转到应用内的某个页面
+            router.push({
+                uri: "/Page_Novelclassify"
+            })
+        },
+
+    }
+</script>

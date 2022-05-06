@@ -1,0 +1,265 @@
+<import name='cover' src='./component/c_book_cover'></import>
+<import name='more' src='./component/c_item_container_swiper'></import>
+<import name='other' src='./component/c_list_single'></import>
+<import name='information' src='./component/c_more_information'></import>
+<template>
+  <!-- template里只能有一个根节点 -->
+  <list class="bookdetail-box">
+    <!-- 书籍名称 -->
+    <list-item type="listItem" class="bookdetail-box-desc">
+      <cover list="{{bookCover}}" param="{{item}}"></cover>
+    </list-item>
+    <!--该作者其它作品 -->
+    <list-item type="listItem1" class="bookdetail-box-one">
+      <other list="{{listbyyouread}}"></other>
+    </list-item>
+    <!-- 喜欢这本书的人还喜欢 -->
+    <list-item type="listItem2" class="bookdetail-box-two">
+      <more list="{{subjectlist}}" banner="{{banner}}"></more>
+    </list-item>
+    <!-- 图书更多信息 -->
+    <list-item type="listItem3" class="bookdetail-box-three">
+      <information list="{{moreInformation}}"></information>
+    </list-item>
+
+    <list-item type="listItem4" class="detail_bottom">
+      <text class="bottom_left_btn" onclick="addToBookshelf">加入书架</text>
+      <text class="bottom_right_btn" onclick="toRead">立即阅读</text>
+    </list-item>
+  </list>
+</template>
+
+<style>
+  .bookdetail-box {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
+
+  .header {
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    padding: 0 33px;
+  }
+
+  .header_right {
+    align-items: center;
+  }
+
+  .header_shear {
+    align-items: center;
+    width: 100px;
+    height: 100px;
+  }
+
+  .header_manu {
+    margin-left: 12px;
+    width: 25px;
+    height: 50px;
+  }
+
+  .back_img,
+  .shear_img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .bookdetail-box-desc {
+    padding: 34px 34px 0px 33px;
+  }
+
+  .bookdetail-box-one {
+    margin: 17px 33px 10px 33px;
+  }
+
+  .bookdetail-box-two {
+    margin-top: 15px;
+  }
+
+  .bookdetail-box-three {
+    margin: 15px 0px 100px 0px;
+  }
+
+  .maintab-shadow-bottom {
+    width: 100%;
+    height: 100px;
+  }
+
+  .detail_bottom {
+    position: fixed;
+    background-color: #ffffff;
+    height: 100px;
+    width: 100%;
+    padding: 0 34px;
+    bottom: 0px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .bottom_left_btn {
+    height: 67px;
+    width: 316px;
+    padding: 15px 0;
+    color: #1a1a1a;
+    font-size: 31.3px;
+    text-align: center;
+    border-radius: 8.3px;
+    border: 1px solid #d4d4d4;
+  }
+
+  .bottom_right_btn {
+    height: 67px;
+    width: 316px;
+    padding: 15px 0;
+    color: #ffffff;
+    font-size: 31.3px;
+    background-color: #D00218;
+    text-align: center;
+    border-radius: 8.3px;
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+  import prompt from '@system.prompt'
+
+  module.exports = {
+
+    protected: {
+      item: ''     //item 为将接收的路由参数
+    },
+    public: {
+      titleData: {
+        backImage: "./img/back.png",
+        shareImage: "./img/share.png",
+        menuImage: "./img/"
+      },
+      bookCover: {
+        title: "冰与火之歌",
+        score: "234567",
+        author: "村上村树",
+        words: "61万字",
+        chapter: '2544',
+        type: "玄幻修仙",
+        image: "./TO_DELETE/ice1.png",
+        arrow: "./img/arrow.png",
+        presentation: '这样确切的爱，一生只有一次。彭野，一个即使没有手表也能知道时间的男人，一个在草原上识别八十八个星座的男人，一个拥有神射手般枪法的男长，一个为了心爱的女人能屈能伸的男人，一个几乎无所不能的男人。程迦，一个在荒野中落单却淡定坐在车顶抽烟的女人，一个帮着羞涩小伙子**大胆示爱的女人，一个中了枪也一声不吭的女人，一个因为彭野而终于知道什么是爱情的女人。有风的地方，就会想起彭野，如狂风般强硬；有海的地方，就会想起程迦，如大海般柔软。仍记得，他指间一斜蓝天日出，鹰在穿梭。他对鹰说：“程迦，明天是个好天气。”他说是，就当然会是，因为——他知道风从哪个方向来。 ',
+      }
+      ,
+      //其它作品
+      listbyyouread:
+        {
+          title: "该作者其它作品",
+          subtitle: "更多",
+          arrow: "img/arrow.png",
+          list: [
+            {
+              image: 'TO_DELETE/read1.png',
+              title: '书生只见',
+              brief: '结婚仿佛金漆的笼子，笼子外面的鸟想住进去，笼内的鸟想飞出来',
+              author: '孟康',
+              clazz: ['古典爱情', '文学']
+            },
+            {
+              image: 'TO_DELETE/read1.png',
+              title: '只见书生',
+              brief: '海归的高管，初入职场的乖乖女，犯傻的小职员，胡同里不能低下头的公主加上富二代的小奸商。',
+              author: '孟康',
+              clazz: ['古典爱情', '文学']
+            },
+            {
+              image: 'TO_DELETE/read1.png',
+              title: '奈印',
+              brief: '结婚仿佛金漆的笼子，笼子外面的鸟想住进去，笼内的鸟想飞出来',
+              author: '孟康',
+              clazz: ['古典爱情', '文学']
+            }
+          ]
+        },
+
+      //喜欢这本书的人还喜欢
+      banner:
+        {
+          title: '喜欢这本书的人还喜欢',
+          link: '更多',
+          image: 'img/arrow.png'
+        },
+      subjectlist:
+        [{
+          image: 'TO_DELETE/ice1.png',
+          title: '冰与火之歌1',
+          people: 2301,
+          author: "玲珑",
+        },
+        {
+          image: 'TO_DELETE/ice1.png',
+          title: '冰与火之歌2',
+          people: 2001,
+          author: "玲珑",
+        },
+        {
+          image: 'TO_DELETE/ice1.png',
+          title: '冰与火之歌3',
+          people: 3001,
+          author: "玲珑",
+        },
+        {
+          image: 'TO_DELETE/ice1.png',
+          title: '冰与火之歌4',
+          people: 3212,
+          author: "玲珑",
+        },
+        {
+          image: 'TO_DELETE/ice1.png',
+          title: '冰与火之歌5',
+          people: 3121,
+          author: "玲珑",
+        },
+        ],
+      moreInformation:
+        {
+          words: 42.3,
+          time: '2018/9/14',
+          publisher: '出版社',
+          number: 85462364245,
+          statement: '本书数字版权由"上海客服（出版）"提供，并由其授权掌阅科技股份有限公司制作发行，若书中含有不良信息，请书友积极告知客服。'
+        }
+
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        menu: true,
+        textColor: '##000000',
+        backgroundColor: '#ffffff',
+      })
+      //将接收的路由参数转成对象
+      if (this.item) {
+        this.item = JSON.parse(this.item);
+      }
+
+    },
+
+    onMenuPress() {
+      prompt.showContextMenu({
+        itemList: ['分享']
+      })
+    },
+
+    back() {
+      router.back();
+    },
+
+    addToBookshelf() {
+      //TODO:添加书籍至书架的操作
+    },
+    toRead() {
+      //TODO：点击跳转至阅读器界面
+      router.push({
+        uri: '/Page_Read'
+      })
+    }
+  }
+</script>

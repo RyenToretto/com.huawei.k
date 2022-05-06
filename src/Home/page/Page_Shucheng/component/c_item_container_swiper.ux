@@ -1,0 +1,109 @@
+<template>
+
+	<div class="swiper-container">
+		<div class="swiper-head">
+			<div class="swiper-left">
+				<text class="swiper-main-title">{{banner.title}}</text>
+			</div>
+			<div class="swiper-right">
+				<text class="swiper-link">{{banner.link}}</text>
+				<image class="swiper-arrow" src="{{banner.uri}}"></image>
+			</div>
+		</div>
+		<list class="swiper-list">
+			<block for="{{list}}">
+				<list-item type="prod" class="swiper-list-item">
+					<stack class="swiper-stack">
+						<image class="swiper-image" src="{{$item.img}}"></image>
+						<div class="swiper-image">
+							<image class="swiper-icon" src="{{$item.icon}}"></image>
+						</div>
+					</stack>
+					<text class="swiper-title">{{$item.title}}</text>
+				</list-item>
+			</block>
+		</list>
+
+	</div>
+</template>
+
+<style>
+	.swiper-container {
+		flex-direction: column;
+	}
+
+	.swiper-head {
+		justify-content: space-between;
+		width: 750px;
+	}
+
+	.swiper-main-title {
+		font-size: 31px;
+		color: #1A1A1A;
+		font-weight: bold;
+		align-self: center;
+	}
+
+	.swiper-left {
+		margin-left: 33px;
+	}
+
+	.swiper-right {
+		margin-right: 33px;
+	}
+
+	.swiper-link {
+		font-size: 27px;
+		color: #8D8D8D;
+		margin-right: 14px;
+		align-self: center;
+	}
+
+	.swiper-arrow {
+		width: 16px;
+		height: 28px;
+		align-self: center;
+	}
+
+	.swiper-stack {
+		margin: 21px 8px 23px 8px;
+	}
+
+	.swiper-image {
+		width: 330px;
+		height: 183px;
+		border-radius: 8px;
+	}
+
+	.swiper-list {
+		flex-direction: row;
+		height: 269px;
+		margin: 0px 16px 0px 16px;
+	}
+
+	.swiper-list-item {
+		flex-direction: column;
+	}
+
+	.swiper-icon {
+		width: 33px;
+		height: 33px;
+		margin-top: 138px;
+		margin-left: 17px;
+		border-radius: 5px;
+	}
+
+	.swiper-title {
+		font-size: 27px;
+		color: #1A1A1A;
+		margin-left: 8px;
+	}
+</style>
+
+<script>
+	module.exports = {
+		onInit() {
+
+		}
+	}
+</script>

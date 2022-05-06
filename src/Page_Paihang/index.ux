@@ -1,0 +1,322 @@
+<import name='reader_paihang_component_searchbar' src='./component/Component_SearchBar.ux'></import>
+<import name='paihanglist' src='./component/c_paihang_list'></import>
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="paihang-box">
+    <div class="mallClassification-wrap">
+      <reader_paihang_component_searchbar url="Page_RecentSearch" searchbar="{{novelDatas.searchbar}}"></reader_paihang_component_searchbar>
+    </div>
+    <tabs class="tabs" onchange="changeTabactive">
+
+      <tab-bar class="tab-bar">
+        <block for="novelDatas.list">
+          <div class="tab-item">
+            <text style="color: {{$item.color}};font-weight:{{$item.font_weight}}">{{$item.title}}</text>
+            <div if="{{$item.show_line}}" class="line" style="background-color: {{novelDatas.color_active}}"></div>
+          </div>
+        </block>
+      </tab-bar> 
+
+      <tab-content class="tab-content" style="height:{{screenHeight}}px">
+        <block for="novelDatas.list">
+          <div class="container-text">
+            <div class="mallClassification-left" style="height:{{screenHeight}}px">
+              <div class="verticaltab-content">
+                <list>
+                  <list-item for="{{tabArray}}" type="tab-item">
+                    <text onclick="detail($idx)" class="{{contentType==$idx?'verticaltab-active':'verticaltab-text'}}">{{$item.title}}</text>
+                  </list-item>
+                </list>
+              </div>
+            </div>
+            <div else class="mallClassification-right">
+              <list>
+                <list-item type="content-item">
+                  <paihanglist list="{{novelDatas.novelList[$idx]}}" content-type="{{contentType}}"></paihanglist>
+                </list-item>
+              </list>
+            </div>
+          </div>
+        </block>
+
+      </tab-content>
+
+    </tabs>
+  </div>
+</template>
+
+<style>
+  .paihang-box {
+    flex-direction: column;
+    background-color: #ffffff;
+    margin-bottom: 100px;
+  }
+
+  .mallClassification-wrap {
+    width: 683px;
+    margin: 17px 34px 36px 34px;
+  }
+
+  .tab-bar {
+    margin-left: 244px;
+    margin-right: 256px;
+    height: 100px;
+  }
+
+  .tab-item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tab-item text {
+    opacity: 0.5;
+    margin-bottom: 12px;
+    font-size: 31.3px;
+  }
+
+  .tab-item text:active {
+    font-size: 31.3px;
+    margin-bottom: 8px;
+  }
+
+  .line {
+    width: 100px;
+    height: 4px;
+  }
+
+  .container-text {
+    width: 100%;
+  }
+
+  .mallClassification-left {
+    height: 100%;
+    width: 25%;
+    margin-top: 20px;
+    background-color: rgba(0, 0, 0, 0.03);
+  }
+
+  .verticaltab-content {
+    width: 151px;
+    margin-bottom: 30px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .verticaltab-text {
+    padding-top: 35px;
+    padding-bottom: 30px;
+    color: #4A4A4A;
+    font-size: 27.1px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .verticaltab-active {
+    padding-top: 35px;
+    padding-bottom: 30px;
+    color: #CD2325;
+    font-size: 27.1px;
+    width: 100%;
+    background-color: #ffffff;
+    text-align: center;
+  }
+
+  .mallClassification-right {
+    height: 100%;
+    margin-top: 20px;
+    flex-direction: column;
+    background-color: #ffffff;
+  }
+</style>
+
+<script>
+  import device from '@system.device';
+
+  module.exports = {
+    data: {
+      screenHeight: 0,
+      tabArray: [{
+        'title': '畅销周榜',
+        'select': true
+      },
+      {
+        'title': '读者评分',
+        'select': false
+      },
+      {
+        'title': '特价好书',
+        'select': false
+      },
+      {
+        'title': '人气新书',
+        'select': false
+      },
+      {
+        'title': '豆瓣评分',
+        'select': false
+      },
+      {
+        'title': '当当人气',
+        'select': false
+      }
+      ],
+      contentType: 0,
+      sexType: "boy",
+      novelDatas: {
+        color_normal: '#1A1A1A',
+        color_active: '#CD2325',
+        //搜索框数据
+        searchbar: "./img/c_search_search.png",
+        list: [
+          { title: '男生', show_line: false, color: '#1A1A1A', font_weight: 400 },
+          { title: '女生', show_line: false, color: '#1A1A1A', font_weight: 400 }
+        ],
+        novelList: [
+          [
+            [
+              { image: './TO_DELETE/p_word.png', title: '神墓', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '辰东', novelType: '玄幻', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '神墓', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '辰东', novelType: '玄幻', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '神墓', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '辰东', novelType: '玄幻', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '神墓', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '辰东', novelType: '玄幻', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '神墓', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '辰东', novelType: '玄幻', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '神墓', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '辰东', novelType: '玄幻', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '神墓', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '辰东', novelType: '玄幻', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '神墓', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '辰东', novelType: '玄幻', evaluation: '4.1万热度' },
+            ],
+            [
+              { image: './TO_DELETE/p_youth.png', title: '这个大神有点痞', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '某某', novelType: '网文', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '这个大神有点痞', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '某某', novelType: '网文', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '这个大神有点痞', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '某某', novelType: '网文', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '这个大神有点痞', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '某某', novelType: '网文', evaluation: '4.1万热度' },
+            ],
+            [
+              { image: './TO_DELETE/p_arc_of_war.png', title: '我们仨', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '杨绛', novelType: '文学', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_arc_of_war.png', title: '我们仨', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '杨绛', novelType: '文学', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_arc_of_war.png', title: '我们仨', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '杨绛', novelType: '文学', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_arc_of_war.png', title: '我们仨', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '杨绛', novelType: '文学', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_arc_of_war.png', title: '我们仨', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '杨绛', novelType: '文学', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_arc_of_war.png', title: '我们仨', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '杨绛', novelType: '文学', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_arc_of_war.png', title: '我们仨', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '杨绛', novelType: '文学', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_arc_of_war.png', title: '我们仨', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '杨绛', novelType: '文学', evaluation: '4.1万热度' },
+            ],
+            [
+              { image: './TO_DELETE/p_youth.png', title: '斗破苍穹', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '天蚕土豆', novelType: '爽文', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '斗破苍穹', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '天蚕土豆', novelType: '爽文', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '斗破苍穹', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '天蚕土豆', novelType: '爽文', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '斗破苍穹', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '天蚕土豆', novelType: '爽文', evaluation: '4.1万热度' }
+            ],
+            [
+              { image: './TO_DELETE/p_word.png', title: '射雕英雄传', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '金庸', novelType: '武侠', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '射雕英雄传', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '金庸', novelType: '武侠', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '射雕英雄传', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '金庸', novelType: '武侠', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '射雕英雄传', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '金庸', novelType: '武侠', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '射雕英雄传', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '金庸', novelType: '武侠', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '射雕英雄传', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '金庸', novelType: '武侠', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '射雕英雄传', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '金庸', novelType: '武侠', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '射雕英雄传', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '金庸', novelType: '武侠', evaluation: '4.1万热度' },
+            ],
+            [
+              { image: './TO_DELETE/p_youth.png', title: '经济管理学', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '某某', novelType: '经济', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '经济管理学', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '某某', novelType: '经济', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '经济管理学', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '某某', novelType: '经济', evaluation: '4.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '经济管理学', presentation: '一九九七年早春，阿瑗去世。一九九八年岁末，钟书去世。我们三人就此失散了。就这么轻易地失散了。 “世间好物不坚牢，彩云易散琉璃脆”。现在，只剩下了我一人。我清醒地看到以前当做“我们家”的寓所，只是旅途上的客栈而已。家在哪里，我不知道，我还在寻觅归途。', writer: '某某', novelType: '经济', evaluation: '4.1万热度' }
+            ],
+          ],
+          [
+            [
+              { image: './TO_DELETE/p_youth.png', title: '谁的青春不疯狂', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '谁的青春不疯狂', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '谁的青春不疯狂', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '谁的青春不疯狂', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '谁的青春不疯狂', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '谁的青春不疯狂', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '谁的青春不疯狂', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '谁的青春不疯狂', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+            ],
+            [
+              { image: './TO_DELETE/p_word.png', title: '悲伤逆流成河', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '悲伤逆流成河', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '悲伤逆流成河', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '悲伤逆流成河', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+            ],
+            [
+              { image: './TO_DELETE/p_youth.png', title: '小王子', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '小王子', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '小王子', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '小王子', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '小王子', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '小王子', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '小王子', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '小王子', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+            ],
+            [
+              { image: './TO_DELETE/p_word.png', title: '何以笙箫默', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '何以笙箫默', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '何以笙箫默', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '何以笙箫默', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' }
+            ],
+            [
+              { image: './TO_DELETE/p_youth.png', title: '微微一笑很倾城', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '微微一笑很倾城', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '微微一笑很倾城', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '微微一笑很倾城', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '微微一笑很倾城', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '微微一笑很倾城', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '微微一笑很倾城', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_youth.png', title: '微微一笑很倾城', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+            ],
+            [
+              { image: './TO_DELETE/p_word.png', title: '泡沫之夏', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '泡沫之夏', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '泡沫之夏', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' },
+              { image: './TO_DELETE/p_word.png', title: '泡沫之夏', presentation: '现在我们三个失散了。剩下的这个我，再也找不到他们了。我只能把我们一同生活的岁月，重温一遍，和他们再聚聚。', writer: '青春陌生', novelType: '青春', evaluation: '5.1万热度' }
+            ],
+          ]
+        ]
+      }
+    },
+
+    onInit() {
+      this.$page.setTitleBar({
+        //titlebar的状态在manifest.json中display设置的
+        textColor: '#1a1a1a',
+        backgroundColor: '#f2f2f2',
+        text: '排行',
+        menu: true
+      });
+
+      let that = this;
+      device.getInfo({
+        success: function (ret) {
+          let height = ret.screenHeight;
+          that.screenHeight = height - 230;
+        }
+      });
+    },
+
+    changeTabactive: function (e) {
+      if (e.index === 0) {
+        this.sexType = "boy";
+      } else {
+        this.sexType = "girl";
+      }
+      for (let i = 0; i < this.novelDatas.list.length; i++) {
+        let element = this.novelDatas.list[i];
+        element.show_line = false;
+        element.color = this.novelDatas.color_normal;
+        if (i === e.index) {
+          element.show_line = true;
+          element.color = this.novelDatas.color_active;
+          element.font_weight = 500;
+        } else {
+          element.font_weight = 400;
+        }
+      }
+    },
+
+    detail: function (index) {
+      this.contentType = index;
+    }
+
+  }
+</script>

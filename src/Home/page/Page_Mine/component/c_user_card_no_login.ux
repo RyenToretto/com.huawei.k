@@ -1,0 +1,82 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+  <!-- 如果background-image需要调用所传的参数，不能使用url,直接使用{{url}}即可 -->
+  <div class="user-card-nologin">
+    <div class="usercard-top">
+      <div class="portrait-noexpand">
+        <image src={{content.portrait}}></image>
+        <div class="name-nologin">
+          <text class="main-title">{{content.title}}</text>
+          <text class="sub-title">{{content.subTitle}}</text>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .user-card-nologin {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    width: 90%;
+    height: 320px;
+    border-radius: 15px;
+    padding: 0 15px;
+    background-image: url(../img/nologin_bg.png);
+  }
+
+  .name-nologin {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .main-title {
+    font-size: 31.3px;
+    color: #1A1A1A;
+  }
+
+  .sub-title {
+    font-size: 25px;
+    color: rgba(26, 26, 26, 0.5);
+  }
+
+  .usercard-top {
+    width: 100%;
+  }
+
+  .portrait-noexpand {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: right;
+  }
+
+  .portrait-noexpand image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .name text {
+    font-weight: bold;
+    font-size: 35px;
+  }
+</style>
+
+<script>
+
+  module.exports = {
+    props: [
+      'content'
+    ],
+    data() {
+      return {
+        content: this.content
+      }
+    }
+  }
+</script>

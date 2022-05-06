@@ -1,0 +1,151 @@
+<import name="usercard" src="./component/c_user_card"></import>
+<import name="usercardnologin" src="./component/c_user_card_no_login"></import>
+<import name="mine_fastentry" src="./component/c_mine_fastEntry"></import>
+<import name="set" src="./component/c_set"></import>
+<template>
+  <!-- template里只能有一个根节点 -->
+  <list class="container">
+    <list-item type="listItem1" class="user-top">
+      <block if="{{loginstatus}}">
+        <usercard content="{{userCard}}"></usercard>
+      </block>
+      <block if="{{!loginstatus}}">
+        <usercardnologin content="{{userCardNoLogin}}"></usercardnologin>
+      </block>
+    </list-item>
+    <list-item type="listItem2" class="user-middle">
+      <mine_fastentry list="{{fastentrylist}}"></mine_fastentry>
+    </list-item>
+    <list-item type="listItem3">
+      <div class="user-bottom"> </div>
+    </list-item>
+
+    <list-item type="listItem4">
+      <set list="{{setlist}}"></set>
+    </list-item>
+
+  </list>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 100px;
+  }
+
+  .user-top {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .user-middle {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 60px;
+  }
+
+  .user-bottom {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 50px;
+  }
+</style>
+
+<script>
+  module.exports = {
+    data: {
+      title: '用户界面',
+      loginstatus: false,
+      //登陆成功卡片的信息
+      userCard: {
+        userInfo: {
+          portrait: "./page/Page_Mine/TO_DELETE/login_avatar.png",
+          backgroundImage: "./page/Page_Mine/img/login_bg.png",
+          username: "Jiaqi"
+        },
+        expand: [
+          {
+            number: 1200,
+            name: "阅币"
+          },
+          {
+            number: 2008,
+            name: "代金券"
+          }
+        ]
+      },
+      //未登录卡片的信息
+      userCardNoLogin: {
+        portrait: "./page/Page_Mine/TO_DELETE/nologin_avatar.png",
+        backgroundImage: "./page/Page_Mine/img/nologin_bg.png",
+        title: "登陆华为账户",
+        subTitle: "大波红包等你拿xxxx"
+      },
+      //快捷入口数据
+      fastentrylist: [{
+        'icon': './page/Page_Mine/img/1.png',
+        'title': '签到',
+        'src': 'sign',
+        'isNew': false
+      },
+      {
+        'icon': './page/Page_Mine/img/2.png',
+        'title': '充值',
+        'src': 'recharge',
+        'isNew': false
+      },
+      {
+        'icon': './page/Page_Mine/img/3.png',
+        'title': '礼品',
+        'src': 'gift',
+        'isNew': false
+      },
+      {
+        'icon': './page/Page_Mine/img/4.png',
+        'title': '活动',
+        'src': 'activities',
+        'isNew': false
+      },
+      {
+        'icon': './page/Page_Mine/img/5.png',
+        'title': '消息',
+        'number': 6,
+        'src': 'news',
+        'isNew': false
+      }
+      ],
+      //设置数据
+      setlist: [{
+        'title': '绑定手机',
+        'subTitle': '',
+        'src': 'phone',
+        'arrow': './page/Page_Mine/img/arrow.png'
+      },
+      {
+        'title': '帮助与反馈',
+        'subTitle': '',
+        'src': 'help',
+        'arrow': './page/Page_Mine/img/arrow.png'
+      },
+      {
+        'title': '关于',
+        'subTitle': '',
+        'src': 'about',
+        'arrow': './page/Page_Mine/img/arrow.png'
+      }
+      ]
+    },
+
+    onInit() {
+      this.$page.setTitleBar({
+        //titlebar的状态在manifest.json中display设置的
+        menu: false
+      });
+    },
+  }
+</script>

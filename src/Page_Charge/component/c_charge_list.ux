@@ -1,0 +1,116 @@
+<template>
+  <div class="charge_list_container">
+    <div class="charge_list" for="{{list}}">
+
+      <div class="charge_left">
+        <text class="charge_mooncakes">{{$item.mooncakes}} 阅饼</text>
+        <text class="charge_present" if="$item.voucher">送</text>
+        <text class="charge_voucher" if="$item.voucher">{{$item.voucher}}元代金券</text>
+      </div>
+      <div class="charge_right">
+        <text class="charge_money">￥{{$item.money}} </text>
+        <text class="charge_btn" onclick="recharge($item.money)">充值</text>
+      </div>
+
+    </div>
+    <div class="charge_notice">
+      <text class="notice_title">{{noticeData.title}}</text>
+      <text class="notice_text">{{noticeData.text1}}</text>
+      <text class="notice_text">{{noticeData.text2}}</text>
+      <text class="notice_text">{{noticeData.text3}}</text>
+
+    </div>
+  </div>
+</template>
+
+<style>
+  .charge_list_container {
+    margin: 0px 33px 0px 33px;
+    flex-direction: column;
+  }
+
+  .charge_list {
+    justify-content: space-between;
+    height: 100px;
+  }
+
+  .charge_left,
+  .charge_right {
+    align-items: center;
+  }
+
+  .charge_mooncakes {
+    color: #1a1a1a;
+    font-size: 31.3px;
+  }
+
+  .charge_present {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 16.7px;
+    background-color: #FF8500;
+    margin-left: 20px;
+    margin-right: 5px;
+    border-radius: 3px;
+  }
+
+  .charge_voucher {
+    font-size: 25px;
+    color: #FF742E;
+  }
+
+  .charge_money {
+    color: #FF8500;
+    font-size: 31.3px;
+    margin-right: 18px;
+  }
+
+  .charge_btn {
+    width: 117px;
+    height: 58px;
+    background-color: #FF8500;
+    color: #FFFFFF;
+    font-size: 25px;
+    text-align: center;
+    align-items: center;
+    border-radius: 8.3px;
+  }
+
+  .charge_notice {
+    flex-direction: column;
+  }
+
+  .notice_title {
+    height: 100px;
+    color: #1a1a1a;
+    font-size: 31.3px;
+  }
+
+  .notice_text {
+    font-size: 27px;
+    color: #000000;
+    opacity: 0.5;
+  }
+</style>
+
+<script>
+  export default {
+    data: {
+      noticeData:{
+        title:'温馨提示',
+        text1:'1.充值阅读权限仅限本书城使用。',
+        text2:'2.使用非短信方式进行充值，1元兑换100月饼。',
+        text3:'3.若充值后账户余额长时间无变化，请记录您的i账号 h***.@126.com后致电客服400-811-3311。',
+      }
+    },
+    props: [
+      'list',
+    ],
+    recharge(money) {
+      //todo
+    }
+  }
+</script>

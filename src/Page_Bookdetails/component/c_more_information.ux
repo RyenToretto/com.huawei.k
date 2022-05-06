@@ -1,0 +1,86 @@
+<template>
+	<div class="information_container">
+		<div class="information_head">
+			<div>
+				<text class="information_main_title">图书更多信息</text>
+			</div>
+		</div>
+		<div class="information_list">
+			<div class="information_words">
+				<text class="left_text">字数</text>
+				<text class="right_text">{{list.words}}</text>
+			</div>
+			<div class="information_time">
+				<text class="left_text">上架时间</text>
+				<text class="right_text">{{list.time}}</text>
+			</div>
+			<div class="information_publisher">
+				<text class="left_text">出版社</text>
+				<text class="right_text">{{list.publisher}}</text>
+			</div>
+			<div class="information_number">
+				<text class="left_text">书号</text>
+				<text class="right_text">{{list.number}}</text>
+			</div>
+			<div class="information_statement">
+				<text class="left_text">免责声明</text>
+				<text class="right_statement_text">{{list.statement}}</text>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+	.information_container {
+		height: 369px;
+		padding: 0px 34px 0px 34px;
+		width: 100%;
+		flex-direction: column;
+	}
+
+	.information_head {
+		height: 100px;
+	}
+
+	.information_main_title {
+		font-size: 31.3px;
+		color: #1A1A1A;
+		font-weight: bold;
+	}
+
+	.information_list {
+		flex-direction: column;
+		margin-top: 17px;
+	}
+
+	.left_text {
+		color: rgba(0, 0, 0, 0.5);
+		font-size: 25px;
+		width: 25%;
+	}
+
+	.right_text {
+		color: rgba(0, 0, 0, 1);
+		font-size: 25px;
+	}
+
+	.information_statement {
+		align-items: flex-start;
+	}
+
+	.right_statement_text {
+		color: rgba(0, 0, 0, 1);
+		font-size: 25px;
+		width: 75%;
+	}
+</style>
+
+<script>
+	export default {
+		data: {
+			props: [
+				'list',
+			]
+		}
+	}
+</script>

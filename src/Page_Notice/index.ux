@@ -1,0 +1,63 @@
+<import name="notice" src="./component/notice_list"></import>
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="container">
+        <notice list="{{noticeList}}"></notice>
+    </div>
+</template>
+
+<style>
+    .container {
+        flex-direction: column;
+    }
+</style>
+
+<script>
+
+    module.exports = {
+        data: {
+            noticeList: [
+                {
+                    type: 'ordinary',
+                    title: '您订阅的《读者2018年第四期》已上架',
+                    time: '刚刚'
+                },
+                {
+                    type: 'ordinary',
+                    title: '您订阅的《读者2018年第四期》已上架',
+                    time: '4天前'
+                },
+                {
+                    type: 'ordinary',
+                    title: '您订阅的《读者2018年第四期》已上架',
+                    time: '11天前'
+                },
+                                {
+                    type: 'vip',
+                    title: 'VIP 月票到账啦',
+                    time: '21天前'
+                },
+                                {
+                    type: 'vip',
+                    title: '您有2张副卡即将过期',
+                    time: '27天前'
+                },
+                                {
+                    type: 'vip',
+                    title: '您的包月VIP即将到期，请及时续费',
+                    time: '27天前'
+                },
+            ]
+        },
+        onInit() {
+            this.$page.setTitleBar({
+                text: '消息',
+                textColor: '#1a1a1a',
+                backgroundColor: '#f2f2f2',
+                menu: true
+            })
+        }
+
+
+    }
+</script>

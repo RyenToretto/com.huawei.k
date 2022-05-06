@@ -1,0 +1,89 @@
+<template>
+	<div class="fastentry-content">
+		<div for="{{list}}" class="fastentry-box" onclick="detail($item.title)">
+			<div>
+				<image class="fastentry-img" src="{{$item.icon}}"></image>
+				<text class="fastentry-number" if="{{$item.number?true:false}}">{{$item.number}}</text>
+			</div>
+			<div>
+				<text class="fastentry-text">{{$item.title}}</text>
+				<text class="fastentry-tips" if="{{$item.isNew}}"></text>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+	.fastentry-content {
+		padding: 16px 0px 0px 0px;
+		width: 683px;
+		justify-content: space-around;
+	}
+
+	.fastentry-box {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.fastentry-number {
+		height: 26px;
+		margin: 0px 0px 0px -10px;
+		padding: 0px 5px;
+		font-size: 18.8px;
+		color: #ffffff;
+		border-radius: 12.5px;
+		background-color: #FF1400;
+	}
+
+	.fastentry-text {
+		padding-top: 17px;
+		color: #1A1A1A;
+		font-size: 25px;
+	}
+
+	.fastentry-img {
+		width: 83px;
+		height: 83px;
+	}
+
+	.fastentry-tips {
+		width: 17px;
+		height: 17px;
+		margin: 25px 0px 0px 0px;
+		border-radius: 17px;
+		background-color: #FF1400;
+	}
+</style>
+
+<script>
+	import router from '@system.router';
+	module.exports = {
+		props: {
+			list: Array
+		},
+		detail(type) {
+			if (type === "排行") {
+				router.push({
+					uri: 'Page_Paihang',
+					params: { testId: 'testId' }
+				})
+			} else if (type === "都市") {
+				router.push({
+					uri: 'Page_In_Build',
+					params: { type: type }
+				})
+			} else if (type === "特价") {
+				router.push({
+					uri: 'Page_In_Build',
+					params: { type: type }
+				})
+			} else if (type === "免费") {
+				router.push({
+					uri: 'Page_In_Build',
+					params: { type: type }
+				})
+			}
+
+		}
+	}
+</script>

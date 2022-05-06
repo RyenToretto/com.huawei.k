@@ -1,0 +1,71 @@
+<template>
+  <div class="list_container">
+
+      <div for="{{list}}" class="list_content">
+        <div onclick="goToPage($item)">
+          <image class="activity_image" src="{{$item.image}}"></image>
+        </div>
+
+        <div class="notice_summary">
+          <text class="notice_title">{{$item.title}}</text>
+          <text class="notice_time">{{$item.time}}</text>
+        </div>
+      </div>
+
+  </div>
+</template>
+
+<style>
+  .list_container {
+    margin: 20px 33px 0px 33px;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .list_content {
+    flex-direction: column;
+  }
+
+  .activity_image {
+    width: 683px;
+    height: 293px;
+    margin: 17px 0;
+  }
+
+  .notice_summary {
+    flex-direction: column;
+  }
+
+  .notice_title {
+    lines: 1;
+    font-size: 27.1px;
+    color: #1a1a1a;
+  }
+
+  .notice_time {
+    font-size: 20.8px;
+    color: #1a1a1a;
+    opacity: 0.5;
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+  export default {
+    data: {
+      props: [
+        'list',
+      ]
+    },
+
+    onInit() {
+      //todo
+    },
+    goToPage(item) {
+      router.push({
+        uri: '/',
+        params: { item: item }
+      })
+    }
+  }
+</script>

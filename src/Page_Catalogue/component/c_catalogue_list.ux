@@ -1,0 +1,140 @@
+<template>
+  <div class="catalogue_list_container">
+    <div class="catalogue_header">
+      <text class="catalogue_total">共{{catalogue.total}}章</text>
+      <select id="select" class="select" onchange="changeValue()">
+        <option class="option" for="{{item in options}}" value="{{item.evry}}">{{item.evry}} 章</option>
+      </select>
+    </div>
+    <div class="catalogue_list" for="{{item in newList}}" onclick="goToRead(item)">
+
+      <div class="catalogue_left">
+        <text class="catalogue_catalogueNumber">第{{item.catalogueNumber}}章</text>
+        <text class="catalogue_catalogueTitle"> {{item.catalogueTitle}}</text>
+      </div>
+      <div class="catalogue_right">
+        <text class="catalogue_free">免费</text>
+      </div>
+
+    </div>
+  </div>
+</template>
+<script>
+  import router from '@system.router'
+  export default {
+    props: [
+      'catalogue',
+    ],
+    data: {
+      itemList: [],
+      options: [],
+      newList: [],
+    },
+    onInit() {
+      /*将总页面数分割成一定范围的组合，渲染到下拉列表*/
+      this.separateTotalPage();
+    },
+
+    separateTotalPage() {
+      let itemList = [];  //用来装下拉列表option的数组
+      let totalPage = this.catalogue.total; //目录总数
+      let items = 20;      //下拉列表的范围
+      let seperatePageMathCeil = Math.ceil(totalPage / items); //向上取整，一共要分多少项
+      let beginNumber = 0, endNumber = 0;
+
+      for (let i = 0; i < seperatePageMathCeil; i++) {
+        let item = {};       //数组中的值
+        if (i === 0) {
+          beginNumber = 1;
+          item.evry = 1 + "-" + items;
+          itemList.push(item);
+        } else {
+          beginNumber += items;
+          endNumber = beginNumber + items - 1;
+          if (i === seperatePageMathCeil - 1) {
+            //下拉列表最后一项为目录总数totalPage
+            item.evry = beginNumber + "-" + totalPage;
+          } else {
+            item.evry = beginNumber + "-" + endNumber;
+          }
+          itemList.push(item);
+        }
+      }
+      this.options = itemList;
+      this.newList = this.catalogue.list;
+
+    },
+
+    changeValue(value) {
+      let selectedArr = value.newValue.split('-'); //value.newValue为下拉列表当前option的value
+      let newList = this.catalogue.list.slice(selectedArr[0] - 1, selectedArr[1]); //截取当前下拉列表范围的目录数据
+      this.newList = newList;
+    },
+    //跳转到阅读
+    goToRead(item) {
+      //跳转至阅读器页面
+      router.push({
+        uri: '/Page_Read',
+        params: { item: item }
+      })
+    }
+  }
+</script>
+<style>
+  .catalogue_list_container {
+    margin: 0px 33px;
+    flex-direction: column;
+  }
+
+  .catalogue_header {
+    margin-top: 46px;
+    /* height: 100px; */
+    justify-content: space-between;
+  }
+
+  .select {
+    width: 200px;
+    height: 67px;
+    color: #1a1a1a;
+    font-size: 31.3px;
+  }
+
+  .option {
+    font-size: 31.3px;
+    color: #1A1A1A;
+    height: 200px;
+  }
+
+  .catalogue_total {
+    font-size: 27.1px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .catalogue_list {
+    justify-content: space-between;
+    height: 100px;
+  }
+
+  .catalogue_catalogueTitle {
+    color: #000000;
+    font-size: 31.3px;
+  }
+
+  .catalogue_catalogueNumber {
+    margin-right: 15px;
+    color: #000000;
+    font-size: 31.3px;
+  }
+
+  .catalogue_free {
+    font-size: 27.1px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .catalogue_right {
+    width: 167px;
+    border-bottom-color: rgba(24,34,51,0.2);
+    border-bottom-width: 0.5px;
+    justify-content: flex-end;
+  }
+</style>

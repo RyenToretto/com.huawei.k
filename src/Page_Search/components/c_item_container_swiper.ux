@@ -1,0 +1,102 @@
+<template>
+
+	<div class="swiper-container">
+		<list class="swiper-list">
+			<block for="{{list}}">
+				<list-item type="prod" class="swiper-list-item">
+					<stack>
+						<image class="swiper-image" src="{{$item.img}}"></image>
+						<text class="swiper-number">{{$idx+1}}</text>
+					</stack>
+					<text class="swiper-title">{{$item.title}}</text>
+				</list-item>
+			</block>
+		</list>
+
+	</div>
+</template>
+
+<style>
+	.swiper-container {
+		flex-direction: column;
+	}
+
+	.swiper-list {
+		flex-direction: row;
+		height: 269px;
+	}
+
+	.swiper-list-item {
+		height: 258px;
+		margin-right: 13px;
+		flex-direction: column;
+	}
+
+	.swiper-image {
+		width: 158px;
+		height: 205px;
+		border-radius: 8px;
+	}
+
+	.swiper-number {
+		width: 33px;
+		height: 33px;
+		border-radius: 4.2px;
+		color: #ffffff;
+		background-color: #FF0000;
+		text-align: center;
+		font-size: 20.8px;
+		margin: 9px;
+	}
+
+	.swiper-title {
+		font-size: 27.1px;
+		color: #1A1A1A;
+		margin-top: 16px;
+	}
+</style>
+
+<script>
+	module.exports = {
+		data: {
+
+			title: 'World!',
+			banner: {
+				title: '精选儿歌',
+				link: '更多',
+				uri: '../Common/img/swiper/arrow.png'
+			},
+			list: [{
+				img: '../Common/img/swiper/1.png',
+				icon: '../Common/img/swiper/icon.png',
+				title: '交通规则要牢记'
+			},
+			{
+				img: '../Common/img/swiper/2.png',
+				icon: '../Common/img/swiper/icon.png',
+				title: '我的好朋友'
+			},
+			{
+				img: '../Common/img/swiper/1.png',
+				icon: '../Common/img/swiper/icon.png',
+				title: '交通规则要牢记'
+			},
+			{
+				img: '../Common/img/swiper/2.png',
+				icon: '../Common/img/swiper/icon.png',
+				title: '我的好朋友'
+			},
+			{
+				img: '../Common/img/swiper/1.png',
+				icon: '../Common/img/swiper/icon.png',
+				title: '交通规则要牢记'
+			},
+			{
+				img: '../Common/img/swiper/2.png',
+				icon: '../Common/img/swiper/icon.png',
+				title: '我的好朋友'
+			}
+			]
+		}
+	}
+</script>

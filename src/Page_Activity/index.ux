@@ -1,0 +1,49 @@
+<import name="activity" src="./component/activity_list"></import>
+<template>
+    <!-- template里只能有一个根节点 -->
+    <div class="container">
+        <activity list="{{activityList}}"></activity>
+    </div>
+</template>
+
+<style>
+    .container {
+        flex-direction: column;
+    }
+
+</style>
+
+<script>
+
+    module.exports = {
+        data: {
+            activityList: [
+                {
+                    image: 'TO_DELETE/3.png',
+                    title: '购书赢Mate9',
+                    time: '2018/12/01-2018/01/23'
+                },
+                {
+                    image: 'TO_DELETE/4.png',
+                    title: '热销红文，全场免费',
+                    time: ' '
+                },
+                {
+                    image: 'TO_DELETE/5.png',
+                    title: '独来独往 第107期',
+                    time: '2018/12/01-2018/01/23'
+                }
+            ]
+        },
+        onInit() {
+            this.$page.setTitleBar({
+                text: '活动',
+                textColor: '#1a1a1a',
+                backgroundColor: '#f2f2f2',
+                menu: true
+            })
+        }
+
+
+    }
+</script>
