@@ -52,139 +52,139 @@
 	}
 
 	.single-product {
-		margin: 5px 0px 5px 0px;
+		margin: 4.8px 0px 4.8px 0px;
 	}
 
 	.single-description {
 		flex-direction: column;
-		width: 434px;
+		width: 416.64px;
 		align-self: center;
 	}
 
 	.strats {
 		align-items: center;
-		margin-bottom: 21px;
+		margin-bottom: 20px;
 
 	}
 
 	.strat_image {
-		width: 25px;
+		width: 24px;
 		align-items: center;
 
 	}
 
 	.single-image {
-		width: 217px;
-		height: 289px;
-		margin-right: 50px;
-		margin-left: 67px;
-		border-radius: 8px;
+		width: 208.32px;
+		height: 277.44px;
+		margin-right: 48px;
+		margin-left: 64.32px;
+		border-radius: 7.68px;
 	}
 
 	.description_title {
 		color: #000000;
-		font-size: 37.5px;
-		margin-bottom: 9px;
+		font-size: 36px;
+		margin-bottom: 8.64px;
 	}
 
 	.description_score {
 		align-items: center;
 
-		font-size: 25px;
+		font-size: 24px;
 		color: #FFBF00;
 		margin-left: 4px;
-		margin-right: 9px;
+		margin-right: 8.64px;
 	}
 
 	.description_peapel {
-		font-size: 25px;
+		font-size: 24px;
 		opacity: 0.5;
 	}
 
 	.single-brief {
 		color: #1A1A1A;
-		font-size: 25px;
-		margin-bottom: 8px;
+		font-size: 24px;
+		margin-bottom: 7.68px;
 	}
 
 	.description_content {
-		margin-top: 42px;
-		padding-left: 34px;
+		margin-top: 40.32px;
+		padding-left: 32.64px;
 		flex-direction: column;
 	}
 
 	.content_title {
-		height: 100px;
-		padding-top: 41px;
+		height: 96px;
+		padding-top: 40px;
 		color: #000000;
-		font-size: 31.3px;
+		font-size: 30px;
 		font-weight: bold;
 	}
 
 	.content_text {
 		color: #000000;
-		font-size: 27.1px;
-		width: 650px;
+		font-size: 26px;
+		width: 624px;
 		lines: 3;
-		line-height: 43.75px;
+		line-height: 42px;
 		text-overflow: ellipsis;
 	}
 
 	.whole_content_text {
 		color: #000000;
-		font-size: 27.1px;
-		width: 650px;
-		line-height: 43.75px;
+		font-size: 26px;
+		width: 624px;
+		line-height: 42px;
 		text-overflow: ellipsis;
 	}
 
 	.key-words {
-		margin-top: 20px;
-		margin-left: 33px;
+		margin-top: 19.2px;
+		margin-left: 31.68px;
 	}
 
 	.key-words-text {
-		font-size: 25px;
+		font-size: 24px;
 		color: #000000;
-		height: 50px;
-		padding: 0 17px;
+		height: 48px;
+		padding: 0 16.32px;
 		background-color: rgba(80, 96, 117, 0.1);
-		border-radius: 8.3px;
-		margin-right: 17px;
+		border-radius: 9px;
+		margin-right: 16.32px;
 	}
 
 	.bottom_footer {
-		width: 695px;
-		margin-top: 50px;
-		margin-left: 33px;
+		width: 667px;
+		margin-top: 48px;
+		margin-left: 31.68px;
 		justify-content: space-between;
 	}
 
 	.swiper-link {
-		font-size: 27px;
+		font-size: 26px;
 		color: #8D8D8D;
 		align-self: center;
 		margin-right: 14px;
 	}
 
 	.swiper-arrow {
-		width: 16px;
-		height: 28px;
+		width: 15.36px;
+		height: 27px;
 		align-self: center;
 	}
 
 	.swiper-main-title {
-		height: 100px;
-		font-size: 31.3px;
+		height: 96px;
+		font-size: 30px;
 		color: #1A1A1A;
 		align-self: center;
 	}
 
 	.seperate_line {
 		width: 100%;
-		height: 17px;
+		height: 16.32px;
 		background-color: #F2F2F2;
-		margin-top: 20px;
+		margin-top: 19.2px;
 
 	}
 </style>

@@ -25,7 +25,7 @@
 <style>
 	.single-container {
 		height: 100%;
-		margin: 0px 33px;
+		margin: 0px 31.68px;
 		flex-direction: column;
 	}
 
@@ -36,37 +36,37 @@
 	}
 
 	.first-single-product {
-		width: 533px;
-		height: 192px;
+		width: 512px;
+		height: 184.32px;
 		justify-content: space-between;
 	}
 
 	.single-product {
-		margin-top: 17px;
-		width: 533px;
-		height: 192px;
+		margin-top: 16.32px;
+		width: 512px;
+		height: 184.32px;
 		justify-content: space-between;
 	}
 
 	.single-image {
-		width: 125px;
-		height: 167px;
-		border-radius: 8px;
+		width: 120px;
+		height: 160px;
+		border-radius: 7.68px;
 	}
 
 	.single-description {
 		flex-direction: column;
 		justify-content: space-around;
-		margin-left: 33px;
-		width: 375px;
+		margin-left: 31.68px;
+		width: 360px;
 
 	}
 
 	.single-title {
 		color: #1A1A1A;
-		font-size: 31.3px;
+		font-size: 30px;
 		margin-top: 11px;
-		margin-bottom: 17px;
+		margin-bottom: 16.32px;
 	}
 
 	.single-brief {
@@ -74,8 +74,8 @@
 		text-overflow: ellipsis;
 		color: #1A1A1A;
 		opacity: 0.5;
-		font-size: 27.1px;
-		margin-bottom: 17px;
+		font-size: 26px;
+		margin-bottom: 16.32px;
 	}
 
 	.single-bottom {
@@ -85,7 +85,7 @@
 	.single-author {
 		color: #1A1A1A;
 		opacity: 0.5;
-		font-size: 27.1px;
+		font-size: 26px;
 		align-self: center;
 	}
 
@@ -97,20 +97,20 @@
 		text-align: center;
 		color: #000000;
 		opacity: 0.5;
-		font-size: 20px;
-		line-height: 24px;
+		font-size: 19.2px;
+		line-height: 23px;
 		background-color: rgba(118, 118, 118, 0.1);
-		border-radius: 5px;
+		border-radius: 4.8px;
 		align-self: center;
 		margin-left: 10px;
-		padding: 5px 15px;
+		padding: 4.8px 14.4px;
 	}
 
 	.line {
 		width: 100%;
 		height: 1px;
 		background-color: rgba(24, 34, 51, 0.2);
-		margin-top: 40px;
+		margin-top: 38.4px;
 	}
 </style>
 

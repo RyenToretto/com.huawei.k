@@ -19,10 +19,10 @@
 							<block for="{{$item.listItems}}">
 								<list-item type="listItem" class="list-item-ui">
 									<div onclick="openUrl()">
-										<div style="width:30px;margin-right: 17px;">
+										<div style="width:28.8px;margin-right: 16.32px;">
 											<text class="right_list_text">{{$idx+1}}</text>
 										</div>
-										<div style="width:364px;">
+										<div style="width:350px;">
 											<text class="right_list_text">{{$item.name}}</text>
 										</div>
 									</div>
@@ -38,56 +38,56 @@
 
 <style>
 	.number_list {
-		width: 450px;
+		width: 432px;
 		flex-direction: column;
 		align-items: center;
 	}
 
 	.right_list_text {
 		color: rgba(26, 26, 26, 1);
-		font-size: 31.3px;
+		font-size: 30px;
 	}
 
 	.list-item-ui {
-		height: 67px;
-		margin-left: 16px;
-		width: 684px;
+		height: 64.32px;
+		margin-left: 15.36px;
+		width: 657px;
 	}
 
 	.list_container {
-		height: 220px;
-		margin: 13.8px 0;
+		height: 211.2px;
+		margin: 13.25px 0;
 	}
 
 	.left_img image {
-		height: 217px;
-		width: 217px;
-		border-radius: 8.3px;
+		height: 208.32px;
+		width: 208.32px;
+		border-radius: 9px;
 		align-items: center;
 	}
 
 	.list_item_con {
 		margin: 0px 10px;
-		height: 250px;
+		height: 240px;
 	}
 
 	.more_link {
-		width: 200px
+		width: 192px
 	}
 
 	.text_more {
-		width: 300px;
+		width: 288px;
 		color: rgba(26, 26, 26, 0.5);
-		font-size: 27.08px;
+		font-size: 26px;
 		text-align: right;
-		padding-right: 27px;
+		padding-right: 26px;
 		background-size: auto;
 		background-position: right;
 		background-repeat: no-repeat;
 	}
 
 	.title_text {
-		font-size: 31px;
+		font-size: 30px;
 		color: #1A1A1A;
 		font-weight: bold;
 		align-self: center;
@@ -99,13 +99,13 @@
 	}
 
 	.main_con {
-		padding: 0px 33px;
-		width: 750px;
+		padding: 0px 31.68px;
+		width: 720px;
 	}
 
 	.arrow {
-		width: 16px;
-		height: 28px;
+		width: 15.36px;
+		height: 27px;
 		align-self: center;
 	}
 

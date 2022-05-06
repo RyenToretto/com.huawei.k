@@ -13,19 +13,19 @@
 
 <style>
   .list_container {
-    margin: 20px 33px 0px 33px;
+    margin: 19.2px 31.68px 0px 31.68px;
     flex-direction: column;
   }
 
   .list_content {
-    height: 133px;
+    height: 127.68px;
     align-items: center;
   }
 
   .icon_image {
-    width: 83px;
-    height: 83px;
-    margin-right: 33px;
+    width: 79.68px;
+    height: 79.68px;
+    margin-right: 31.68px;
   }
 
   .notice_summary {
@@ -34,12 +34,12 @@
 
   .notice_title {
     lines: 1;
-    font-size: 31.3px;
+    font-size: 30px;
     color: #1a1a1a;
   }
 
   .notice_time {
-    font-size: 27.1px;
+    font-size: 26px;
     color: #000000;
     opacity: 0.6;
     margin-top: 4px;

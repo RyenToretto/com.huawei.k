@@ -21,9 +21,9 @@
     align-content: center;
     align-items: center;
     width: 90%;
-    height: 320px;
-    border-radius: 15px;
-    padding: 0 15px;
+    height: 307.2px;
+    border-radius: 14.4px;
+    padding: 0 14.4px;
     background-image: url(../img/nologin_bg.png);
   }
 
@@ -31,16 +31,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 28.8px;
   }
 
   .main-title {
-    font-size: 31.3px;
+    font-size: 30px;
     color: #1A1A1A;
   }
 
   .sub-title {
-    font-size: 25px;
+    font-size: 24px;
     color: rgba(26, 26, 26, 0.5);
   }
 
@@ -57,13 +57,13 @@
   }
 
   .portrait-noexpand image {
-    width: 100px;
-    height: 100px;
+    width: 96px;
+    height: 96px;
   }
 
   .name text {
     font-weight: bold;
-    font-size: 35px;
+    font-size: 33.6px;
   }
 </style>
 

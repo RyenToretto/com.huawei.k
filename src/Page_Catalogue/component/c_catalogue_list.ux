@@ -82,57 +82,57 @@
 </script>
 <style>
   .catalogue_list_container {
-    margin: 0px 33px;
+    margin: 0px 31.68px;
     flex-direction: column;
   }
 
   .catalogue_header {
-    margin-top: 46px;
-    /* height: 100px; */
+    margin-top: 44.16px;
+    /* height: 96px; */
     justify-content: space-between;
   }
 
   .select {
-    width: 200px;
-    height: 67px;
+    width: 192px;
+    height: 64.32px;
     color: #1a1a1a;
-    font-size: 31.3px;
+    font-size: 30px;
   }
 
   .option {
-    font-size: 31.3px;
+    font-size: 30px;
     color: #1A1A1A;
-    height: 200px;
+    height: 192px;
   }
 
   .catalogue_total {
-    font-size: 27.1px;
+    font-size: 26px;
     color: rgba(0, 0, 0, 0.5);
   }
 
   .catalogue_list {
     justify-content: space-between;
-    height: 100px;
+    height: 96px;
   }
 
   .catalogue_catalogueTitle {
     color: #000000;
-    font-size: 31.3px;
+    font-size: 30px;
   }
 
   .catalogue_catalogueNumber {
-    margin-right: 15px;
+    margin-right: 14.4px;
     color: #000000;
-    font-size: 31.3px;
+    font-size: 30px;
   }
 
   .catalogue_free {
-    font-size: 27.1px;
+    font-size: 26px;
     color: rgba(0, 0, 0, 0.5);
   }
 
   .catalogue_right {
-    width: 167px;
+    width: 160px;
     border-bottom-color: rgba(24,34,51,0.2);
     border-bottom-width: 0.5px;
     justify-content: flex-end;

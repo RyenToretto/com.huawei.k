@@ -25,13 +25,13 @@
 
 <style>
   .charge_list_container {
-    margin: 0px 33px 0px 33px;
+    margin: 0px 31.68px 0px 31.68px;
     flex-direction: column;
   }
 
   .charge_list {
     justify-content: space-between;
-    height: 100px;
+    height: 96px;
   }
 
   .charge_left,
@@ -41,42 +41,42 @@
 
   .charge_mooncakes {
     color: #1a1a1a;
-    font-size: 31.3px;
+    font-size: 30px;
   }
 
   .charge_present {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
     text-align: center;
     align-items: center;
     color: #FFFFFF;
-    font-size: 16.7px;
+    font-size: 16px;
     background-color: #FF8500;
-    margin-left: 20px;
-    margin-right: 5px;
+    margin-left: 19.2px;
+    margin-right: 4.8px;
     border-radius: 3px;
   }
 
   .charge_voucher {
-    font-size: 25px;
+    font-size: 24px;
     color: #FF742E;
   }
 
   .charge_money {
     color: #FF8500;
-    font-size: 31.3px;
-    margin-right: 18px;
+    font-size: 30px;
+    margin-right: 17.28px;
   }
 
   .charge_btn {
-    width: 117px;
-    height: 58px;
+    width: 112.32px;
+    height: 55.68px;
     background-color: #FF8500;
     color: #FFFFFF;
-    font-size: 25px;
+    font-size: 24px;
     text-align: center;
     align-items: center;
-    border-radius: 8.3px;
+    border-radius: 9px;
   }
 
   .charge_notice {
@@ -84,13 +84,13 @@
   }
 
   .notice_title {
-    height: 100px;
+    height: 96px;
     color: #1a1a1a;
-    font-size: 31.3px;
+    font-size: 30px;
   }
 
   .notice_text {
-    font-size: 27px;
+    font-size: 26px;
     color: #000000;
     opacity: 0.5;
   }

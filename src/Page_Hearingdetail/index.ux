@@ -87,83 +87,83 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 75px;
+    margin-bottom: 72px;
   }
 
   .top_tittel {
     text-align: center;
-    font-size: 37.5px;
+    font-size: 36px;
     color: #1a1a1a;
-    padding: 0px 20px;
+    padding: 0px 19.2px;
   }
 
   .book_image {
     justify-content: center;
-    margin-top: 46px;
+    margin-top: 44.16px;
     margin-bottom: 10px;
   }
 
   .book_image_png {
-    width: 217px;
-    height: 289px;
+    width: 208.32px;
+    height: 277.44px;
   }
 
   .book_name {
     color: #000000;
-    font-size: 37.5px;
+    font-size: 36px;
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 14.4px;
   }
 
   .book_author {
-    font-size: 25px;
+    font-size: 24px;
     text-align: center;
     color: rgba(0, 0, 0, 0.5);
-    margin-bottom: 13px;
+    margin-bottom: 12.48px;
     opacity: 0.5;
   }
 
   .book_evaluate {
-    margin-bottom: 31px;
+    margin-bottom: 30px;
     align-items: center;
   }
 
   .book_score {
-    font-size: 25px;
+    font-size: 24px;
     color: #FFBF00;
     margin-left: 10px;
   }
 
   .middle_massege {
     align-items: center;
-    width: 548px;
+    width: 526px;
     flex-wrap: wrap;
   }
 
   .middle_massege div {
-    width: 273px;
+    width: 262px;
   }
 
   .middle_massege_title {
-    font-size: 25px;
+    font-size: 24px;
     color: rgba(0, 0, 0, 0.5);
-    margin-right: 8px;
+    margin-right: 7.68px;
   }
 
   .middle_massege_name {
-    font-size: 25px;
+    font-size: 24px;
     color: rgba(0, 0, 0, 1);
   }
 
   .book_detail {
-    margin: 34px 108px 3px 108px;
+    margin: 32.64px 103.68px 3px 103.68px;
   }
 
   .detail_text {
     lines: 9;
     color: #000000;
-    font-size: 27.1px;
-    line-height: 44px;
+    font-size: 26px;
+    line-height: 42px;
   }
 
   .buttom_audio {
@@ -171,7 +171,7 @@
     bottom: 0px;
     left: 0px;
     right: 0px;
-    height: 270px;
+    height: 259.2px;
   }
 
   /* 音频播放组件 */
@@ -184,14 +184,14 @@
 
   .audio-back {
     width: 100%;
-    height: 100px;
+    height: 96px;
     align-items: center;
   }
 
   .audio-back image {
-    margin-left: 33px;
-    width: 50px;
-    height: 50px;
+    margin-left: 31.68px;
+    width: 48px;
+    height: 48px;
   }
 
   .audio-content {
@@ -199,105 +199,105 @@
     align-items: center;
     justify-content: center;
     background-color: #FFFFFF;
-    padding-left: 34px;
-    padding-right: 34px;
+    padding-left: 32.64px;
+    padding-right: 32.64px;
   }
 
   .audio-title {
     color: #1A1A1A;
-    font-size: 37.5px;
-    margin-top: 16.7px;
+    font-size: 36px;
+    margin-top: 16px;
   }
 
   .audio-img {
-    width: 467px;
-    height: 467px;
-    border-radius: 233.5px;
-    margin-bottom: 155px;
-    margin-top: 155px;
+    width: 448px;
+    height: 448px;
+    border-radius: 224px;
+    margin-bottom: 149px;
+    margin-top: 149px;
   }
 
   .audio-progress {
-    width: 680px;
+    width: 352.8px;
     justify-content: space-between;
   }
 
   .audio-time {
-    width: 60px;
-    height: 32px;
+    width: 57.6px;
+    height: 31px;
     color: #1A1A1A;
-    font-size: 22.7px;
+    font-size: 21.8px;
     opacity: 0.75;
   }
 
   .slider {
     selected-color: #007DFF;
     color: #E5E5E5;
-    width: 500px;
-    padding-left: 22.4px;
-    padding-right: 22.7px;
+    width: 480px;
+    padding-left: 21.5px;
+    padding-right: 21.8px;
   }
 
   .audio-control {
     width: 100%;
-    margin: 34px 0px 58px 0px;
+    margin: 32.64px 0px 55.68px 0px;
     justify-content: center;
     align-items: center;
   }
 
   .audio-repeat {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
   }
 
 
 
   .play_container {
-    width: 135px;
-    height: 135px;
-    margin: 0px 65px 0px 65px;
-    border-radius: 100px;
+    width: 129.6px;
+    height: 129.6px;
+    margin: 0px 62.4px 0px 62.4px;
+    border-radius: 96px;
   }
 
   .pre_container {
-    width: 82px;
-    height: 82px;
-    margin-left: 76px;
-    border-radius: 40px;
+    width: 78.72px;
+    height: 78.72px;
+    margin-left: 72.96px;
+    border-radius: 38.4px;
   }
 
   .next_container {
-    width: 83px;
-    height: 83px;
-    border-radius: 40px;
+    width: 79.68px;
+    height: 79.68px;
+    border-radius: 38.4px;
   }
 
   .audio-last {
-    width: 83px;
-    height: 83px;
+    width: 79.68px;
+    height: 79.68px;
     resize-mode: center;
   }
 
   .audio-next {
-    width: 83px;
-    height: 83px;
+    width: 79.68px;
+    height: 79.68px;
     resize-mode: center;
   }
 
   .audio-play {
-    width: 135px;
-    height: 135px;
+    width: 129.6px;
+    height: 129.6px;
   }
 
   .audio-pause {
-    width: 135px;
-    height: 135px;
+    width: 129.6px;
+    height: 129.6px;
   }
 
   .audio-more {
-    width: 50px;
-    height: 50px;
-    margin-left: 76px;
+    width: 48px;
+    height: 48px;
+    margin-left: 72.96px;
   }
 
   /* 播放列表 */
@@ -323,10 +323,10 @@
     left: 0px;
     right: 0px;
     width: 100%;
-    height: 883px;
+    height: 879.68px;
     background-color: #f0f8ff;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+    border-top-left-radius: 15.36px;
+    border-top-right-radius: 15.36px;
   }
 
   .hearing-catalog-none {
@@ -334,17 +334,17 @@
   }
 
   .catalog-list {
-    padding-top: 20px;
-    padding-left: 33px;
-    padding-right: 33px;
+    padding-top: 19.2px;
+    padding-left: 31.68px;
+    padding-right: 31.68px;
   }
 
   .catalog-item {
     justify-content: space-between;
     align-items: center;
-    height: 130px;
-    padding-top: 27px;
-    padding-bottom: 27px;
+    height: 125px;
+    padding-top: 26px;
+    padding-bottom: 26px;
     border-top-width: 0.5px;
     border-top-color: rgba(0, 0, 0, 0.2);
   }
@@ -354,12 +354,12 @@
   }
 
   .title_num {
-    font-size: 31.3px;
+    font-size: 30px;
     color: #1a1a1a;
   }
 
   .title_name {
-    font-size: 31.3px;
+    font-size: 30px;
     color: #1a1a1a;
     lines: 1;
     text-overflow: ellipsis;
@@ -367,11 +367,11 @@
 
   .right {
     align-items: center;
-    margin-left: 75px;
+    margin-left: 72px;
   }
 
   .music-paly-png {
-    width: 42px;
+    width: 40.32px;
   }
 
   .music-paly-png-none {
@@ -384,15 +384,15 @@
   }
 
   .clock {
-    width: 25px;
-    height: 25px;
+    width: 24px;
+    height: 24px;
   }
 
   .time {
-    font-size: 27.1px;
+    font-size: 26px;
     color: #1A1A1A;
     opacity: 0.5;
-    margin-left: 8px;
+    margin-left: 7.68px;
   }
 
   .activate {
@@ -401,19 +401,19 @@
 
   .catalog-top {
     width: 100%;
-    font-size: 38px;
+    font-size: 36.48px;
     color: #1A1A1A;
-    margin: 28.6px 33px 17.8px 33px;
+    margin: 27.46px 31.68px 17px 31.68px;
   }
 
   .catalog-bottom {
     width: 100%;
-    height: 150px;
+    height: 144px;
     bottom: 0px;
     text-align: center;
-    line-height: 50px;
+    line-height: 48px;
     color: #ff0000;
-    font-size: 28px;
+    font-size: 27px;
     background-color: #f0f8ff;
   }
 </style>

@@ -33,32 +33,32 @@
 
 <style>
 	.single-container {
-		margin: 0px 34px 0px 34px;
+		margin: 0px 32.64px 0px 32.64px;
 		flex-direction: column;
 	}
 
 	.swiper-head {
 		justify-content: space-between;
-		margin-bottom: 30px;
+		margin-bottom: 28.8px;
 	}
 
 	.swiper-main-title {
-		font-size: 31px;
+		font-size: 30px;
 		color: #1a1a1a;
 		font-weight: bold;
 		align-self: center;
 	}
 
 	.swiper-link {
-		font-size: 27px;
+		font-size: 26px;
 		color: #8d8d8d;
 		align-self: center;
 		margin-right: 14px;
 	}
 
 	.swiper-arrow {
-		width: 16px;
-		height: 28px;
+		width: 15.36px;
+		height: 27px;
 		align-self: center;
 	}
 
@@ -69,35 +69,35 @@
 	}
 
 	.single-product {
-		margin: 0px 0px 27.6px 0px;
+		margin: 0px 0px 26.5px 0px;
 	}
 
 	.single-description {
 		flex-direction: column;
-		width: 434px;
+		width: 416.64px;
 		align-self: center;
 	}
 
 	.single-image {
-		width: 217px;
-		height: 290px;
-		margin-right: 33px;
-		border-radius: 8px;
+		width: 208.32px;
+		height: 278.4px;
+		margin-right: 31.68px;
+		border-radius: 7.68px;
 	}
 
 	.single-title {
 		color: #000000;
-		font-size: 31.3px;
-		line-height: 40.6px;
-		margin-bottom: 16px;
+		font-size: 30px;
+		line-height: 39px;
+		margin-bottom: 15.36px;
 	}
 
 	.single-brief {
 		color: #1a1a1a;
 		opacity: 0.5;
-		font-size: 27.1px;
-		line-height: 34.9px;
-		margin-bottom: 49px;
+		font-size: 26px;
+		line-height: 33.5px;
+		margin-bottom: 47.04px;
 	}
 
 	.single-bottom {
@@ -107,7 +107,7 @@
 	.single-author {
 		color: #1a1a1a;
 		opacity: 0.5;
-		font-size: 27.1px;
+		font-size: 26px;
 		align-self: center;
 	}
 
@@ -118,14 +118,14 @@
 	.single-clazz {
 		color: #000000;
 		opacity: 0.5;
-		font-size: 16.7px;
-		line-height: 24px;
+		font-size: 16px;
+		line-height: 23px;
 		background-color: rgba(0, 0, 0, 0.1);
-		border-radius: 8.3px;
+		border-radius: 9px;
 		align-self: center;
 		margin-left: 10px;
 		text-align: center;
-		padding: 10px 20px;
+		padding: 10px 19.2px;
 	}
 </style>
 

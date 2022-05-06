@@ -25,14 +25,14 @@
 
 <style>
 	.mallClassification-content {
-		width: 750px;
+		width: 720px;
 		background-color: #ffffff;
 		flex-direction: column;
 	}
 
 	.mallClassification-wrap {
-		width: 683px;
-		margin: 17px 34px 36px 34px;
+		width: 655.68px;
+		margin: 16.32px 32.64px 35px 32.64px;
 	}
 
 	.mallClassification-left {
@@ -40,26 +40,26 @@
 	}
 
 	.verticaltab-content {
-		width: 151px;
-		margin-bottom: 30px;
+		width: 145px;
+		margin-bottom: 28.8px;
 		flex-direction: column;
 		align-items: center;
 	}
 
 	.verticaltab-text {
-		padding-top: 35px;
-		padding-bottom: 30px;
+		padding-top: 33.6px;
+		padding-bottom: 28.8px;
 		color: #4a4a4a;
-		font-size: 27.1px;
+		font-size: 26px;
 		width: 100%;
 		text-align: center;
 	}
 
 	.verticaltab-active {
-		padding-top: 35px;
-		padding-bottom: 30px;
+		padding-top: 33.6px;
+		padding-bottom: 28.8px;
 		color: #cd2325;
-		font-size: 27.1px;
+		font-size: 26px;
 		width: 100%;
 		background-color: #ffffff;
 		text-align: center;
@@ -71,9 +71,9 @@
 	}
 
 	.mallClassification-title {
-		margin: 53px 0px 0px 33.3px;
+		margin: 50.88px 0px 0px 32px;
 		color: #1a1a1a;
-		font-size: 27.1px;
+		font-size: 26px;
 	}
 
 	.mallClassification-box {

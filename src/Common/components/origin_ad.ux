@@ -24,7 +24,7 @@
 
 <style lang="less">
     .origin-ad {
-      padding: 0 20px;
+      padding: 0 19.2px;
       width: 100%;
       flex-direction: column;
       align-items: center;
@@ -34,12 +34,12 @@
         resize-mode: contain;
       }
       .btn {
-        height: 80px;
+        height: 76.8px;
         width: 60%;
         background-color: #00bfff;
         color: #ffffff;
-        border-radius: 20px;
-        margin-bottom: 20px;
+        border-radius: 19.2px;
+        margin-bottom: 19.2px;
         &:active {
           background-color: #058fbd;
         }
@@ -57,15 +57,15 @@
               padding: 0 10px;
               color: #ffffff;
               background-color: #00bfff;
-              border-radius: 8px;
+              border-radius: 7.68px;
             }
             .adbtn:active {
               background-color: #058fbd;
             }
           }
           .closeImg {
-            width: 24px;
-            height: 24px;
+            width: 23px;
+            height: 23px;
             flex-shrink: 0;
           }
         }

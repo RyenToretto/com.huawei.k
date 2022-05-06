@@ -32,36 +32,36 @@
 
 <style>
 	.information_container {
-		height: 369px;
-		padding: 0px 34px 0px 34px;
+		height: 354.24px;
+		padding: 0px 32.64px 0px 32.64px;
 		width: 100%;
 		flex-direction: column;
 	}
 
 	.information_head {
-		height: 100px;
+		height: 96px;
 	}
 
 	.information_main_title {
-		font-size: 31.3px;
+		font-size: 30px;
 		color: #1A1A1A;
 		font-weight: bold;
 	}
 
 	.information_list {
 		flex-direction: column;
-		margin-top: 17px;
+		margin-top: 16.32px;
 	}
 
 	.left_text {
 		color: rgba(0, 0, 0, 0.5);
-		font-size: 25px;
+		font-size: 24px;
 		width: 25%;
 	}
 
 	.right_text {
 		color: rgba(0, 0, 0, 1);
-		font-size: 25px;
+		font-size: 24px;
 	}
 
 	.information_statement {
@@ -70,7 +70,7 @@
 
 	.right_statement_text {
 		color: rgba(0, 0, 0, 1);
-		font-size: 25px;
+		font-size: 24px;
 		width: 75%;
 	}
 </style>

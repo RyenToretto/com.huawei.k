@@ -48,19 +48,19 @@
   }
 
   .component1 {
-    margin-top: 30px;
+    margin-top: 28.8px;
   }
 
   .component4 {
-    margin-top: 50px;
+    margin-top: 48px;
   }
 
   .component5 {
-    margin-top: 50px;
+    margin-top: 48px;
   }
 
   .component7 {
-    margin-top: 50px;
+    margin-top: 48px;
   }
 </style>
 
@@ -103,7 +103,7 @@
               uri: './page/Page_Tingshu/TO_DELETE/222.png',
               title: '吐槽是门手艺',
               brief: '《脱口秀大会》，《吐槽大会》原班人马，诺曼博士探讨了我们的生活为什么需要复杂，而不是简单',
-              author: '',
+              author: '易中天',
               clazz: ['10万人在听']
             }
           ]

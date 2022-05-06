@@ -49,18 +49,18 @@
   .paihang-box {
     flex-direction: column;
     background-color: #ffffff;
-    margin-bottom: 100px;
+    margin-bottom: 96px;
   }
 
   .mallClassification-wrap {
-    width: 683px;
-    margin: 17px 34px 36px 34px;
+    width: 655.68px;
+    margin: 16.32px 32.64px 35px 32.64px;
   }
 
   .tab-bar {
-    margin-left: 244px;
-    margin-right: 256px;
-    height: 100px;
+    margin-left: 234.24px;
+    margin-right: 245.76px;
+    height: 96px;
   }
 
   .tab-item {
@@ -70,17 +70,17 @@
 
   .tab-item text {
     opacity: 0.5;
-    margin-bottom: 12px;
-    font-size: 31.3px;
+    margin-bottom: 11.52px;
+    font-size: 30px;
   }
 
   .tab-item text:active {
-    font-size: 31.3px;
-    margin-bottom: 8px;
+    font-size: 30px;
+    margin-bottom: 7.68px;
   }
 
   .line {
-    width: 100px;
+    width: 96px;
     height: 4px;
   }
 
@@ -91,31 +91,31 @@
   .mallClassification-left {
     height: 100%;
     width: 25%;
-    margin-top: 20px;
+    margin-top: 19.2px;
     background-color: rgba(0, 0, 0, 0.03);
   }
 
   .verticaltab-content {
-    width: 151px;
-    margin-bottom: 30px;
+    width: 145px;
+    margin-bottom: 28.8px;
     flex-direction: column;
     align-items: center;
   }
 
   .verticaltab-text {
-    padding-top: 35px;
-    padding-bottom: 30px;
+    padding-top: 33.6px;
+    padding-bottom: 28.8px;
     color: #4A4A4A;
-    font-size: 27.1px;
+    font-size: 26px;
     width: 100%;
     text-align: center;
   }
 
   .verticaltab-active {
-    padding-top: 35px;
-    padding-bottom: 30px;
+    padding-top: 33.6px;
+    padding-bottom: 28.8px;
     color: #CD2325;
-    font-size: 27.1px;
+    font-size: 26px;
     width: 100%;
     background-color: #ffffff;
     text-align: center;
@@ -123,7 +123,7 @@
 
   .mallClassification-right {
     height: 100%;
-    margin-top: 20px;
+    margin-top: 19.2px;
     flex-direction: column;
     background-color: #ffffff;
   }

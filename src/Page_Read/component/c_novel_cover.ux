@@ -34,52 +34,52 @@
 
   .content {
     height: 100%;
-    margin: 0 42px;
+    margin: 0 40.32px;
     justify-content: space-between;
   }
 
   .center_hand_image {
     position: fixed;
-    left: 371px;
-    top: 530px;
+    left: 356.16px;
+    top: 509px;
   }
 
   .center {
     flex-direction: column;
     width: 30%;
-    padding-top: 360px;
+    padding-top: 345.6px;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.4);
   }
 
   .center_image {
     width: 50%;
-    margin-top: 40px;
+    margin-top: 38.4px;
   }
 
   .left {
     flex-direction: column;
-    margin-top: 517px;
-    padding: 0 30px 0 40px;
+    margin-top: 496.32px;
+    padding: 0 28.8px 0 38.4px;
 
   }
 
   .right {
     flex-direction: column;
-    margin-top: 517px;
-    padding: 0 40px 0 30px;
+    margin-top: 496.32px;
+    padding: 0 38.4px 0 28.8px;
   }
 
   .center_text {
     color: #ffffff;
-    font-size: 31.3px;
+    font-size: 30px;
   }
 
   .left_text,
   .right_text {
     color: #ffffff;
-    font-size: 31.3px;
-    margin-top: 40px;
+    font-size: 30px;
+    margin-top: 38.4px;
   }
 </style>
 

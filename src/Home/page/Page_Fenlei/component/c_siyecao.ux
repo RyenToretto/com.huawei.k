@@ -10,14 +10,14 @@
     .siyecao-content {
         flex-wrap: wrap;
         justify-content: space-between;
-        padding: 0 49px;
+        padding: 0 47.04px;
     }
 
     .siyecao-content text {
-        width: 234px;
-        height: 84px;
+        width: 224.64px;
+        height: 80.64px;
         text-align: center;
-        margin-bottom: 32px;
+        margin-bottom: 31px;
         color: #000000;
     }
 </style>

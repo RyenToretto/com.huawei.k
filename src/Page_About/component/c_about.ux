@@ -5,7 +5,7 @@
 			<text id="app_name" class="text_appname">{{header.appName}}</text>
 			<text id="app_version" class="text_grey">{{header.appVersion}}</text>
 		</div>
-		<div class="center_container" style="height:600px;">
+		<div class="center_container" style="height:576px;">
 		</div>
 		<div class="center_container bottom_con">
 			<div>
@@ -21,31 +21,31 @@
 <style>
 	.bottom_con {
 		position: fixed;
-		bottom: 33px;
+		bottom: 31.68px;
 		flex-direction: column;
 		align-items: center;
 	}
 
 	.text_appname {
 		color: rgb(26, 26, 26);
-		font-size: 31px;
-		margin-top: 22px;
-		margin-bottom: 13px;
+		font-size: 30px;
+		margin-top: 21.12px;
+		margin-bottom: 12.48px;
 	}
 
 	.text_grey {
 		color: rgba(26, 26, 26, 0.5);
-		font-size: 27.1px;
+		font-size: 26px;
 	}
 
 	.text_copy {
 		color: rgba(26, 26, 26, 0.5);
-		font-size: 21px;
+		font-size: 20px;
 	}
 
 	.text_link {
 		color: #005BBA;
-		font-size: 20.8px;
+		font-size: 20px;
 	}
 
 	.center_container {
@@ -57,10 +57,10 @@
 	}
 
 	.logo_style {
-		height: 150px;
-		width: 150px;
-		margin-top: 117px;
-		border-radius: 30px;
+		height: 144px;
+		width: 144px;
+		margin-top: 112.32px;
+		border-radius: 28.8px;
 	}
 </style>
 

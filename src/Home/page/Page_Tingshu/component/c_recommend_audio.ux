@@ -19,24 +19,24 @@
 
 <style>
 	.recommend-audio-container {
-		margin: 0px 34px;
+		margin: 0px 32.64px;
 		flex-direction: column;
 	}
 
 	.content-list {
-		height: 133px;
+		height: 127.68px;
 		width: 100%;
 		align-items: center;
 	}
 
 	.content-left {
-		width: 83px;
-		height: 83px;
-		margin-right: 33px;
+		width: 79.68px;
+		height: 79.68px;
+		margin-right: 31.68px;
 	}
 
 	.content-right {
-		width: 560px;
+		width: 537.6px;
 		height: 100%;
 		flex-direction: column;
 		border-bottom-color: #F2F2F2;
@@ -46,8 +46,8 @@
 
 	.audio-description {
 		color: #1A1A1A;
-		font-size: 31.3px;
-		margin-bottom: 5px;
+		font-size: 30px;
+		margin-bottom: 4.8px;
 		lines: 1;
 		text-overflow: ellipsis;
 	}
@@ -57,14 +57,14 @@
 	}
 
 	.audio-time image {
-		width: 25px;
-		height: 25px;
+		width: 24px;
+		height: 24px;
 	}
 
 	.audio-time text {
 		color: #1A1A1A;
-		font-size: 27.1px;
-		margin-left: 15px;
+		font-size: 26px;
+		margin-left: 14.4px;
 	}
 </style>
 

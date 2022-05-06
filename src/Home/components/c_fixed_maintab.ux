@@ -37,56 +37,56 @@
 
 	.tabs {
 		background-color: #f2f2f2;
-		height: 100px;
+		height: 96px;
 		width: 100%;
 		position: fixed;
 		bottom: 0px;
 	}
 
 	.tab-content {
-		margin-bottom: 100px;
+		margin-bottom: 96px;
 	}
 
 	.tab-item {
 		flex-direction: column;
 		align-items: center;
-		margin-left: 33px;
-		margin-right: 33px;
+		margin-left: 31.68px;
+		margin-right: 31.68px;
 		padding-top: 14px;
 		padding-bottom: 11px;
-		width: 170.8px;
-		height: 104.2px;
+		width: 164px;
+		height: 100px;
 	}
 
 	.image-active {
-		width: 50px;
-		height: 50px;
+		width: 48px;
+		height: 48px;
 		resize-mode: contain;
 	}
 
 	.image-normal {
-		width: 50px;
-		height: 50px;
+		width: 48px;
+		height: 48px;
 		resize-mode: contain;
 	}
 
 	.tab-item text {
-		font-size: 20.8px;
+		font-size: 20px;
 		margin-top: 10px;
 		text-align: center;
 		color: rgba(0, 0, 0, 0.5);
 	}
 
 	.tab-item text:active {
-		font-size: 21px;
+		font-size: 20px;
 		color: #cd2325;
-		margin-top: 6px;
+		margin-top: 5.76px;
 		text-align: center;
 	}
 
 	.maintab-shadow-bottom {
 		width: 100%;
-		height: 20px;
+		height: 19.2px;
 	}
 </style>
 

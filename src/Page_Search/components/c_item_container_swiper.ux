@@ -23,36 +23,36 @@
 
 	.swiper-list {
 		flex-direction: row;
-		height: 269px;
+		height: 258.24px;
 	}
 
 	.swiper-list-item {
-		height: 258px;
-		margin-right: 13px;
+		height: 247.68px;
+		margin-right: 12.48px;
 		flex-direction: column;
 	}
 
 	.swiper-image {
-		width: 158px;
-		height: 205px;
-		border-radius: 8px;
+		width: 151.68px;
+		height: 196.8px;
+		border-radius: 7.68px;
 	}
 
 	.swiper-number {
-		width: 33px;
-		height: 33px;
-		border-radius: 4.2px;
+		width: 31.68px;
+		height: 31.68px;
+		border-radius: 4px;
 		color: #ffffff;
 		background-color: #FF0000;
 		text-align: center;
-		font-size: 20.8px;
-		margin: 9px;
+		font-size: 20px;
+		margin: 8.64px;
 	}
 
 	.swiper-title {
-		font-size: 27.1px;
+		font-size: 26px;
 		color: #1A1A1A;
-		margin-top: 16px;
+		margin-top: 15.36px;
 	}
 </style>
 

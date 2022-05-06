@@ -17,7 +17,7 @@
 
 <style>
 	.fastentry-content {
-		padding: 16px 0px 0px 0px;
+		padding: 15.36px 0px 0px 0px;
 	}
 
 	.fastentry-box {
@@ -32,31 +32,31 @@
 	}
 
 	.fastentry-number {
-		height: 26px;
-		margin: 0px 0px 0px -25px;
-		padding: 0px 5px;
-		font-size: 18.8px;
+		height: 25px;
+		margin: 0px 0px 0px -24px;
+		padding: 0px 4.8px;
+		font-size: 18px;
 		color: #ffffff;
-		border-radius: 12.5px;
+		border-radius: 12px;
 		background-color: #FF1400;
 	}
 
 	.fastentry-text {
-		padding-top: 17px;
+		padding-top: 16.32px;
 		color: #1A1A1A;
-		font-size: 25px;
+		font-size: 24px;
 	}
 
 	.fastentry-img {
-		width: 84px;
-		height: 84px;
+		width: 80.64px;
+		height: 80.64px;
 	}
 
 	.fastentry-tips {
-		width: 17px;
-		height: 17px;
-		margin: 25px 0px 0px 12px;
-		border-radius: 17px;
+		width: 16.32px;
+		height: 16.32px;
+		margin: 24px 0px 0px 11.52px;
+		border-radius: 16.32px;
 		background-color: #FF1400;
 	}
 </style>

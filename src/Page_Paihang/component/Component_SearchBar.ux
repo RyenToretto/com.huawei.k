@@ -17,29 +17,29 @@
     }
 
     .title {
-        font-size: 100px;
+        font-size: 96px;
     }
 
     .div_search {
         background-color: #f2f2f2;
-        width: 684px;
-        height: 64px;
-        margin-left: 33px;
-        margin-right: 33px;
-        border-radius: 8px;
+        width: 657px;
+        height: 61.44px;
+        margin-left: 31.68px;
+        margin-right: 31.68px;
+        border-radius: 7.68px;
         align-items: center;
     }
 
     .image_search {
-        width: 33px;
-        height: 33px;
-        margin: 17px;
+        width: 31.68px;
+        height: 31.68px;
+        margin: 16.32px;
     }
 
     .place_holder {
-        width: 500px;
-        height: 40px;
-        font-size: 27px;
+        width: 480px;
+        height: 38.4px;
+        font-size: 26px;
         color: #1A1A1A;
         opacity: 0.3;
     }

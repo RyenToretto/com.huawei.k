@@ -13,13 +13,13 @@
   }
 
   .goods_image {
-    border-radius: 8px;
-    margin-top: 133px;
+    border-radius: 7.68px;
+    margin-top: 127.68px;
   }
 
 
   .title {
-    font-size: 33px;
+    font-size: 31.68px;
     color: #1a1a1a;
     opacity: 0.3;
   }

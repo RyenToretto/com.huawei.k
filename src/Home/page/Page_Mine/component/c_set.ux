@@ -11,7 +11,7 @@
 <style>
 	.set-content {
 		flex-direction: column;
-		padding: 30px 33px;
+		padding: 28.8px 31.68px;
 		width: 100%;
 	}
 
@@ -22,27 +22,27 @@
 	}
 
 	.set-img {
-		width: 50px;
-		height: 50px;
-		margin-right: 34px;
+		width: 48px;
+		height: 48px;
+		margin-right: 32.64px;
 	}
 
 	.set-title {
-		padding-top: 29px;
-		padding-bottom: 29px;
+		padding-top: 27.84px;
+		padding-bottom: 27.84px;
 		color: #1A1A1A;
-		font-size: 31px;
+		font-size: 30px;
 		flex: 1;
 	}
 
 	.set-sub-title {
 		color: #8D8D8D;
-		font-size: 27px;
+		font-size: 26px;
 	}
 
 	.set-arrow {
-		height: 28px;
-		width: 16px;
+		height: 27px;
+		width: 15.36px;
 		margin-left: 14px;
 		margin-right: 10px;
 	}

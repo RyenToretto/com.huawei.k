@@ -40,9 +40,9 @@
   .header {
     justify-content: space-between;
     align-items: center;
-    height: 100px;
+    height: 96px;
     width: 100%;
-    padding: 0 33px;
+    padding: 0 31.68px;
   }
 
   .header_right {
@@ -51,74 +51,74 @@
 
   .header_shear {
     align-items: center;
-    width: 100px;
-    height: 100px;
+    width: 96px;
+    height: 96px;
   }
 
   .header_manu {
-    margin-left: 12px;
-    width: 25px;
-    height: 50px;
+    margin-left: 11.52px;
+    width: 24px;
+    height: 48px;
   }
 
   .back_img,
   .shear_img {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
   }
 
   .bookdetail-box-desc {
-    padding: 34px 34px 0px 33px;
+    padding: 32.64px 32.64px 0px 31.68px;
   }
 
   .bookdetail-box-one {
-    margin: 17px 33px 10px 33px;
+    margin: 16.32px 31.68px 10px 31.68px;
   }
 
   .bookdetail-box-two {
-    margin-top: 15px;
+    margin-top: 14.4px;
   }
 
   .bookdetail-box-three {
-    margin: 15px 0px 100px 0px;
+    margin: 14.4px 0px 96px 0px;
   }
 
   .maintab-shadow-bottom {
     width: 100%;
-    height: 100px;
+    height: 96px;
   }
 
   .detail_bottom {
     position: fixed;
     background-color: #ffffff;
-    height: 100px;
+    height: 96px;
     width: 100%;
-    padding: 0 34px;
+    padding: 0 32.64px;
     bottom: 0px;
     justify-content: space-between;
     align-items: center;
   }
 
   .bottom_left_btn {
-    height: 67px;
-    width: 316px;
-    padding: 15px 0;
+    height: 64.32px;
+    width: 303.36px;
+    padding: 14.4px 0;
     color: #1a1a1a;
-    font-size: 31.3px;
+    font-size: 30px;
     text-align: center;
-    border-radius: 8.3px;
+    border-radius: 9px;
     border: 1px solid #d4d4d4;
   }
 
   .bottom_right_btn {
-    height: 67px;
-    width: 316px;
-    padding: 15px 0;
+    height: 64.32px;
+    width: 303.36px;
+    padding: 14.4px 0;
     color: #ffffff;
-    font-size: 31.3px;
+    font-size: 30px;
     background-color: #D00218;
     text-align: center;
-    border-radius: 8.3px;
+    border-radius: 9px;
   }
 </style>
 

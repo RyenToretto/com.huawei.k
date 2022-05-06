@@ -16,19 +16,19 @@
 <style>
 	.sincla-container {
 		justify-content: center;
-		padding: 17px 49px 0 49px;
+		padding: 16.32px 47.04px 0 47.04px;
 	}
 
 	.sincla-product {
-		margin-right: 32px;
+		margin-right: 31px;
 		flex-wrap: wrap;
 		justify-content: space-between;
 	}
 
 	.sincla-item {
 		width: 50%;
-		height: 134px;
-		margin: 0 0px 46px 0;
+		height: 128.64px;
+		margin: 0 0px 44.16px 0;
 	}
 
 	.sincla-description {
@@ -36,15 +36,15 @@
 	}
 
 	.sincla-image {
-		width: 90px;
-		height: 120px;
-		margin-right: 27px;
+		width: 86.4px;
+		height: 115.2px;
+		margin-right: 26px;
 	}
 
 	.sincla-title {
 		color: #1a1a1a;
-		font-size: 27.1px;
-		line-height: 34.9px;
+		font-size: 26px;
+		line-height: 33.5px;
 	}
 </style>
 

@@ -31,28 +31,28 @@
   .container {
     flex-direction: column;
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 96px;
   }
 
   .user-top {
     justify-content: center;
     align-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 19.2px;
   }
 
   .user-middle {
     justify-content: center;
     align-content: center;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 57.6px;
   }
 
   .user-bottom {
     justify-content: center;
     align-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 48px;
   }
 </style>
 

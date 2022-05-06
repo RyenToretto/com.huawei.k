@@ -34,51 +34,51 @@
 
 	.swiper-head {
 		justify-content: space-between;
-		width: 750px;
+		width: 720px;
 	}
 
 	.swiper-main-title {
-		font-size: 31px;
+		font-size: 30px;
 		color: #1A1A1A;
 		font-weight: bold;
 		align-self: center;
 	}
 
 	.swiper-left {
-		margin-left: 33px;
+		margin-left: 31.68px;
 	}
 
 	.swiper-right {
-		margin-right: 33px;
+		margin-right: 31.68px;
 	}
 
 	.swiper-link {
-		font-size: 27px;
+		font-size: 26px;
 		color: #8D8D8D;
 		margin-right: 14px;
 		align-self: center;
 	}
 
 	.swiper-arrow {
-		width: 16px;
-		height: 28px;
+		width: 15.36px;
+		height: 27px;
 		align-self: center;
 	}
 
 	.swiper-stack {
-		margin: 21px 8px 23px 8px;
+		margin: 20px 7.68px 22.08px 7.68px;
 	}
 
 	.swiper-image {
-		width: 330px;
-		height: 183px;
-		border-radius: 8px;
+		width: 317px;
+		height: 175.68px;
+		border-radius: 7.68px;
 	}
 
 	.swiper-list {
 		flex-direction: row;
-		height: 269px;
-		margin: 0px 16px 0px 16px;
+		height: 258.24px;
+		margin: 0px 15.36px 0px 15.36px;
 	}
 
 	.swiper-list-item {
@@ -86,17 +86,17 @@
 	}
 
 	.swiper-icon {
-		width: 33px;
-		height: 33px;
-		margin-top: 138px;
-		margin-left: 17px;
-		border-radius: 5px;
+		width: 31.68px;
+		height: 31.68px;
+		margin-top: 132.48px;
+		margin-left: 16.32px;
+		border-radius: 4.8px;
 	}
 
 	.swiper-title {
-		font-size: 27px;
+		font-size: 26px;
 		color: #1A1A1A;
-		margin-left: 8px;
+		margin-left: 7.68px;
 	}
 </style>
 

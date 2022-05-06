@@ -40,9 +40,9 @@
     align-content: center;
     align-items: center;
     width: 90%;
-    height: 320px;
-    border-radius: 15px;
-    padding: 0 15px;
+    height: 307.2px;
+    border-radius: 14.4px;
+    padding: 0 14.4px;
     background-image: url(../img/login_bg.png);
   }
 
@@ -66,27 +66,27 @@
   }
 
   .portrait image {
-    border-radius: 70px;
-    width: 100px;
-    height: 100px;
-    margin: 50px 33.3px 0px 50px;
+    border-radius: 67.2px;
+    width: 96px;
+    height: 96px;
+    margin: 48px 32px 0px 48px;
   }
 
   .portrait-noexpand image {
-    border-radius: 70px;
-    width: 100px;
-    height: 100px;
+    border-radius: 67.2px;
+    width: 96px;
+    height: 96px;
   }
 
   .name text {
-    font-size: 31px;
+    font-size: 30px;
     color: #5b441a;
-    margin: 50px 0px 0px 0px;
+    margin: 48px 0px 0px 0px;
   }
 
   .usercard-bottom {
     width: 100%;
-    height: 160px;
+    height: 153.6px;
     justify-content: center;
     align-items: center;
   }
@@ -103,21 +103,21 @@
 
   .item-top text {
     font-weight: bold;
-    font-size: 31px;
+    font-size: 30px;
     text-align: center;
     color: #5b441a;
   }
 
   .item-bottom text {
-    font-size: 25px;
+    font-size: 24px;
     text-align: center;
     color: #5b441a;
   }
 
   .line {
-    height: 50px;
-    width: 2px;
-    margin: 0 20px;
+    height: 48px;
+    width: 1.92px;
+    margin: 0 19.2px;
     background-color: rgba(0, 0, 0, 0.2);
   }
 </style>

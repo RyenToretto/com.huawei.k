@@ -59,8 +59,8 @@
   }
 
   .shucheng-box-one {
-    width: 683px;
-    margin: 17px 34px 36px 34px;
+    width: 655.68px;
+    margin: 16.32px 32.64px 35px 32.64px;
   }
 
 
@@ -69,23 +69,23 @@
   .shucheng-box-three {}
 
   .shucheng-box-four {
-    margin-top: 50px;
+    margin-top: 48px;
   }
 
   .shucheng-box-five {
-    margin-top: 50px;
+    margin-top: 48px;
   }
 
   .shucheng-box-six {
-    margin-top: 50px;
+    margin-top: 48px;
   }
 
   .shucheng-box-seven {
-    margin-top: 50px;
+    margin-top: 48px;
   }
 
   .shucheng-box-eight {
-    margin: 50px 0px;
+    margin: 48px 0px;
   }
 </style>
 
