@@ -1,4 +1,4 @@
-<import name="search-result-item" src="./component/search_result_item"></import>
+<import name="search-result-item" src="./components/search_result_item"></import>
 <template>
     <div class="p-history-container">
 

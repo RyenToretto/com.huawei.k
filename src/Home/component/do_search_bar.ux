@@ -43,7 +43,7 @@
         props: {
             uri: {
                 type: String,
-                default: '/Page_Search'
+                default: '/Page_Test_Ad'
             },
             image: {
                 type: String,

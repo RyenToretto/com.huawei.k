@@ -12,6 +12,12 @@
     import prompt from '@system.prompt';
     let bannerAd;
     export default {
+        props: {
+            fixTop: {
+                type: [String, Number],
+                default: 52
+            }
+        },
         data: {
             provider: "",
             bannerAD: {
@@ -36,7 +42,7 @@
             }
             rootEle.getBoundingClientRect({
                 success: (pos) => {
-                    this.bannerAD.style.top = pos.top + 23
+                    this.bannerAD.style.top = pos.top + 23 + (+this.fixTop)
                     this.bannerAD.style.left = pos.left
                     this.showBannerAd()
                 }

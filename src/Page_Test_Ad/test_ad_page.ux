@@ -1,0 +1,108 @@
+<import name="banner-ad" src="../Common/components/banner_ad"></import>
+<import name="ask-ad-right" src="../Common/components/ask_ad_right"></import>
+<import name="origin-ad" src="../Common/components/origin_ad"></import>
+<import name="rewarded-ad" src="../Common/components/rewarded_ad"></import>
+<import name="ins-screen-ad" src="../Common/components/ins_screen_ad"></import>
+
+<template>
+  <div class="test-ad-page">
+    <ask-ad-right></ask-ad-right>
+
+    <!--  --><banner-ad id="refBannerAd"></banner-ad>
+
+    <div class="test-case-btn-group">
+      <input type="button" class="btn" value="获取Banner广告" onclick="getBannerAd(allowAdNonPersonnal)" />
+      <input type="button" class="btn with-mgn-top" value="隐藏Banner广告" onclick="hideBanerAd" />
+      <input type="button" class="btn with-mgn-top" value="显示Banner广告" onclick="showBannerAd" />
+    </div>
+    
+    <text class="test-case-title">原生广告 =></text>
+    <origin-ad></origin-ad>
+
+    <text class="test-case-title">激励视频广告 =></text>
+    <rewarded-ad id="refRewardedAd"></rewarded-ad>
+    <div class="test-case-btn-group">
+      <input type="button" class="btn" value="展示激励视频广告" onclick="getRewardedAd" />
+    </div>
+
+    <text class="test-case-title">插屏广告 =></text>
+    <ins-screen-ad id="refInsScreenAd"></ins-screen-ad>
+    <div class="test-case-btn-group">
+      <input type="button" class="btn" value="显示插屏图片广告" onclick="getInsImageScreenAd" />
+      <input type="button" class="btn with-mgn-top" value="显示插屏视频广告" onclick="getInsVideoScreenAd" />
+    </div>
+
+  </div>
+</template>
+
+<style lang="less">
+  @import "../Common/css/variable.less";
+  @import "../Common/css/common.less";
+  @import "../Common/css/button.less";
+
+  .test-ad-page {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    .test-case-title {
+      margin: 40px 0 10px;
+      padding: 0 4px;
+      border-top: 1px solid #000000;
+      border-bottom: 1px solid #000000;
+    }
+    .test-case-btn-group {
+      padding: 20px 0;
+      flex-direction: column;
+      align-items: center;
+      background-color: #4682b4;
+      .btn {
+        height: 40px;
+        background-color: #00bfff;
+        color: #ffffff;
+        border-radius: 20px;
+        width: 80%;
+      }
+      .with-mgn-top {
+        margin-top: 20px;
+      }
+      .btn:active {
+        background-color: #058fbd;
+      }
+    }
+  }
+</style>
+
+<script>
+  module.exports = {
+    data: {
+      allowAdNonPersonnal: 0
+    },
+    hideBanerAd() {
+      this.$child('refBannerAd').hideAdBaner()
+    },
+    showBannerAd() {
+      this.$child('refBannerAd').showAdBaner()
+    },
+    getBannerAd() {
+      this.$child('refBannerAd').getAdBanner()
+    },
+    getRewardedAd () {
+      this.$child('refRewardedAd').getAdRewarded()
+    },
+    getInsImageScreenAd () {
+      this.$child('refInsScreenAd').getAdInsImageScreen()
+    },
+    getInsVideoScreenAd () {
+      this.$child('refInsScreenAd').getAdInsVideoScreen()
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: '广告测试页面' });
+    },
+    onShow() {
+      APP_STATISTICS.page_show(this); // 页面打点 显示
+    },
+    onHide() {
+      APP_STATISTICS.page_hide(this); // 页面打点 隐藏
+    }
+  }
+</script>

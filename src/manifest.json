@@ -36,6 +36,10 @@
             "Page_Search": {
                 "component": "search_page",
                 "path": "/Page_Search"
+            },
+            "Page_Test_Ad": {
+                "component": "test_ad_page",
+                "path": "/Page_Test_Ad"
             }
         }
     },
