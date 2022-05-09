@@ -1,137 +1,117 @@
 <template>
-  <!-- template里只能有一个根节点 -->
-  <!-- 如果background-image需要调用所传的参数，不能使用url,直接使用{{url}}即可 -->
-  <list class="user-card">
-    <list-item type="listItem" class="usercard-top">
-      <div class="{{expand.length>0?'portrait':'portrait-noexpand'}}">
-        <image src={{userInfo.portrait}}></image>
-        <div class="name">
-          <text>{{userInfo.username}}</text>
+  <div class="user-card">
+    <div class="left-user-box">
+      <div class="user-head-image">
+        <image src="{{userInfo.avatar}}"></image>
+      </div>
+    </div>
+
+    <div class="right-user-box">
+      <div class="user-name">
+        <text>{{userInfo.nickname}}</text>
+      </div>
+
+      <div class="user-account-info">
+        <div class="user-account-item">
+          <div class="item-top">
+            <text>{{userInfo.readCoin}}</text>
+          </div>
+          <div class="item-bottom">
+            <text>阅币</text>
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="user-account-item">
+          <div class="item-top">
+            <text>{{userInfo.waitCoin}}</text>
+          </div>
+          <div class="item-bottom">
+            <text>代金券</text>
+          </div>
         </div>
       </div>
-    </list-item>
-    <list-item type="listItem1">
-      <block if="{{expand.length>0}}">
-        <div class="usercard-bottom">
-          <block for="{{expand}}">
-            <block if="{{$idx>0}}">
-              <div class="line"></div>
-            </block>
-            <div class="usercard-bottom-item">
-              <div class="item-top">
-                <text>{{$item.number}}</text>
-              </div>
-              <div class="item-bottom">
-                <text>{{$item.name}}</text>
-              </div>
-            </div>
-          </block>
-        </div>
-      </block>
-    </list-item>
-
-  </list>
+    </div>
+  </div>
 </template>
 
-<style>
+<style lang="less">
   .user-card {
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
     width: 90%;
     height: 307.2px;
     border-radius: 14.4px;
-    padding: 0 14.4px;
     background-image: url(../img/login_bg.png);
-  }
-
-  .usercard-top {
-    width: 100%;
-  }
-
-  .portrait {
-    width: 40%;
-    justify-content: space-around;
-    align-items: center;
-    text-align: right;
-  }
-
-  .portrait-noexpand {
-    width: 100%;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    text-align: right;
-  }
-
-  .portrait image {
-    border-radius: 67.2px;
-    width: 96px;
-    height: 96px;
-    margin: 48px 32px 0px 48px;
-  }
-
-  .portrait-noexpand image {
-    border-radius: 67.2px;
-    width: 96px;
-    height: 96px;
-  }
-
-  .name text {
-    font-size: 30px;
-    color: #5b441a;
-    margin: 48px 0px 0px 0px;
-  }
-
-  .usercard-bottom {
-    width: 100%;
-    height: 153.6px;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .usercard-bottom-item {
-    flex-direction: column;
-    align-items: center;
-    width: 25%;
-  }
-
-  .item-top {
-    margin-bottom: 14px;
-  }
-
-  .item-top text {
-    font-weight: bold;
-    font-size: 30px;
-    text-align: center;
-    color: #5b441a;
-  }
-
-  .item-bottom text {
-    font-size: 24px;
-    text-align: center;
-    color: #5b441a;
-  }
-
-  .line {
-    height: 48px;
-    width: 1.92px;
-    margin: 0 19.2px;
-    background-color: rgba(0, 0, 0, 0.2);
+    .left-user-box {
+      .user-head-image {
+        padding: 44px 32px 24px;
+        width: 240px;
+        height: 320px;
+        image {
+          width: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+    }
+    .right-user-box {
+      padding-top: 24px;
+      flex-direction: column;
+      align-items: flex-start;
+      .user-name {
+        padding: 20px 0;
+        text {
+          font-size: 30px;
+          color: #5b441a;
+        }
+      }
+      .user-account-info {
+        padding: 20px 0;
+        align-items: center;
+        .user-account-item {
+          padding: 0 20px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .item-top {
+            text {
+              font-weight: bold;
+              font-size: 30px;
+              text-align: center;
+              color: #5b441a;
+            }
+          }
+          .item-bottom {
+            text {
+              font-size: 24px;
+              text-align: center;
+              color: #5b441a;
+            }
+          }
+        }
+        .line {
+          height: 48px;
+          width: 1.92px;
+          margin: 0 19.2px;
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
   }
 </style>
 
 <script>
 
   module.exports = {
-    props: [
-      'content'
-    ],
+    props: {
+      userInfo: {
+        type: Object,
+        default: {}
+      }
+    },
     data() {
       return {
-        userInfo: this.content.userInfo,
-        expand: this.content.expand
+        userInfo: this.userInfo
       }
     }
   }

@@ -1,23 +1,54 @@
 <script>
+  import PubSub from 'pubsub-js'
+
   // 快应用官方: 华为分析服务 https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/myProject/99536292102212564/9249519184595980730?appId=106051257
   import agconnect from '@agconnect/api';
   import '@agconnect/instance';
   import '@hmscore/analytics-sdk-quickapp';
 
-  // 快应用官方: 轻粒子数据统计 http://developer.quickingdata.com/doc/developing/application/q_app.html
-  import './Common/js/qinglizi/appStatistics.min.js'
-
+  import storage from '@system.storage';
+  import account from '@service.account';
+  import rootStore from './Common/js/rootStore.js'
   import http from './Common/js/http.js'
   import utils from './Common/js/utils.js'
   import { agConnectConfig } from './Common/js/static.js'
 
+  // 快应用官方: 轻粒子数据统计 http://developer.quickingdata.com/doc/developing/application/q_app.html
+  import './Common/js/qinglizi/appStatistics.min.js'
+
   agconnect.instance().configInstance(agConnectConfig);
 
   module.exports = {
+    rootStore,
+    utils,
+    http,
+    agconnect,
+    pubSub: PubSub,
+    userInfo: {},
+    isLogin: false,
+    accessToken: '',
+    provider: '',
+    appPubSub() {
+      this.pubSub.subscribe(rootStore.GET_LOGIN, (msg) => {
+        return this.isLogin
+      });
+      this.pubSub.subscribe(rootStore.UPDATE_LOGIN, this.updateLogin);
+    },
+    getLoginState() {
+      (async () => {
+        let accessToken = await utils.promiseFactory(storage.get, { key: 'access_token' });
+        this.accessToken = accessToken || '';
+        await this.getUserInfo();
+      })()
+        .catch(e => {
+          console.log('\n\n=> 48 getLoginState error:' + e);
+        })
+        .finally(() => {
+        })
+    },
     onCreate() {
-      this.$utils = utils;
-      this.$http = http;
-      this.$agconnect = agconnect;
+      this.appPubSub();
+      this.getLoginState();
 
       // 生产环境屏蔽以下两行
       agconnect.analytics.InitSettings.debugMode = true; // 启用调试模式
@@ -26,7 +57,7 @@
       this.$analytics = agconnect.analytics();
 
       console.info('快应用已创建');
-      APP_STATISTICS.app_sta_init( this ); // 统计打点
+      APP_STATISTICS.app_sta_init(this); // 统计打点
     },
     onDestroy() {
       console.info('快应用已销毁');
@@ -34,7 +65,30 @@
     onError(err) { //  监听应用错误的生命周期函数
       try {
         APP_STATISTICS.on_err(err); // 错误统计打点代码
-      } catch (error) {}
+      } catch (error) { }
+    },
+    updateLogin(msg, { isLogin, userInfo }) {
+      console.log(`\n${msg}: 用户${isLogin ? '已' : '未'}登陆, userInfo =`, userInfo)
+      this.isLogin = isLogin
+      this.userInfo = userInfo
+    },
+    async getUserInfo() {
+      utils.promiseFactory(storage.set, { key: 'access_token', value: this.accessToken });
+      account.getProfile({
+        appid: "106051257",
+        token: this.accessToken,
+        success: (userInfo) => {
+          PubSub.publish(rootStore.UPDATE_LOGIN, {
+            isLogin: true,
+            userInfo
+          });
+        },
+        fail: (res, code) => {
+          PubSub.publish(rootStore.UPDATE_LOGIN, {
+            isLogin: false
+          });
+        }
+      })
     }
   }
 </script>

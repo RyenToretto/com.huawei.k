@@ -6,24 +6,23 @@
   <!-- template里只能有一个根节点 -->
   <list class="container">
     <list-item type="listItem1" class="user-top">
-      <block if="{{loginstatus}}">
-        <usercard content="{{userCard}}"></usercard>
+      <block if="{{isLogin}}">
+        <usercard user-info="{{userInfo}}"></usercard>
       </block>
-      <block if="{{!loginstatus}}">
-        <usercardnologin content="{{userCardNoLogin}}"></usercardnologin>
+      <block if="{{!isLogin}}">
+        <usercardnologin content="{{userNoLoginInfo}}"></usercardnologin>
       </block>
     </list-item>
     <list-item type="listItem2" class="user-middle">
       <mine_fastentry list="{{fastentrylist}}"></mine_fastentry>
     </list-item>
     <list-item type="listItem3">
-      <div class="user-bottom"> </div>
+      <div class="user-bottom"></div>
     </list-item>
 
     <list-item type="listItem4">
       <set list="{{setlist}}"></set>
     </list-item>
-
   </list>
 </template>
 
@@ -60,28 +59,18 @@
   module.exports = {
     data: {
       title: '用户界面',
-      loginstatus: false,
+      isLogin: false,
       //登陆成功卡片的信息
-      userCard: {
-        userInfo: {
-          portrait: "./page/Page_Mine/TO_DELETE/login_avatar.png",
+      userInfo: {
           backgroundImage: "./page/Page_Mine/img/login_bg.png",
-          username: "Jiaqi"
-        },
-        expand: [
-          {
-            number: 1200,
-            name: "阅币"
-          },
-          {
-            number: 2008,
-            name: "代金券"
-          }
-        ]
+          nickname: "",
+          avatar: "./page/Page_Mine/TO_DELETE/nologin_avatar.png",
+          readCoin: 1200,
+          waitCoin: 2009
       },
       //未登录卡片的信息
-      userCardNoLogin: {
-        portrait: "./page/Page_Mine/TO_DELETE/nologin_avatar.png",
+      userNoLoginInfo: {
+        avatar: "./page/Page_Mine/TO_DELETE/nologin_avatar.png",
         backgroundImage: "./page/Page_Mine/img/nologin_bg.png",
         title: "登陆华为账户",
         subTitle: "大波红包等你拿xxxx"
@@ -140,12 +129,23 @@
       }
       ]
     },
-
-    onInit() {
-      this.$page.setTitleBar({
-        //titlebar的状态在manifest.json中display设置的
-        menu: false
+    async getLoginState() {
+      const { pubSub, rootStore } = this.$app.$def;
+      pubSub.subscribe(rootStore.UPDATE_LOGIN, (msg, { isLogin, userInfo }) => {
+        this.isLogin = isLogin
+        this.userInfo.nickname = userInfo.nickname
+        this.userInfo.avatar = userInfo.avatar.default
       });
     },
+    onInit() {
+      this.getLoginState()
+      this.$page.setTitleBar({
+        menu: false // titlebar 的状态在 manifest.json 中 display 设置的
+      });
+    },
+    async onShow(options) {
+      const { isLogin } = this.$app.$def;
+      this.isLogin = isLogin
+    }
   }
 </script>

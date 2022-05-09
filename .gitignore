@@ -1,9 +1,7 @@
 .quickapp/screenshot.png
 .DS_Store
 node_modules
-dist
 build
-sign
 
 # Log files
 npm-debug.log*
