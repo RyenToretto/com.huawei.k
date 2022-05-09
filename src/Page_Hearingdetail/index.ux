@@ -683,10 +683,10 @@
           _self.dynamicallyColor = data.color;
         },
         fail: function (data, code) {
-          console.log('handling fail, code = ' + code);
+          console.log('颜色选择异常, code = ' + code);
         },
         complete: function (data, code) {
-          console.log('handling complete, code = ' + code);
+          console.log('颜色选择完成, code = ' + code);
         }
       });
     },
