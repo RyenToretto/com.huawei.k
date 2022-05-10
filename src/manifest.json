@@ -92,8 +92,8 @@
     "display": {
         "menu": true,
         "titleBarTextColor": "#17181a",
-        "backgroundColor": "#f5f5f5",
-        "titleBarBackgroundColor": "#f5f5f5",
+        "backgroundColor": "#f6f6f6",
+        "titleBarBackgroundColor": "#f6f6f6",
         "orientation": "auto"
     }
 }

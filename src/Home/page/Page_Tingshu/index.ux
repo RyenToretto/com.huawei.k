@@ -219,11 +219,9 @@
     },
     onInit() {
       this.$page.setTitleBar({
-        //titlebar的状态，在manifest.json中display设置的
         text: '听书',
         textColor: '##1A1A1A',
-        backgroundColor: 'rgba(242,242,242,0.95)',
-        menu: true
+        backgroundColor: 'rgba(242,242,242,0.95)'
       });
     }
   }

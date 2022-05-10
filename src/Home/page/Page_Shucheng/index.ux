@@ -1,5 +1,5 @@
 <import name="search-bar" src="../../../Common/components/search_bar"></import>
-<import name='shucheng_swiper' src='./component/c_swiper.ux'></import>
+<import name='shucheng-swiper' src='./component/shucheng_swiper'></import>
 <import name="fastentry" src="./component/c_fastEntry"></import>
 <import name='multi' src='./component/c_list_multi'></import>
 <import name='shucheng_swi' src='./component/c_item_container_swiper'></import>
@@ -10,39 +10,48 @@
 <template>
   <!-- template里只能有一个根节点 -->
   <list class="shucheng-box">
+
     <!-- 搜索框 -->
     <list-item type="listItem1" class="shucheng-box-one">
       <search-bar></search-bar>
     </list-item>
+
     <!-- 轮播图 -->
     <list-item type="listItem2" class="shucheng-box-two">
-      <shucheng_swiper swiperdata={{swiperdata}}></shucheng_swiper>
+      <shucheng-swiper swiperdata={{swiperdata}}></shucheng-swiper>
     </list-item>
+
     <!-- 快捷方式入口 -->
     <list-item type="listItem3" class="shucheng-box-three">
       <fastentry list="{{fastentrylist}}"></fastentry>
      </list-item>
+
     <!-- 每日一书 -->
     <list-item type="listItem4" class="shucheng-box-four">
       <single_every list="{{everydayonebook}}"></single_every>
      </list-item>
+
     <!-- 为你推荐 -->
     <list-item type="listItem5" class="shucheng-box-five">
       <multi banner="{{banner2}}" list="{{data2}}" num="{{3}}"></multi>
      </list-item>
+
     <!-- 根据你读过的书推荐 -->
     <list-item type="listItem6" class="shucheng-box-six">
       <single_every list="{{listbyyouread}}"></single_every>
      </list-item>
+
     <!-- 专题推荐 -->
     <list-item type="listItem7" class="shucheng-box-seven">
       <shucheng_swi list="{{subjectlist}}" banner="{{banner}}"></shucheng_swi>
      </list-item>
+
     <!-- 榜单推荐 -->
     <list-item type="listItem8" class="shucheng-box-eight">
       <recommandlist recommandlist="{{recommendlist.list}}" arrow="{{recommendlist.arrowimage}}" title="{{recommendlist.title}}"
         morelink="{{recommendlist.morelink}}"></recommandlist>
      </list-item>
+
     <!-- 限时特价 -->
     <list-item type="listItem9" class="shucheng-box-nine">
       <multi banner="{{banner3}}" list="{{data3}}" num="{{4}}"></multi>
@@ -56,36 +65,6 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-  }
-
-  .shucheng-box-one {
-    width: 655.68px;
-    margin: 16.32px 32.64px 35px 32.64px;
-  }
-
-
-  .shucheng-box-two {}
-
-  .shucheng-box-three {}
-
-  .shucheng-box-four {
-    margin-top: 48px;
-  }
-
-  .shucheng-box-five {
-    margin-top: 48px;
-  }
-
-  .shucheng-box-six {
-    margin-top: 48px;
-  }
-
-  .shucheng-box-seven {
-    margin-top: 48px;
-  }
-
-  .shucheng-box-eight {
-    margin: 48px 0px;
   }
 </style>
 
@@ -306,10 +285,6 @@
     },
 
     onInit() {
-      this.$page.setTitleBar({
-        //titlebar的状态在manifest.json中display设置的
-        menu: false
-      });
     },
   }
 </script>

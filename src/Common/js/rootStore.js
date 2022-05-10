@@ -51,6 +51,7 @@ const getGlbParams = () => {
 const rootStore = {
     UPDATE_LOGIN: 'update_login',
     GET_LOGIN: 'get_login',
+    INIT_DONE: 'init_done',
     glbParams,
     setGlbParams,
     getGlbParams

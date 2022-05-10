@@ -31,33 +31,26 @@
     deviceInfo: {
     },
     appPubSub() {
-      this.pubSub.subscribe(rootStore.GET_LOGIN, (msg) => {
+      PubSub.subscribe(rootStore.GET_LOGIN, (msg) => {
         return this.isLogin
       });
-      this.pubSub.subscribe(rootStore.UPDATE_LOGIN, this.updateLogin);
+      PubSub.subscribe(rootStore.UPDATE_LOGIN, this.updateLogin);
     },
     async getDeviceInfo() {
       const { deviceInfo } = await rootStore.setGlbParams();
       this.deviceInfo = deviceInfo;
       rootStore.getGlbParams();
     },
-    getLoginState() {
-      (async () => {
-        let accessToken = await utils.promiseFactory(storage.get, { key: 'access_token' });
-        this.accessToken = accessToken || '';
-        await this.getUserInfo();
-      })()
-        .catch(e => {
-          console.log('\n\n=> 48 getLoginState error:' + e);
-        })
-        .finally(() => {
-        })
+    async getLoginState() {
+      let accessToken = await utils.promiseFactory(storage.get, { key: 'access_token' });
+      this.accessToken = accessToken || '';
+      await this.getUserInfo();
     },
     async onCreate() {
       this.appPubSub();
-      await this.getDeviceInfo()
-      this.getLoginState();
-
+      await this.getDeviceInfo();
+      await this.getLoginState();
+      PubSub.publish(rootStore.INIT_DONE);
       // 生产环境屏蔽以下两行
       agconnect.analytics.InitSettings.debugMode = true; // 启用调试模式
       agconnect.analytics.InitSettings.terminalName = "koujianfeng dev terminal"; // 调试模式下，自定义终端标识
@@ -76,26 +69,27 @@
       } catch (error) { }
     },
     updateLogin(msg, { isLogin, userInfo }) {
-      console.log(`\n${msg}: 用户${isLogin ? '已' : '未'}登陆, userInfo =`, userInfo)
+      console.log(`\n${msg}: 用户${isLogin ? '已' : '未'}登陆, nickname =`, userInfo.nickname)
       this.isLogin = isLogin
       this.userInfo = userInfo
     },
     async getUserInfo() {
-      utils.promiseFactory(storage.set, { key: 'access_token', value: this.accessToken });
-      account.getProfile({
-        appid: "106051257",
-        token: this.accessToken,
-        success: (userInfo) => {
-          PubSub.publish(rootStore.UPDATE_LOGIN, {
-            isLogin: true,
-            userInfo
-          });
-        },
-        fail: (res, code) => {
-          PubSub.publish(rootStore.UPDATE_LOGIN, {
-            isLogin: false
-          });
-        }
+      return new Promise((resolve) => {
+        utils.promiseFactory(storage.set, { key: 'access_token', value: this.accessToken });
+        account.getProfile({
+          appid: "106051257",
+          token: this.accessToken,
+          success: (userInfo) => {
+            const result = { isLogin: true, userInfo }
+            PubSub.publish(rootStore.UPDATE_LOGIN, result);
+            resolve(result)
+          },
+          fail: (res, code) => {
+            const result = { isLogin: false }
+            PubSub.publish(rootStore.UPDATE_LOGIN, result);
+            resolve(result)
+          }
+        });
       })
     }
   }

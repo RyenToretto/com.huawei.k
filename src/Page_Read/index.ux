@@ -543,8 +543,7 @@
       this.$page.setTitleBar({
         textColor: '#1a1a1a',
         backgroundColor: '#f2f2f2',
-        text: '阅读',
-        menu: true
+        text: '阅读'
       });
 
       //将接收的路由参数转成对象
@@ -560,21 +559,11 @@
     showSetting() {
       this.titleStatus = true;
       this.settingStatus = true;
-
-      //设置titlebar背景色
-      this.$page.setTitleBar({
-        textColor: 'rgba(255,255,255,0.5)',
-        backgroundColor: '#262626'
-      });
     },
     hideSetting() {
       this.titleStatus = false;
       this.settingStatus = false;
       this.readSettingStatus = false;
-
-      this.$page.setTitleBar({
-        textColor: '#1a1a1a'
-      });
       //设置titlebar背景色
       if (this.backgroundColor === 'day') {
         this.$page.setTitleBar({

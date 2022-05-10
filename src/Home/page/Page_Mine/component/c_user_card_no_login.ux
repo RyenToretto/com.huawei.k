@@ -108,22 +108,23 @@
       });
     },
     async loginSuccess(data) {
-      const { utils, pubSub, rootStore } = this.$app.$def;
-      utils.promiseFactory(storage.set, { key: 'access_token', value: this.accessToken });
-      account.getProfile({
-        appid: "106051257",
-        token: this.accessToken,
-        success: (userInfo) => {
-          pubSub.publish(rootStore.UPDATE_LOGIN, {
-            isLogin: true,
-            userInfo
-          });
-        },
-        fail: (res, code) => {
-          pubSub.publish(rootStore.UPDATE_LOGIN, {
-            isLogin: false
-          });
-        }
+      return new Promise((resolve) => {
+        const { utils, pubSub, rootStore } = this.$app.$def;
+        utils.promiseFactory(storage.set, { key: 'access_token', value: this.accessToken });
+        account.getProfile({
+          appid: "106051257",
+          token: this.accessToken,
+          success: (userInfo) => {
+            const result = { isLogin: true, userInfo }
+            pubSub.publish(rootStore.UPDATE_LOGIN, result);
+            resolve(result);
+          },
+          fail: (res, code) => {
+            const result = { isLogin: false }
+            pubSub.publish(rootStore.UPDATE_LOGIN, result);
+            resolve(result);
+          }
+        });
       })
     }
   }

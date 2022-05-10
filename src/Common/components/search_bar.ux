@@ -10,28 +10,27 @@
 
 <style lang="less">
   .search-bar {
+    width: 100%;
+    padding: 0 24px 12px;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
     align-items: center;
+    align-content: center;
     .search-bar-wrapper {
-      background-color: #f2f2f2;
-      width: 657px;
-      height: 61.44px;
-      margin-left: 31.68px;
-      margin-right: 31.68px;
-      border-radius: 7.68px;
+      background-color: #eeeeee;
+      width: 672px;
+      height: 78px;
+      border-radius: 39px;
+      justify-content: center;
       align-items: center;
       .ico-search {
-        width: 31.68px;
-        height: 31.68px;
-        margin: 16.32px;
+        width: 39.6px;
+        height: 39.6px;
+        margin-right: 19.4px;
       }
       .place-holder {
-        width: 480px;
-        height: 38.4px;
-        font-size: 26px;
-        color: #1A1A1A;
+        font-size: 30px;
+        color: #6E7275;
         opacity: 0.3;
       }
     }

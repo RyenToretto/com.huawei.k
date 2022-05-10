@@ -1,8 +1,8 @@
-<import name='fixedmaintab' src='./components/c_fixed_maintab.ux'></import>
+<import name='fixed-bottom-nav' src='./components/fixed_bottom_nav.ux'></import>
 
 <template>
   <!-- template里只能有一个根节点 -->
-  <fixedmaintab datas="{{datas}}"></fixedmaintab>
+  <fixed-bottom-nav datas="{{datas}}"></fixed-bottom-nav>
 </template>
 
 <style>
@@ -29,9 +29,8 @@
       this.$page.setTitleBar({
         //titlebar的状态在manifest.json中display设置的
         textColor: '#1a1a1a',
-        backgroundColor: '#f2f2f2',
-        text: '阅读',
-        menu: true
+        backgroundColor: '#f6f6f6',
+        text: '阅读'
       });
     },
   }

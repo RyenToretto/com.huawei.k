@@ -273,11 +273,9 @@
 
     onInit() {
       this.$page.setTitleBar({
-        //titlebar的状态在manifest.json中display设置的
         textColor: '#1a1a1a',
         backgroundColor: '#f2f2f2',
-        text: '排行',
-        menu: true
+        text: '排行'
       });
 
       let that = this;

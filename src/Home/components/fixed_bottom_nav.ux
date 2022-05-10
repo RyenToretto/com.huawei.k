@@ -1,15 +1,15 @@
-<import name='shujia' src='../page/Page_Shujia/index'></import>
-<import name='shucheng' src='../page/Page_Shucheng/index'></import>
-<import name='fenlei' src='../page/Page_Fenlei/index'></import>
-<import name='tingshu' src='../page/Page_Tingshu/index'></import>
-<import name='mine' src='../page/Page_Mine/index'></import>
+<import name="shujia" src="../page/Page_Shujia/index"></import>
+<import name="shucheng" src="../page/Page_Shucheng/index"></import>
+<import name="fenlei" src="../page/Page_Fenlei/index"></import>
+<import name="tingshu" src="../page/Page_Tingshu/index"></import>
+<import name="mine" src="../page/Page_Mine/index"></import>
 
 <template>
   <!-- template里只能有一个根节点 -->
   <div class="container">
     <tabs onchange="switchContent">
       <tab-content>
-        <shujia foo={{foo}}></shujia>
+        <shujia foo="{{foo}}"></shujia>
         <shucheng></shucheng>
         <tingshu></tingshu>
         <fenlei></fenlei>
@@ -26,68 +26,67 @@
       </tab-bar>
     </tabs>
   </div>
-
 </template>
 
 <style>
-	.container {
-		flex-direction: column;
-		justify-content: space-between;
-	}
+  .container {
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-	.tabs {
-		background-color: #f2f2f2;
-		height: 96px;
-		width: 100%;
-		position: fixed;
-		bottom: 0px;
-	}
+  .tabs {
+    background-color: #f2f2f2;
+    height: 96px;
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+  }
 
-	.tab-content {
-		margin-bottom: 96px;
-	}
+  .tab-content {
+    margin-bottom: 96px;
+  }
 
-	.tab-item {
-		flex-direction: column;
-		align-items: center;
-		margin-left: 31.68px;
-		margin-right: 31.68px;
-		padding-top: 14px;
-		padding-bottom: 11px;
-		width: 164px;
-		height: 100px;
-	}
+  .tab-item {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 31.68px;
+    margin-right: 31.68px;
+    padding-top: 14px;
+    padding-bottom: 11px;
+    width: 164px;
+    height: 100px;
+  }
 
-	.image-active {
-		width: 48px;
-		height: 48px;
-		resize-mode: contain;
-	}
+  .image-active {
+    width: 48px;
+    height: 48px;
+    resize-mode: contain;
+  }
 
-	.image-normal {
-		width: 48px;
-		height: 48px;
-		resize-mode: contain;
-	}
+  .image-normal {
+    width: 48px;
+    height: 48px;
+    resize-mode: contain;
+  }
 
-	.tab-item text {
-		font-size: 20px;
-		margin-top: 10px;
-		text-align: center;
-		color: rgba(0, 0, 0, 0.5);
-	}
+  .tab-item text {
+    font-size: 20px;
+    margin-top: 10px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+  }
 
-	.tab-item text:active {
-		font-size: 20px;
-		color: #cd2325;
-		margin-top: 5.76px;
-		text-align: center;
-	}
+  .tab-item text:active {
+    font-size: 20px;
+    color: #cd2325;
+    margin-top: 5.76px;
+    text-align: center;
+  }
 
-	.maintab-shadow-bottom {
-		width: 100%;
-		height: 19.2px;
-	}
+  .maintab-shadow-bottom {
+    width: 100%;
+    height: 19.2px;
+  }
 </style>
 
 <script>
@@ -127,9 +126,8 @@
           element.show = true;
           this.$page.setTitleBar({
             textColor: '#1a1a1a',
-            backgroundColor: '#f2f2f2',
-            text: '阅读',
-            menu: true,
+            backgroundColor: '#f6f6f6',
+            text: '阅读'
           });
         }
       }

@@ -26,11 +26,9 @@
         },
         onInit() {
             this.$page.setTitleBar({
-                //titlebar的状态，在manifest.json中display设置的
                 text: '小说',
                 textColor: '##000000',
-                backgroundColor: 'rgba(242,242,242,0.95)',
-                menu: false
+                backgroundColor: 'rgba(242,242,242,0.95)'
             });
         },
     }

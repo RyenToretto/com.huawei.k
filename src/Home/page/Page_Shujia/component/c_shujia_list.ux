@@ -198,8 +198,7 @@
       this.$page.setTitleBar({
         textColor: '#ffffff',
         backgroundColor: '#007DFF',
-        backgroundOpacity: 0.5,
-        menu: false
+        backgroundOpacity: 0.5
       });
       this.shujiarows = this.sliceArray(this.list);
     },

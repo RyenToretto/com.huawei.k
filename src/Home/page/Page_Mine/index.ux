@@ -139,9 +139,6 @@
     },
     onInit() {
       this.getLoginState()
-      this.$page.setTitleBar({
-        menu: false // titlebar 的状态在 manifest.json 中 display 设置的
-      });
     },
     async onShow(options) {
       const { isLogin } = this.$app.$def;

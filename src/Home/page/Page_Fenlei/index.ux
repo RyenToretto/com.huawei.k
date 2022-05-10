@@ -184,11 +184,6 @@
     },
     //初始化
     onInit: function () {
-      this.$page.setTitleBar({
-        //titlebar的状态在manifest.json中display设置的
-        menu: false
-      });
-
       let that = this;
       device.getInfo({
         success: function (ret) {

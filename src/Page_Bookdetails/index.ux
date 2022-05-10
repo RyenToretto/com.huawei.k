@@ -231,7 +231,6 @@
     },
     onInit() {
       this.$page.setTitleBar({
-        menu: true,
         textColor: '##000000',
         backgroundColor: '#ffffff',
       })

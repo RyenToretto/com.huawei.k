@@ -1,0 +1,116 @@
+<template>
+  <div class="shu-cheng-swiper">
+    <div class="shu-cheng-swiper-wrapper">
+      <swiper class="swiper-shu-cheng" autoplay="true" interval="5000">
+        <div class="each-shu-cheng-swiper" for="{{shuChengData}}">
+          <div class="each-shu-cheng-bg"></div>
+          <image class="bg-image" src="{{$item.coverUrl}}"></image>
+          <div class="each-detail">
+            <text class="each-title">{{$item.bookTitle}}</text>
+            <text class="each-desc">{{$item.bookIntro}}</text>
+            <div class="each-tags">
+              <div class="each-cate mrg-0"><text>{{$item.categoryName}}</text></div>
+              <div class="each-cate"><text>{{$item.subCategoryName}}</text></div>
+            </div>
+          </div>
+        </div>
+      </swiper>
+    </div>
+  </div>
+</template>
+
+<style lang="less">
+  .shu-cheng-swiper {
+    padding: 12px 24px 0;
+    .shu-cheng-swiper-wrapper {
+      flex-direction: column;
+      .swiper-shu-cheng {
+        height: 218px;
+        indicator-color: rgba(0, 0, 0, 0.03);
+        indicator-selected-color: rgba(0, 0, 0, 0.09);
+        indicator-size: 12px;
+        indicator-right: 30px;
+        indicator-bottom: 24px;
+        .each-shu-cheng-swiper {
+          .each-shu-cheng-bg {
+            width: 100%;
+            height: 204px;
+            border-radius: 12px;
+            background-color: #ffffff;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+          }
+          .bg-image {
+            width: 140px;
+            height: 186px;
+            border-radius: 12px;
+            position: absolute;
+            bottom: 32px;
+            left: 32px;
+          }
+          .each-detail {
+            padding: 18px 21px 0 196px;
+            flex-direction: column;
+            .each-title {
+              padding: 2px 0;
+              line-height: 42px;
+              font-size: 30px;
+              color: #17181A;
+            }
+            .each-desc {
+              padding: 7px 0;
+              lines: 2;
+              text-overflow: ellipsis;
+              line-height: 32px;
+              font-size: 22px;
+              color: #6E7275;
+            }
+            .each-tags {
+              padding-top: 8px;
+              .each-cate {
+                margin: 0 6px;
+                text {
+                  padding: 3px 10px;
+                  border-radius: 8px;
+                  background-color: rgba(204, 204, 204, 0.16);
+                  font-size: 18px;
+                  color: #4FACF8;
+                }
+              }
+              .mrg-0 {
+                margin: 0 6px 0 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  export default {
+    data: {
+      shuChengData: []
+    },
+    onInit() {
+      const { pubSub, rootStore } = this.$app.$def;
+      pubSub.subscribe(rootStore.INIT_DONE, (msg) => {
+        this.getData()
+      });
+    },
+    async getData() {
+      const { http } = this.$app.$def
+      try {
+        const { data } = await http.get('/book/category/banner', {
+          placeId: 0
+        });
+        if (data.message && +data.message.code === 200) {
+          this.shuChengData = data.result
+        }
+      } catch (e) {
+      }
+    }
+  }
+</script>

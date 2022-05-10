@@ -482,11 +482,9 @@
     //初始化进来自动播放
     onInit: function () {
       this.$page.setTitleBar({
-        //titlebar的状态，在manifest.json中display设置的
         text:"听书",
         textColor: '##1A1A1A',
-        backgroundColor: '#ffffff',
-        menu: false
+        backgroundColor: '#ffffff'
       });
 
       audio.stop();
@@ -693,13 +691,9 @@
 
     showCatalog() {
       this.catalogStatus = true;
-      //设置标题栏背景
-      this.$page.setTitleBar({ menu: false, textColor: '#1A1A1A', backgroundColor: 'rgba(0,0,0,0.5)' });
     },
     closeCatalog() {
       this.catalogStatus = false;
-      //设置标题栏背景
-      this.$page.setTitleBar({ menu: false, textColor: '#1A1A1A', backgroundColor: '#FFFFFF' });
     },
     toHearing(item, index) {
       audio.stop();

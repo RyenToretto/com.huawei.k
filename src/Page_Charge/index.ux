@@ -49,8 +49,7 @@
         //titlebar的状态，在manifest.json中display设置的
         text: '充值',
         textColor: '#1A1A1A',
-        backgroundColor: 'rgba(242,242,242,0.95)',
-        menu: false
+        backgroundColor: 'rgba(242,242,242,0.95)'
       });
     },
 

@@ -144,13 +144,6 @@
         type2: "./page/Page_Shujia/img/headphone.png",
         shujiaLine: "./page/Page_Shujia/img/shujia.png"
       }
-    },
-    
-    onInit() {
-       this.$page.setTitleBar({
-        //titlebar的状态在manifest.json中display设置的
-        menu: false
-      });
-    },
+    }
   }
 </script>
