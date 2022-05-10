@@ -28,11 +28,18 @@
     isLogin: false,
     accessToken: '',
     provider: '',
+    deviceInfo: {
+    },
     appPubSub() {
       this.pubSub.subscribe(rootStore.GET_LOGIN, (msg) => {
         return this.isLogin
       });
       this.pubSub.subscribe(rootStore.UPDATE_LOGIN, this.updateLogin);
+    },
+    async getDeviceInfo() {
+      const { deviceInfo } = await rootStore.setGlbParams();
+      this.deviceInfo = deviceInfo;
+      rootStore.getGlbParams();
     },
     getLoginState() {
       (async () => {
@@ -46,8 +53,9 @@
         .finally(() => {
         })
     },
-    onCreate() {
+    async onCreate() {
       this.appPubSub();
+      await this.getDeviceInfo()
       this.getLoginState();
 
       // 生产环境屏蔽以下两行
