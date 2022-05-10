@@ -1,10 +1,10 @@
-<import name='reader_main_component_searchbar' src='./component/c_searchBar.ux'></import>
+<import name="search-bar" src="../../../Common/components/search_bar"></import>
 <import name="novel_list" src="./component/c_novel_list"></import>
 
 <template>
   <div class="mallClassification-content" style="height:{{screenHeight}}px">
     <div class="mallClassification-wrap">
-      <reader_main_component_searchbar url="Page_RecentSearch" placeholder={{placeholder}} searchbar="{{searchbar}}"></reader_main_component_searchbar>
+      <search-bar></search-bar>
     </div>
     <div>
       <div class="mallClassification-left">
@@ -85,10 +85,7 @@
   import device from '@system.device';
   module.exports = {
     data: {
-      //搜索框数据
-      searchbar: "./page/Page_Fenlei/img/c_search_search.png",
       arrow: "./page/Page_Fenlei/img/arrow.png",
-      placeholder: '设计中的设计',
       screenHeight: 0,
       tabArray: [{
         'title': '历史',

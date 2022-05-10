@@ -10,24 +10,23 @@
 本页面引用了高亮组件，c_hight_light
  -->
 <import name="page10_1" src="./components/c_hight_light"></import>
-<import name='swi' src='./components/c_item_container_swiper'></import>
+<import name="swi" src="./components/c_item_container_swiper"></import>
 <template>
   <div class="container">
-
     <div class="search_bar_container">
-      <div class="image_search_back_div_search" onclick="back">
-        <image class="image_search_back" src="./img/search_back.png"></image>
-      </div>
-      <div class="search_close">
-        <div class="image_search_back_div" onclick="search">
-          <image class="image_search_result " src="./img/search.png"></image>
+      <div class="search-box">
+        <div class="icon-search" onclick="search">
+          <image class="search-icon" src="./img/search.png"></image>
         </div>
-        <input class="search" id="search" name="search" value="{{inputValue}}" placeholder="搜索书籍、作者" onchange="updateValue()"></input>
-        <div show="{{inputValue!=''}}" class="image_search_back_div" onclick="resetSearchValue">
-          <image class="image_search_result close_size" src="./img/search_close.png"></image>
+
+        <input class="search-input" id="search" name="search" value="{{inputValue}}" placeholder="搜索书名/作者名" onchange="updateValue()"></input>
+
+        <div show="{{inputValue!=''}}" class="icon-search" onclick="resetSearchValue">
+          <image class="search-icon close_size" src="./img/search-box.png"></image>
         </div>
       </div>
     </div>
+
     <div class="panel">
       <!-- 搜素热词、历史显示区域 -->
       <block if="{{showPageType === 'searchBar'}}">
@@ -101,7 +100,7 @@
           <text>书架上找到2本书籍</text>
           <div class="search-shujia-book">
             <div class="shujia_hight_light_item">
-              <image class="shujia-book-image" src='./TO_DELETE/author.png'></image>
+              <image class="shujia-book-image" src="./TO_DELETE/author.png"></image>
               <div class="shujia_search_text margin_left">
                 <page10_1 prop1="三生三世十里桃花" prop2="{{inputValue}}"></page10_1>
               </div>
@@ -129,11 +128,37 @@
   </div>
 </template>
 
-<style>
+<style lang="less">
   .container {
     flex-direction: column;
-    align-content: center;
-    align-items: center;
+    .search_bar_container {
+      padding: 10px 30px;
+      height: 96px;
+      .search-box {
+        flex: 1;
+        background-color: #f2f2f2;
+        align-items: center;
+        border-radius: 7.68px;
+        height: 61.44px;
+        .icon-search {
+          padding: 10px;
+          height: 96px;
+          align-items: center;
+          justify-content: center;
+          .search-icon {
+            width: 31.68px;
+            height: 31.68px;
+          }
+        }
+        .search-input {
+          height: 38.4px;
+          color: #1a1a1a;
+          font-size: 27px;
+          line-height: 38.4px;
+          margin-right: 31.68px;
+        }
+      }
+    }
   }
 
   .panel {
@@ -142,56 +167,10 @@
     margin-left: 31.68px;
     margin-right: 31.68px;
     flex-direction: column;
-    align-items: center;
   }
 
   .title {
     font-size: 96px;
-  }
-
-  .search_bar_container {
-    align-items: center;
-    width: 668.16px;
-    height: 96px;
-    margin-left: 16.32px;
-    margin-right: 31.68px;
-  }
-
-  .search_close {
-    background-color: #f2f2f2;
-    align-items: center;
-    border-radius: 7.68px;
-    height: 61.44px;
-    width: 584px;
-  }
-
-  .search {
-    width: 438.4px;
-    height: 38.4px;
-    color: #1a1a1a;
-    font-size: 27px;
-    line-height: 38.4px;
-    margin-right: 31.68px;
-  }
-
-  .image_search_back_div_search {
-    width: 80.64px;
-    height: 96px;
-    align-items: center;
-    justify-content: center;
-
-  }
-
-  .image_search_back_div {
-    width: 80.64px;
-    height: 96px;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .image_search_back {
-    width: 38.4px;
-    height: 38.4px;
   }
 
   .search_text {
@@ -256,13 +235,6 @@
     font-size: 24px;
     color: #000000;
     lines: 1;
-  }
-
-  .image_search_result {
-    width: 31.68px;
-    height: 31.68px;
-    margin-left: 16.32px;
-    margin-right: 16.32px;
   }
 
   .search-shujia {
@@ -353,7 +325,6 @@
 
   .search_item_div {
     align-items: flex-start;
-    ;
     height: 304.32px;
     width: 672px;
   }
@@ -392,7 +363,6 @@
     height: 277.44px;
     border-bottom-color: #182233;
     border-bottom-width: 0.5px;
-
   }
 
   .result_title {
@@ -412,7 +382,6 @@
     width: 469.44px;
     height: 168px;
     margin-bottom: 40.32px;
-
   }
 
   .result_content_main_text {
@@ -424,7 +393,6 @@
     width: 469.44px;
     height: 33.6px;
     justify-content: space-between;
-
   }
 
   .result_content_foot_author {
@@ -444,7 +412,6 @@
     color: #a9a9a9;
     font-size: 17.28px;
     border-radius: 4px;
-
   }
 
   .margin_left {
@@ -461,7 +428,6 @@
     width: 28.8px;
     height: 28.8px;
   }
-
 
   /* 搜索结果列表 */
 
@@ -645,9 +611,6 @@
     },
     clearHis() {
       this.hisList = [];
-    },
-    back() {
-      router.back();
     },
     resetSearchValue() {
       this.showPageType = "searchBar";

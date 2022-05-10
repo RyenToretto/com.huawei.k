@@ -23,8 +23,7 @@
         { "name": "system.request" },
         { "name": "system.requesttask" },
         { "name": "system.uploadtask" },
-        { "name": "service.ad" },
-        { "name": "service.account" }
+        { "name": "service.ad" }
     ],
     "config": {
         "designWidth": 720

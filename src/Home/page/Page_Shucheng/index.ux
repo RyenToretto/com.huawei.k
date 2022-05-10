@@ -1,4 +1,4 @@
-<import name='reader_main_shucheng_component_searchbar' src='./component/c_searchBar.ux'></import>
+<import name="search-bar" src="../../../Common/components/search_bar"></import>
 <import name='shucheng_swiper' src='./component/c_swiper.ux'></import>
 <import name="fastentry" src="./component/c_fastEntry"></import>
 <import name='multi' src='./component/c_list_multi'></import>
@@ -12,7 +12,7 @@
   <list class="shucheng-box">
     <!-- 搜索框 -->
     <list-item type="listItem1" class="shucheng-box-one">
-      <reader_main_shucheng_component_searchbar searchbar={{searchbar}}></reader_main_shucheng_component_searchbar>
+      <search-bar></search-bar>
     </list-item>
     <!-- 轮播图 -->
     <list-item type="listItem2" class="shucheng-box-two">
@@ -94,8 +94,6 @@
   module.exports = {
     props: [],
     data: {
-      //搜索框数据
-      searchbar: "./page/Page_Shucheng/img/c_search_search.png",
       //轮播图
       swiperdata:
         [

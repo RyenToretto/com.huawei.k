@@ -1,10 +1,10 @@
-<import name='reader_main_shujia_component_searchbar' src='./component/Component_SearchBar.ux'></import>
+<import name="search-bar" src="../../../Common/components/search_bar"></import>
 <import name='shujia_list' src='./component/c_shujia_list.ux'></import>
 <template>
   <!-- template里只能有一个根节点 -->
   <div class="shujia-box">
     <div class="shujia-box-top">
-      <reader_main_shujia_component_searchbar searchbar={{searchbar}}></reader_main_shujia_component_searchbar>
+      <search-bar></search-bar>
     </div>
     <div class="shujia-box-bottom">
       <shujia_list list={{list}} checkedlist={{checkedList}} img={{img}} foo={{foo}}></shujia_list>
@@ -143,10 +143,7 @@
         type1: "./page/Page_Shujia/img/image1.png",
         type2: "./page/Page_Shujia/img/headphone.png",
         shujiaLine: "./page/Page_Shujia/img/shujia.png"
-      },
-
-      //搜索框数据
-      searchbar: "./page/Page_Shujia/img/c_search_search.png"
+      }
     },
     
     onInit() {

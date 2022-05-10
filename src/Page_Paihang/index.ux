@@ -1,13 +1,12 @@
-<import name='reader_paihang_component_searchbar' src='./component/Component_SearchBar.ux'></import>
-<import name='paihanglist' src='./component/c_paihang_list'></import>
+<import name="search-bar" src="../Common/components/search_bar"></import>
+<import name="paihanglist" src="./component/c_paihang_list"></import>
 <template>
   <!-- template里只能有一个根节点 -->
   <div class="paihang-box">
     <div class="mallClassification-wrap">
-      <reader_paihang_component_searchbar url="Page_RecentSearch" searchbar="{{novelDatas.searchbar}}"></reader_paihang_component_searchbar>
+      <search-bar></search-bar>
     </div>
     <tabs class="tabs" onchange="changeTabactive">
-
       <tab-bar class="tab-bar">
         <block for="novelDatas.list">
           <div class="tab-item">
@@ -15,7 +14,7 @@
             <div if="{{$item.show_line}}" class="line" style="background-color: {{novelDatas.color_active}}"></div>
           </div>
         </block>
-      </tab-bar> 
+      </tab-bar>
 
       <tab-content class="tab-content" style="height:{{screenHeight}}px">
         <block for="novelDatas.list">
@@ -38,9 +37,7 @@
             </div>
           </div>
         </block>
-
       </tab-content>
-
     </tabs>
   </div>
 </template>
@@ -165,8 +162,6 @@
       novelDatas: {
         color_normal: '#1A1A1A',
         color_active: '#CD2325',
-        //搜索框数据
-        searchbar: "./img/c_search_search.png",
         list: [
           { title: '男生', show_line: false, color: '#1A1A1A', font_weight: 400 },
           { title: '女生', show_line: false, color: '#1A1A1A', font_weight: 400 }
