@@ -1,37 +1,8 @@
-<import name="banner-ad" src="../Common/components/banner_ad"></import>
-<import name="ask-ad-right" src="../Common/components/ask_ad_right"></import>
-<import name="origin-ad" src="../Common/components/origin_ad"></import>
-<import name="rewarded-ad" src="../Common/components/rewarded_ad"></import>
-<import name="ins-screen-ad" src="../Common/components/ins_screen_ad"></import>
-
 <template>
-  <div class="test-ad-page">
-    <ask-ad-right></ask-ad-right>
-
-    <!--  --><banner-ad id="refBannerAd"></banner-ad>
-
+  <div class="test-ali-pay">
     <div class="test-case-btn-group">
-      <input type="button" class="btn" value="获取Banner广告" onclick="getBannerAd(allowAdNonPersonnal)" />
-      <input type="button" class="btn with-mgn-top" value="隐藏Banner广告" onclick="hideBanerAd" />
-      <input type="button" class="btn with-mgn-top" value="显示Banner广告" onclick="showBannerAd" />
+      <input type="button" class="btn" value="支付宝支付测试" onclick="useAliPay" />
     </div>
-    
-    <text class="test-case-title">原生广告 =></text>
-    <origin-ad></origin-ad>
-
-    <text class="test-case-title">激励视频广告 =></text>
-    <rewarded-ad id="refRewardedAd"></rewarded-ad>
-    <div class="test-case-btn-group">
-      <input type="button" class="btn" value="展示激励视频广告" onclick="getRewardedAd" />
-    </div>
-
-    <text class="test-case-title">插屏广告 =></text>
-    <ins-screen-ad id="refInsScreenAd"></ins-screen-ad>
-    <div class="test-case-btn-group">
-      <input type="button" class="btn" value="显示插屏图片广告" onclick="getInsImageScreenAd" />
-      <input type="button" class="btn with-mgn-top" value="显示插屏视频广告" onclick="getInsVideoScreenAd" />
-    </div>
-
   </div>
 </template>
 
@@ -40,7 +11,7 @@
   @import "../Common/css/common.less";
   @import "../Common/css/button.less";
 
-  .test-ad-page {
+  .test-ali-pay {
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -73,36 +44,32 @@
 </style>
 
 <script>
+  import prompt from "@system.prompt";
+  import aliPay from '@service.alipay';
+
   module.exports = {
     data: {
       allowAdNonPersonnal: 0
     },
-    hideBanerAd() {
-      this.$child('refBannerAd').hideAdBaner()
-    },
-    showBannerAd() {
-      this.$child('refBannerAd').showAdBaner()
-    },
-    getBannerAd() {
-      this.$child('refBannerAd').getAdBanner()
-    },
-    getRewardedAd () {
-      this.$child('refRewardedAd').getAdRewarded()
-    },
-    getInsImageScreenAd () {
-      this.$child('refInsScreenAd').getAdInsImageScreen()
-    },
-    getInsVideoScreenAd () {
-      this.$child('refInsScreenAd').getAdInsVideoScreen()
-    },
     onInit: function () {
-      this.$page.setTitleBar({ text: '广告测试页面' });
+      this.$page.setTitleBar({ text: '支付宝支付测试页面' });
     },
-    onShow() {
-      APP_STATISTICS.page_show(this); // 页面打点 显示
-    },
-    onHide() {
-      APP_STATISTICS.page_hide(this); // 页面打点 隐藏
+    useAliPay() {
+      console.info('\n\n ===> 开始支付宝支付')
+      aliPay.pay({
+        orderInfo: "partner=\"2088611359395958\"&seller=\"2088611359395958\"&out_trade_no=\"201320148794006836322946\"&subject=\"支付金额 29.99 元\"&body=\"支付金额 29.99 元\"&total_fee=\"29.99\"&notify_url=\"https%3A%2F%2Fgw.pay.xiaomi.com%2Fnotify%2Fucashier%2F201320148794006836322946%2F0048002\"&sign_type=\"RSA\"&itbpay=\"1440m\"&sign=\"nKDHQigYsBKlBQQ2CDSdSKXlCwzjjaFLWiihjUNx1X1S2d5qP6mPavZG7le9ty2GdPi7958iOQw76bhALOdUO2Vn2pxIUPwTLWQ%2FUH9h5sp7gTTrjAOEWsDEIJSrJ0%2FLl4GtnBtYEWr0dL23gmbV0IcnqXWsNOGi5XDnfqs4IAw%3D\"",
+        callback: (res) => {
+          console.log('(line: 62)支付宝 res = ', res);
+          // const { utils } = this.$app.$def;
+          // webview.loadUrl({ url });
+          prompt.showToast({
+            message: '支付成功'
+          });
+        },
+        fail: function (res, code) {
+          console.log(`(line: 70)支付宝失败 code(${code}), res = `, res);
+        }
+      })
     }
   }
 </script>

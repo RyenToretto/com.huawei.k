@@ -24,6 +24,7 @@
           }
         },
         { "name": "system.webview" },
+        { "name": "service.alipay" },
         { "name": "system.shortcut" },
         { "name": "system.file" },
         { "name": "system.configuration" },
@@ -87,6 +88,10 @@
             "Page_Test_Wechat": {
               "component": "test_wechat_pay",
               "path": "/Page_Test_Wechat"
+            },
+            "Page_Test_Ali": {
+              "component": "test_ali_pay",
+              "path": "/Page_Test_Ali"
             },
             "Page_Notice": {
               "component": "index",
