@@ -1,0 +1,103 @@
+<template>
+  <div class="test-wechat-pay">
+    <div class="test-case-btn-group">
+      <input class="btn" type="button" value="微信支付测试" onclick="useWechatPay" />
+    </div>
+  </div>
+</template>
+
+<style lang="less">
+  @import "../Common/css/variable.less";
+  @import "../Common/css/common.less";
+  @import "../Common/css/button.less";
+
+  .test-wechat-pay {
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    .test-case-title {
+      margin: 38.4px 0 10px;
+      padding: 0 4px;
+      border-top: 1px solid #000000;
+      border-bottom: 1px solid #000000;
+    }
+    .test-case-btn-group {
+      padding: 19.2px 0;
+      flex-direction: column;
+      align-items: center;
+      background-color: #4682b4;
+      .btn {
+        height: 80px;
+        background-color: #00bfff;
+        color: #ffffff;
+        border-radius: 19.2px;
+        width: 80%;
+      }
+      .with-mgn-top {
+        margin-top: 19.2px;
+      }
+      .btn:active {
+        background-color: #058fbd;
+      }
+    }
+  }
+</style>
+
+<script>
+  import prompt from "@system.prompt";
+  import wxpay from '@service.wxpay';
+  import webview from '@system.webview';
+
+  module.exports = {
+    data: {
+    },
+    onInit: function () {
+      this.$page.setTitleBar({ text: '微信支付测试页面' });
+    },
+    onShow() {
+      APP_STATISTICS.page_show(this); // 页面打点 显示
+    },
+    onHide() {
+      APP_STATISTICS.page_hide(this); // 页面打点 隐藏
+    },
+    useWechatPay() {
+      const theType = wxpay.getType();
+      if (theType) {
+        console.log('theType =', theType);
+      }
+      console.info('\n\n ===> 开始微信支付')
+      wxpay.pay({
+        prepayid: 'wx09113246667953cfb8d067ad1892777375', // your order prepayid,eg: wx09113246667953cfb8d067ad1892777375
+        referer: 'https://www.huawei.cn', // your host name configured in wechat: https://www.huawei.cn
+        extra: {
+          mweb_url: 'https%3A%2F%2Fwx.tenpay.com%2Fcgi-bin%2Fmmpayweb-bin%2Fcheckmweb%3Fprepay_id%3Dwx09113246667953cfb8d067ad1892777375%26package%3D299247950%26redirect_url%3Dhttps%3A%2F%2Fm.vip.com%2Fuser-order-detail-list-0.html',
+          prepayid: 'wx09113246667953cfb8d067ad1892777375'
+        },
+        fail: (data, code) => {
+          console.log('(line: 72)微信支付 ' + wxpay.getType() + ' 失败, code = ' + code);
+          if (code === 1000) {
+            prompt.showToast({
+              message: '未安装微信或当前设备不支持微信支付服务'
+            })
+          }
+        },
+        cancel: (data) => {
+          console.log('(line: 78)微信支付 ' + wxpay.getType() + ' 用户取消');
+          prompt.showToast({
+            message: '微信支付 ' + wxpay.getType() + ' 用户取消'
+          })
+        },
+        success: ({ code, final_url: url }) => {
+          if (code === 0) {
+            const { utils } = this.$app.$def;
+            console.log('(line: 84)微信支付 ' + wxpay.getType() + ' 成功', code, utils.decodeUrl(url));
+            webview.loadUrl({ url });
+            prompt.showToast({
+              message: '微信支付 ' + wxpay.getType() + ' 成功'
+            });
+          }
+        }
+      })
+    }
+  }
+</script>

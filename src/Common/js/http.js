@@ -44,7 +44,7 @@ const request = (options = {}) => {
 
 const http = {
   get: function (url, params, options = {}) {
-    // console.log('\n\n====> get ajax 请求参数: ', { ...rootStore.getGlbParams(), ...params});
+    console.log('\n\n===> get ajax 请求参数: ', { ...rootStore.getGlbParams(), ...params});
     return request({ url: BASE_URL + url, data: { ...rootStore.getGlbParams(), ...params}, method: 'GET', ...options })
   },
   post: function (url, data, options = {}) {

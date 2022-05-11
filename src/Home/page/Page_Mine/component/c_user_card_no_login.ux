@@ -3,7 +3,7 @@
   <!-- 如果background-image需要调用所传的参数，不能使用url,直接使用{{url}}即可 -->
   <div class="user-card-nologin">
     <div class="usercard-top">
-      <div class="avatar-noexpand" @click="clickSignBtn">
+      <div class="avatar-noexpand" @click="useSimpleLogin">
         <image src="{{content.avatar}}"></image>
         <div class="name-nologin">
           <text class="main-title">{{content.title}}</text>
@@ -79,11 +79,12 @@
     data() {
       return {
         provider: "",
+        code: '',
         accessToken: '',
         content: this.content
       }
     },
-    clickSignBtn() {
+    useSimpleLogin() {
       this.provider = account.getProvider();
       if (this.provider !== "huawei") {
         prompt.showToast({
@@ -100,14 +101,14 @@
         scope: "scope.baseProfile",
         success: async (data) => {
           this.accessToken = data.accessToken;
-          await this.loginSuccess(data);
+          await this.loginSuccess();
         },
-        fail: (data, code) => {
-          console.log(`code(${code}): 登陆失败, data = ${JSON.stringify(data)}`);
+        fail: (data, errNo) => {
+          console.log(`errNo(${errNo}): 登陆失败, data = ${JSON.stringify(data)}`);
         }
       });
     },
-    async loginSuccess(data) {
+    async loginSuccess() {
       return new Promise((resolve) => {
         const { utils, pubSub, rootStore } = this.$app.$def;
         utils.promiseFactory(storage.set, { key: 'access_token', value: this.accessToken });
@@ -119,13 +120,58 @@
             pubSub.publish(rootStore.UPDATE_LOGIN, result);
             resolve(result);
           },
-          fail: (res, code) => {
+          fail: (res, errNo) => {
             const result = { isLogin: false }
             pubSub.publish(rootStore.UPDATE_LOGIN, result);
             resolve(result);
           }
         });
       })
+    },
+    useCodeLogin() {
+      this.provider = account.getProvider();
+      if (this.provider !== "huawei") {
+        prompt.showToast({
+          message: "当前设备暂不支持华为账号服务。",
+          duration: 2000,
+          gravity: "center"
+        });
+        return;
+      }
+      if (this.code) {
+        account.checkUserSession({
+          success: async (data) => {
+            await this.getAccessTokenByCode()
+            await this.loginSuccess();
+          },
+          fail: function (data, errNo) {
+            this.getCode();
+          }
+        });
+      } else {
+        this.getCode();
+      }
+    },
+    getCode() {
+      account.authorize({
+        appid: "106051257",
+        type: "code",
+        state: "feedbeef",
+        scope: "scope.baseProfile",
+        success: async (data) => {
+          this.code = data.code;
+          await this.getAccessTokenByCode()
+          await this.loginSuccess();
+        },
+        fail: (data, errNo) => {
+          console.log(`errNo(${errNo}): 登陆失败, data = ${JSON.stringify(data)}`);
+        }
+      });
+    },
+    getAccessTokenByCode() {
+      console.log('\n\n ===> this.code =', this.code)
+      const accessToken = 111
+      this.accessToken = accessToken;
     }
   }
 </script>

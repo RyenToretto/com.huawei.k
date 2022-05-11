@@ -69,7 +69,7 @@
 				})
 			} else if (type === "都市") {
 				router.push({
-					uri: 'Page_In_Build',
+					uri: 'Page_Test_Wechat',
 					params: { type: type }
 				})
 			} else if (type === "特价") {

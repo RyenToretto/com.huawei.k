@@ -7,7 +7,7 @@
 <template>
   <!-- template里只能有一个根节点 -->
   <div class="container">
-    <tabs onchange="switchContent">
+    <tabs onchange="switchContent" index="1">
       <tab-content>
         <shujia foo="{{foo}}"></shujia>
         <shucheng></shucheng>

@@ -15,6 +15,15 @@
         { "name": "system.image" },
         { "name": "system.network" },
         { "name": "service.account" },
+        {
+          "name": "service.wxpay",
+          "params": {
+            "package": "com.your.package",
+            "sign": "abcdefg",
+            "url": "https://your.domain/page"
+          }
+        },
+        { "name": "system.webview" },
         { "name": "system.shortcut" },
         { "name": "system.file" },
         { "name": "system.configuration" },
@@ -74,6 +83,10 @@
             "Page_In_Build": {
               "component": "index",
               "path": "/Page_In_Build"
+            },
+            "Page_Test_Wechat": {
+              "component": "test_wechat_pay",
+              "path": "/Page_Test_Wechat"
             },
             "Page_Notice": {
               "component": "index",

@@ -1,6 +1,4 @@
 <script>
-  import PubSub from 'pubsub-js'
-
   // 快应用官方: 华为分析服务 https://developer.huawei.com/consumer/cn/service/josp/agc/index.html#/myProject/99536292102212564/9249519184595980730?appId=106051257
   import agconnect from '@agconnect/api';
   import '@agconnect/instance';
@@ -8,6 +6,7 @@
 
   import storage from '@system.storage';
   import account from '@service.account';
+  import PubSub from './Common/js/pubSub_1_9_4/index.js'
   import rootStore from './Common/js/rootStore.js'
   import http from './Common/js/http.js'
   import utils from './Common/js/utils.js'
@@ -30,7 +29,7 @@
     provider: '',
     deviceInfo: {
     },
-    appPubSub() {
+    appSubscribe() {
       PubSub.subscribe(rootStore.GET_LOGIN, (msg) => {
         return this.isLogin
       });
@@ -47,7 +46,7 @@
       await this.getUserInfo();
     },
     async onCreate() {
-      this.appPubSub();
+      this.appSubscribe();
       await this.getDeviceInfo();
       await this.getLoginState();
       PubSub.publish(rootStore.INIT_DONE);
@@ -69,7 +68,7 @@
       } catch (error) { }
     },
     updateLogin(msg, { isLogin, userInfo }) {
-      console.log(`\n${msg}: 用户${isLogin ? '已' : '未'}登陆, nickname =`, userInfo.nickname)
+      console.log(`\n\n===>${msg}: 用户${isLogin ? '已' : '未'}登陆, nickname =`, userInfo.nickname)
       this.isLogin = isLogin
       this.userInfo = userInfo
     },
