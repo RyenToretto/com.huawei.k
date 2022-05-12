@@ -70,7 +70,7 @@
                 console.info('Banner广告加载成功!');
             });
             bannerAd.onError(e => {
-                console.error("Banner广告 onError " + JSON.stringify(e));
+                console.error("Banner广告 onError " + JSON.stringify(e, null, 4));
                 prompt.showToast({
                     message: "Banner广告加载异常",
                     duration: 2000,

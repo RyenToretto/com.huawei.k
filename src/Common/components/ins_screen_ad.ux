@@ -47,11 +47,11 @@
             });
             interstitialAd.load();
             interstitialAd.onLoad(function (data) {
-                console.log("图片插屏广告已加载 data= " + JSON.stringify(data));
+                console.log("图片插屏广告已加载 data= " + JSON.stringify(data, null, 4));
                 interstitialAd.show();
             });
             interstitialAd.onError(err => {
-                console.log("图片插屏广告异常 error = " + JSON.stringify(err));
+                console.log("图片插屏广告异常 error = " + JSON.stringify(err, null, 4));
             });
             interstitialAd.onClose(() => {
                 console.log("图片插屏广告已关闭");
@@ -78,18 +78,18 @@
             });
             interstitialAd.load().then(
                 data => {
-                    console.info("请求视频插屏广告成功 data=" + JSON.stringify(data));
+                    console.info("请求视频插屏广告成功 data=" + JSON.stringify(data, null, 4));
                 },
                 data => {
-                    console.info("请求视频插屏广告失败 data=" + JSON.stringify(data));
+                    console.info("请求视频插屏广告失败 data=" + JSON.stringify(data, null, 4));
                 }
             );
             interstitialAd.onLoad(function (data) {
-                console.log("视频插屏广告已加载 data= " + JSON.stringify(data));
+                console.log("视频插屏广告已加载 data= " + JSON.stringify(data, null, 4));
                 interstitialAd.show();
             });
             interstitialAd.onError(err => {
-                console.log("视频插屏广告异常 error = " + JSON.stringify(err));
+                console.log("视频插屏广告异常 error = " + JSON.stringify(err, null, 4));
             });
             interstitialAd.onClose(() => {
                 console.log("视频插屏广告已关闭");

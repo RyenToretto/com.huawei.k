@@ -1,16 +1,15 @@
 <import name="search-bar" src="../../../Common/components/search_bar"></import>
-<import name='shucheng-swiper' src='./component/shucheng_swiper'></import>
-<import name="fastentry" src="./component/c_fastEntry"></import>
-<import name='multi' src='./component/c_list_multi'></import>
-<import name='shucheng_swi' src='./component/c_item_container_swiper'></import>
-<import name='single_every' src='./component/c_list_single'></import>
+<import name="shucheng-swiper" src="./component/shucheng_swiper"></import>
+<import name="nav-card" src="./component/nav_card"></import>
+<import name="multi" src="./component/c_list_multi"></import>
+<import name="shucheng_swi" src="./component/c_item_container_swiper"></import>
+<import name="single_every" src="./component/c_list_single"></import>
 <!-- <import name='single_every' src='./component/c_list_single'></import> -->
-<import name='recommandlist' src='./component/c_recommandList'></import>
+<import name="recommandlist" src="./component/c_recommandList"></import>
 
 <template>
   <!-- template里只能有一个根节点 -->
   <list class="shucheng-box">
-
     <!-- 搜索框 -->
     <list-item type="listItem1" class="shucheng-box-one">
       <search-bar></search-bar>
@@ -18,44 +17,43 @@
 
     <!-- 轮播图 -->
     <list-item type="listItem2" class="shucheng-box-two">
-      <shucheng-swiper swiperdata={{swiperdata}}></shucheng-swiper>
+      <shucheng-swiper></shucheng-swiper>
     </list-item>
 
-    <!-- 快捷方式入口 -->
+    <!-- 导航卡片 -->
     <list-item type="listItem3" class="shucheng-box-three">
-      <fastentry list="{{fastentrylist}}"></fastentry>
-     </list-item>
+      <nav-card nav-list="{{navList}}"></nav-card>
+    </list-item>
 
     <!-- 每日一书 -->
     <list-item type="listItem4" class="shucheng-box-four">
       <single_every list="{{everydayonebook}}"></single_every>
-     </list-item>
+    </list-item>
 
     <!-- 为你推荐 -->
     <list-item type="listItem5" class="shucheng-box-five">
       <multi banner="{{banner2}}" list="{{data2}}" num="{{3}}"></multi>
-     </list-item>
+    </list-item>
 
     <!-- 根据你读过的书推荐 -->
     <list-item type="listItem6" class="shucheng-box-six">
       <single_every list="{{listbyyouread}}"></single_every>
-     </list-item>
+    </list-item>
 
     <!-- 专题推荐 -->
     <list-item type="listItem7" class="shucheng-box-seven">
       <shucheng_swi list="{{subjectlist}}" banner="{{banner}}"></shucheng_swi>
-     </list-item>
+    </list-item>
 
     <!-- 榜单推荐 -->
     <list-item type="listItem8" class="shucheng-box-eight">
-      <recommandlist recommandlist="{{recommendlist.list}}" arrow="{{recommendlist.arrowimage}}" title="{{recommendlist.title}}"
-        morelink="{{recommendlist.morelink}}"></recommandlist>
-     </list-item>
+      <recommandlist recommandlist="{{recommendlist.list}}" arrow="{{recommendlist.arrowimage}}" title="{{recommendlist.title}}" morelink="{{recommendlist.morelink}}"></recommandlist>
+    </list-item>
 
     <!-- 限时特价 -->
     <list-item type="listItem9" class="shucheng-box-nine">
       <multi banner="{{banner3}}" list="{{data3}}" num="{{4}}"></multi>
-     </list-item>
+    </list-item>
   </list>
 </template>
 
@@ -73,65 +71,53 @@
   module.exports = {
     props: [],
     data: {
-      //轮播图
-      swiperdata:
-        [
-          { src: "./page/Page_Shucheng/TO_DELETE/banner/banner1.png"},
-          { src: "./page/Page_Shucheng/TO_DELETE/banner/banner1.png"},
-          { src: "./page/Page_Shucheng/TO_DELETE/banner/banner1.png"}
-        ],
-
       //快捷入口数据 
-      fastentrylist:
-        [{
-          'icon': './page/Page_Shucheng/img/dushi.png',
-          'title': '都市',
-          'src': 'city',
-          'isNew': false
+      navList: [
+        {
+          'icon': './page/Page_Shucheng/img/ico_library.png',
+          'title': '书架',
+          'src': 'city'
         },
         {
-          'icon': './page/Page_Shucheng/img/paihang.png',
-          'title': '排行',
-          'src': 'paihang',
-          'isNew': false
+          'icon': './page/Page_Shucheng/img/ico_boy.png',
+          'title': '男生',
+          'src': 'paihang'
         },
         {
-          'icon': './page/Page_Shucheng/img/tejia.png',
-          'title': '特价',
-          'src': 'tejia',
-          'isNew': false
+          'icon': './page/Page_Shucheng/img/ico_girl.png',
+          'title': '女生',
+          'src': 'tejia'
         },
         {
-          'icon': './page/Page_Shucheng/img/mianfei.png',
-          'title': '免费',
-          'src': 'free',
-          'isNew': false
+          'icon': './page/Page_Shucheng/img/ico_cat.png',
+          'title': '分类',
+          'src': 'free'
         }
-        ],
+      ],
 
       //每日一书
       everydayonebook:
-        {
-          title: "每日一书",
-          subtitle: "更多",
-          arrow: "./page/Page_Shucheng/img/arrow.png",
-          list: [
-            {
-              uri: './page/Page_Shucheng/TO_DELETE/everydayBook/everybook.png',
-              title: '寄余生任我江海',
-              brief: '结婚仿佛金漆的笼子，笼子外面的鸟想住进去，笼内的鸟想飞出来',
-              author: '孟康',
-              clazz: ['古典爱情', '文学']
-            }
-          ]
-        },
+      {
+        title: "每日一书",
+        subtitle: "更多",
+        arrow: "./page/Page_Shucheng/img/arrow.png",
+        list: [
+          {
+            uri: './page/Page_Shucheng/TO_DELETE/everydayBook/everybook.png',
+            title: '寄余生任我江海',
+            brief: '结婚仿佛金漆的笼子，笼子外面的鸟想住进去，笼内的鸟想飞出来',
+            author: '孟康',
+            clazz: ['古典爱情', '文学']
+          }
+        ]
+      },
       //为你推荐
       banner2:
-        {
-          title: '为你推荐',
-          link: '更多',
-          arrow_uri: './page/Page_Shucheng/img/arrow.png'
-        },
+      {
+        title: '为你推荐',
+        link: '更多',
+        arrow_uri: './page/Page_Shucheng/img/arrow.png'
+      },
       data2:
         [
           {
@@ -168,41 +154,41 @@
 
       //根据你读过的书推荐
       listbyyouread:
-        {
-          title: "根据你读过的书推荐",
-          subtitle: "更多",
-          arrow: "./page/Page_Shucheng/img/arrow.png",
-          list: [
-            {
-              uri: './page/Page_Shucheng/TO_DELETE/recommendByRead/read1.png',
-              title: '情人',
-              brief: '讲述一个不依附于男人、有经济实力按自己意愿去尽享爱情之美的现代女性修子的故事。',
-              author: '渡边淳一',
-              clazz: ['古典爱情', '文学', '外国']
-            },
-            {
-              uri: './page/Page_Shucheng/TO_DELETE/recommendByRead/read1.png',
-              title: '欢乐颂',
-              brief: '海归的高管，初入职场的乖乖女，犯傻的小职员，胡同里不能低下头的公主加上富二代的小奸商。',
-              author: '孟康',
-              clazz: ['古典爱情']
-            },
-            {
-              uri: './page/Page_Shucheng/TO_DELETE/recommendByRead/read1.png',
-              title: '象牙塔',
-              brief: '活动的主体是人，即拥有可预测行为且容易犯错的个体。泰勒讲述了他将将继续饿从“象牙塔”中带回现实之旅。',
-              author: '孟康',
-              clazz: ['文学', '外国']
-            }
-          ]
-        },
+      {
+        title: "根据你读过的书推荐",
+        subtitle: "更多",
+        arrow: "./page/Page_Shucheng/img/arrow.png",
+        list: [
+          {
+            uri: './page/Page_Shucheng/TO_DELETE/recommendByRead/read1.png',
+            title: '情人',
+            brief: '讲述一个不依附于男人、有经济实力按自己意愿去尽享爱情之美的现代女性修子的故事。',
+            author: '渡边淳一',
+            clazz: ['古典爱情', '文学', '外国']
+          },
+          {
+            uri: './page/Page_Shucheng/TO_DELETE/recommendByRead/read1.png',
+            title: '欢乐颂',
+            brief: '海归的高管，初入职场的乖乖女，犯傻的小职员，胡同里不能低下头的公主加上富二代的小奸商。',
+            author: '孟康',
+            clazz: ['古典爱情']
+          },
+          {
+            uri: './page/Page_Shucheng/TO_DELETE/recommendByRead/read1.png',
+            title: '象牙塔',
+            brief: '活动的主体是人，即拥有可预测行为且容易犯错的个体。泰勒讲述了他将将继续饿从“象牙塔”中带回现实之旅。',
+            author: '孟康',
+            clazz: ['文学', '外国']
+          }
+        ]
+      },
       //专题推荐
       banner:
-        {
-          title: '专题推荐',
-          link: '更多',
-          uri: './page/Page_Shucheng/img/arrow.png'
-        },
+      {
+        title: '专题推荐',
+        link: '更多',
+        uri: './page/Page_Shucheng/img/arrow.png'
+      },
       subjectlist:
         [{
           img: './page/Page_Shucheng/TO_DELETE/banner/banner1.png'
@@ -216,51 +202,51 @@
         ],
       //榜单推荐
       recommendlist:
-        {
-          // 榜单排行recommandList入参：
-          title: "榜单推荐",
-          more: "更多",
-          arrowimage: "./page/Page_Shucheng/img/arrow.png",
-          morelink: baidu,
-          list: [{
-            recommandType: "新书榜",
-            typeUrl: baidu,
-            backgroundimage: "./page/Page_Shucheng/img/image1.png",
-            listItems: [{
-              name: "我的前半生",
-              url: baidu
-            }, {
-              name: "花间集",
-              url: baidu
-            }, {
-              name: "如何学习",
-              url: baidu
-            }]
+      {
+        // 榜单排行recommandList入参：
+        title: "榜单推荐",
+        more: "更多",
+        arrowimage: "./page/Page_Shucheng/img/arrow.png",
+        morelink: baidu,
+        list: [{
+          recommandType: "新书榜",
+          typeUrl: baidu,
+          backgroundimage: "./page/Page_Shucheng/img/image1.png",
+          listItems: [{
+            name: "我的前半生",
+            url: baidu
           }, {
-            recommandType: "畅销榜",
-            typeUrl: baidu,
-            backgroundimage: "./page/Page_Shucheng/img/image2.png",
-            listItems: [{
-              name: "我的前半生",
-              url: baidu
-            }, {
-              name: "花间集",
-              url: baidu
-            }, {
-              name: "如何学习",
-              url: baidu
-            }]
-          }
-          ]
-        },
+            name: "花间集",
+            url: baidu
+          }, {
+            name: "如何学习",
+            url: baidu
+          }]
+        }, {
+          recommandType: "畅销榜",
+          typeUrl: baidu,
+          backgroundimage: "./page/Page_Shucheng/img/image2.png",
+          listItems: [{
+            name: "我的前半生",
+            url: baidu
+          }, {
+            name: "花间集",
+            url: baidu
+          }, {
+            name: "如何学习",
+            url: baidu
+          }]
+        }
+        ]
+      },
       //限时特价
       banner3:
-        {
-          title: '限时特价',
-          time_uri: './page/Page_Shucheng/img/time.png',
-          link: '更多',
-          arrow_uri: './page/Page_Shucheng/img/arrow.png'
-        },
+      {
+        title: '限时特价',
+        time_uri: './page/Page_Shucheng/img/time.png',
+        link: '更多',
+        arrow_uri: './page/Page_Shucheng/img/arrow.png'
+      },
       data3:
         [
           {

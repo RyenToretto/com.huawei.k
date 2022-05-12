@@ -3,7 +3,7 @@
   <!-- 如果background-image需要调用所传的参数，不能使用url,直接使用{{url}}即可 -->
   <div class="user-card-nologin">
     <div class="usercard-top">
-      <div class="avatar-noexpand" @click="useSimpleLogin">
+      <div class="avatar-noexpand" @click="useCodeLogin">
         <image src="{{content.avatar}}"></image>
         <div class="name-nologin">
           <text class="main-title">{{content.title}}</text>
@@ -68,8 +68,8 @@
 </style>
 
 <script>
+  import ad from "@service.ad";
   import prompt from "@system.prompt";
-  import storage from '@system.storage';
   import account from '@service.account';
 
   module.exports = {
@@ -80,53 +80,8 @@
       return {
         provider: "",
         code: '',
-        accessToken: '',
         content: this.content
       }
-    },
-    useSimpleLogin() {
-      this.provider = account.getProvider();
-      if (this.provider !== "huawei") {
-        prompt.showToast({
-          message: "当前设备暂不支持华为账号服务。",
-          duration: 2000,
-          gravity: "center"
-        });
-        return;
-      }
-      account.authorize({
-        appid: "106051257",
-        type: "token",
-        state: "feedbeef",
-        scope: "scope.baseProfile",
-        success: async (data) => {
-          this.accessToken = data.accessToken;
-          await this.loginSuccess();
-        },
-        fail: (data, errNo) => {
-          console.log(`errNo(${errNo}): 登陆失败, data = ${JSON.stringify(data)}`);
-        }
-      });
-    },
-    async loginSuccess() {
-      return new Promise((resolve) => {
-        const { utils, pubSub, rootStore } = this.$app.$def;
-        utils.promiseFactory(storage.set, { key: 'access_token', value: this.accessToken });
-        account.getProfile({
-          appid: "106051257",
-          token: this.accessToken,
-          success: (userInfo) => {
-            const result = { isLogin: true, userInfo }
-            pubSub.publish(rootStore.UPDATE_LOGIN, result);
-            resolve(result);
-          },
-          fail: (res, errNo) => {
-            const result = { isLogin: false }
-            pubSub.publish(rootStore.UPDATE_LOGIN, result);
-            resolve(result);
-          }
-        });
-      })
     },
     useCodeLogin() {
       this.provider = account.getProvider();
@@ -142,7 +97,6 @@
         account.checkUserSession({
           success: async (data) => {
             await this.getAccessTokenByCode()
-            await this.loginSuccess();
           },
           fail: function (data, errNo) {
             this.getCode();
@@ -161,17 +115,29 @@
         success: async (data) => {
           this.code = data.code;
           await this.getAccessTokenByCode()
-          await this.loginSuccess();
         },
         fail: (data, errNo) => {
-          console.log(`errNo(${errNo}): 登陆失败, data = ${JSON.stringify(data)}`);
+          console.log(`errNo(${errNo}): 登陆失败, data = ${JSON.stringify(data, null, 4)}`);
         }
       });
     },
-    getAccessTokenByCode() {
-      console.log('\n\n ===> this.code =', this.code)
-      const accessToken = 111
-      this.accessToken = accessToken;
+    async getAccessTokenByCode() {
+      const { http, rootStore, requestUserInfo } = this.$app.$def
+      try {
+        let type = ad.getProvider();
+        const res = await http.post('/user/login', {
+          code: this.code,
+          type
+        });
+        const { data } = res;
+        if (data.message && +data.message.code === 200 && data.result) {
+          await rootStore.setGlbHeader(data.result);
+          requestUserInfo()
+        }
+      } catch (e) {
+        console.log('187 get Access Token By Code, err: ', e);
+      } finally {
+      }
     }
   }
 </script>

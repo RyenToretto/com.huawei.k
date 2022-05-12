@@ -1,0 +1,91 @@
+<template>
+	<div class="nav-card">
+		<div for="{{navList}}" class="each-nav-box" onclick="detail($item.title)">
+			<div class="each-nav-img">
+				<image src="{{$item.icon}}"></image>
+			</div>
+			<div class="each-nav-info">
+				<text class="each-nav-text">{{$item.title}}</text>
+				<text class="each-nav-tips" if="{{$item.isNew}}"></text>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style lang="less">
+	.nav-card {
+		padding: 15.36px 0px 0px 0px;
+		width: 655.68px;
+		background-color: #ffffff;
+		justify-content: space-around;
+		.each-nav-box {
+			flex-direction: column;
+			align-items: center;
+			.each-nav-img {
+				width: 79.68px;
+				height: 79.68px;
+				.each-nav-number {
+					height: 25px;
+					margin: 0px 0px 0px -10px;
+					padding: 0px 4.8px;
+					font-size: 18px;
+					color: #ffffff;
+					border-radius: 12px;
+					background-color: #FF1400;
+				}
+			}
+			.each-nav-info {
+				.each-nav-text {
+					padding-top: 16.32px;
+					color: #1A1A1A;
+					font-size: 24px;
+				}
+				.each-nav-tips {
+					width: 16.32px;
+					height: 16.32px;
+					margin: 24px 0px 0px 0px;
+					border-radius: 16.32px;
+					background-color: #FF1400;
+				}
+			}
+		}
+	}
+</style>
+
+<script>
+	import router from '@system.router';
+	module.exports = {
+		props: {
+			navList: {
+				type: Array,
+				default() {
+					return []
+				}
+			}
+		},
+		detail(type) {
+			if (type === "排行") {
+				router.push({
+					uri: 'Page_Paihang',
+					params: { testId: 'testId' }
+				})
+			} else if (type === "都市") {
+				router.push({
+					uri: 'Page_Test_Ali',
+					params: { type: type }
+				})
+			} else if (type === "特价") {
+				router.push({
+					uri: 'Page_In_Build',
+					params: { type: type }
+				})
+			} else if (type === "免费") {
+				router.push({
+					uri: 'Page_In_Build',
+					params: { type: type }
+				})
+			}
+
+		}
+	}
+</script>

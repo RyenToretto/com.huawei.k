@@ -43,7 +43,7 @@
         this.rewarded.errStr = "";
       });
       rewardedVideoAd.onError(e => {
-        console.error("激励视频加载异常 error:" + JSON.stringify(e));
+        console.error("激励视频加载异常 error:" + JSON.stringify(e, null, 4));
         this.rewarded.errStr = JSON.stringify(e);
         prompt.showToast({
           message: "激励视频加载异常",

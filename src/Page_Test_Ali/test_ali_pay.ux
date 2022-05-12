@@ -59,7 +59,7 @@
       aliPay.pay({
         orderInfo: "partner=\"2088611359395958\"&seller=\"2088611359395958\"&out_trade_no=\"201320148794006836322946\"&subject=\"支付金额 29.99 元\"&body=\"支付金额 29.99 元\"&total_fee=\"29.99\"&notify_url=\"https%3A%2F%2Fgw.pay.xiaomi.com%2Fnotify%2Fucashier%2F201320148794006836322946%2F0048002\"&sign_type=\"RSA\"&itbpay=\"1440m\"&sign=\"nKDHQigYsBKlBQQ2CDSdSKXlCwzjjaFLWiihjUNx1X1S2d5qP6mPavZG7le9ty2GdPi7958iOQw76bhALOdUO2Vn2pxIUPwTLWQ%2FUH9h5sp7gTTrjAOEWsDEIJSrJ0%2FLl4GtnBtYEWr0dL23gmbV0IcnqXWsNOGi5XDnfqs4IAw%3D\"",
         callback: (res) => {
-          console.log('(line: 62)支付宝 res = ', res);
+          console.log('(line: 62)支付宝 res = ', JSON.stringify(res, null, 4));
           // const { utils } = this.$app.$def;
           // webview.loadUrl({ url });
           prompt.showToast({
@@ -67,7 +67,7 @@
           });
         },
         fail: function (res, code) {
-          console.log(`(line: 70)支付宝失败 code(${code}), res = `, res);
+          console.log(`(line: 70)支付宝失败 code(${code}), res = `, JSON.stringify(res, null, 4));
         }
       })
     }

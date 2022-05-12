@@ -165,7 +165,7 @@
       ad.requestConsentUpdate({ // 更新用户意见状态
         success: function (data) { // 广告技术提供商等信息
           // 并进一步判断isNeedConsent的值
-          console.log("更新用户意见状态 成功 data = " + JSON.stringify(data));
+          console.log("更新用户意见状态 成功 data = " + JSON.stringify(data, null, 4));
 
           // 确保每次访问代码演示时都会显示一个对话框。 一般情况下不需要添加代码。
           that.checkShowConsentDialog(data);
@@ -185,7 +185,7 @@
         },
         fail: function (data) {
           // 失败时回调。可以请求非个性化广告。
-          console.log("更新用户意见状态 失败 data = " + JSON.stringify(data));
+          console.log("更新用户意见状态 失败 data = " + JSON.stringify(data, null, 4));
           that.allowAdNonPersonnal = 1;
         },
         complete: function () { }

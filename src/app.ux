@@ -5,15 +5,14 @@
   import '@hmscore/analytics-sdk-quickapp';
 
   import storage from '@system.storage';
-  import account from '@service.account';
-  import PubSub from './Common/js/pubSub_1_9_4/index.js'
-  import rootStore from './Common/js/rootStore.js'
-  import http from './Common/js/http.js'
-  import utils from './Common/js/utils.js'
-  import { agConnectConfig } from './Common/js/static.js'
+  import PubSub from './Common/js/pubSub_1_9_4/index.js';
+  import rootStore from './Common/js/rootStore.js';
+  import http from './Common/js/http.js';
+  import utils from './Common/js/utils.js';
+  import { agConnectConfig } from './Common/js/static.js';
 
   // 快应用官方: 轻粒子数据统计 http://developer.quickingdata.com/doc/developing/application/q_app.html
-  import './Common/js/qinglizi/appStatistics.min.js'
+  import './Common/js/qinglizi/appStatistics.min.js';
 
   agconnect.instance().configInstance(agConnectConfig);
 
@@ -25,15 +24,29 @@
     pubSub: PubSub,
     userInfo: {},
     isLogin: false,
-    accessToken: '',
     provider: '',
     deviceInfo: {
     },
+    async requestUserInfo() {
+      const loginInfo = { isLogin: true, userInfo: {} };
+      try {
+        const { data } = await http.get('/user/info', {});
+        if (data.message && +data.message.code === 200 && data.result) {
+          loginInfo.userInfo = data.result;
+          loginInfo.userInfo.nickname = data.result.name;
+        }
+      } catch (e) {
+        console.log('request User Info, err = ', JSON.stringify(e, null, 4));
+      } finally {
+        PubSub.publish(rootStore.UPDATE_LOGIN, loginInfo);
+      }
+    },
     appSubscribe() {
-      PubSub.subscribe(rootStore.GET_LOGIN, (msg) => {
-        return this.isLogin
-      });
-      PubSub.subscribe(rootStore.UPDATE_LOGIN, this.updateLogin);
+      return new Promise(async (resolve) => {
+        await PubSub.subscribe(rootStore.GET_LOGIN, (msg) => this.isLogin);
+        await PubSub.subscribe(rootStore.UPDATE_LOGIN, this.updateLogin);
+        resolve();
+      })
     },
     async getDeviceInfo() {
       const { deviceInfo } = await rootStore.setGlbParams();
@@ -41,15 +54,21 @@
       rootStore.getGlbParams();
     },
     async getLoginState() {
-      let accessToken = await utils.promiseFactory(storage.get, { key: 'access_token' });
-      this.accessToken = accessToken || '';
-      await this.getUserInfo();
+      const accessToken = await utils.promiseFactory(storage.get, { key: 'access_token' });
+      if (accessToken) {
+        await rootStore.setGlbHeader({ accessToken });
+        await this.requestUserInfo();
+      } else {
+        const result = { isLogin: false, userInfo: {} };
+        PubSub.publish(rootStore.UPDATE_LOGIN, result);
+      }
     },
     async onCreate() {
-      this.appSubscribe();
+      await this.appSubscribe();
       await this.getDeviceInfo();
       await this.getLoginState();
       PubSub.publish(rootStore.INIT_DONE);
+
       // 生产环境屏蔽以下两行
       agconnect.analytics.InitSettings.debugMode = true; // 启用调试模式
       agconnect.analytics.InitSettings.terminalName = "koujianfeng dev terminal"; // 调试模式下，自定义终端标识
@@ -68,28 +87,14 @@
       } catch (error) { }
     },
     updateLogin(msg, { isLogin, userInfo }) {
-      console.log(`\n\n===>${msg}: 用户${isLogin ? '已' : '未'}登陆, nickname =`, userInfo.nickname)
-      this.isLogin = isLogin
-      this.userInfo = userInfo
-    },
-    async getUserInfo() {
-      return new Promise((resolve) => {
-        utils.promiseFactory(storage.set, { key: 'access_token', value: this.accessToken });
-        account.getProfile({
-          appid: "106051257",
-          token: this.accessToken,
-          success: (userInfo) => {
-            const result = { isLogin: true, userInfo }
-            PubSub.publish(rootStore.UPDATE_LOGIN, result);
-            resolve(result)
-          },
-          fail: (res, code) => {
-            const result = { isLogin: false }
-            PubSub.publish(rootStore.UPDATE_LOGIN, result);
-            resolve(result)
-          }
-        });
-      })
+      console.log(`\n\n===> ${msg}: 用户${
+        (userInfo && userInfo.nickname)
+         ? ('('+userInfo.nickname+')')
+         : ''
+      }${isLogin ? '已' : '未'}登陆`);
+
+      this.isLogin = isLogin;
+      this.userInfo = userInfo;
     }
   }
 </script>

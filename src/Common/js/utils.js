@@ -128,6 +128,45 @@ const decodeUrl = (encodedURI) => { // Keep track of all the replacements and pr
     return encodedURI;
 }
 
+const getRealType = (obj) => {
+    var toString = Object.prototype.toString
+    var map = {
+        '[object Boolean]': 'boolean',
+        '[object Number]': 'number',
+        '[object String]': 'string',
+        '[object Function]': 'function',
+        '[object Array]': 'array',
+        '[object Date]': 'date',
+        '[object RegExp]': 'regExp',
+        '[object Undefined]': 'undefined',
+        '[object Null]': 'null',
+        '[object Object]': 'object'
+    }
+    return map[toString.call(obj)]
+}
+
+const deepClone = (data, noEmptyProperty = false) => {
+    let _type = getRealType(data)
+    let copyOfObj
+
+    if (_type === 'array') {
+        copyOfObj = []
+    } else if (_type === 'object') {
+        copyOfObj = {}
+    } else {
+        return data
+    }
+
+    for (const [key, value] of Object.entries(data)) {
+        if (noEmptyProperty && (value === '' || value === null || value === undefined)) {
+            continue
+        }
+        copyOfObj[key] = deepClone(value)
+    }
+
+    return copyOfObj
+}
+
 const utils = {
     strToDate,
     lessTenFormat,
@@ -135,7 +174,9 @@ const utils = {
     showToast,
     showDialog,
     promiseFactory,
-    decodeUrl
+    decodeUrl,
+    getRealType,
+    deepClone
 }
 
 export default utils

@@ -134,7 +134,7 @@
       pubSub.subscribe(rootStore.UPDATE_LOGIN, (msg, { isLogin, userInfo }) => {
         this.isLogin = isLogin
         this.userInfo.nickname = userInfo.nickname
-        this.userInfo.avatar = userInfo.avatar.default
+        this.userInfo.avatar = userInfo.avatar
       });
     },
     onInit() {
